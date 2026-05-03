@@ -1,0 +1,10 @@
+# Source material that should not ship to the public site
+Profile.pdf
+*.pdf
+
+# Editor + OS noise
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/
+.idea/

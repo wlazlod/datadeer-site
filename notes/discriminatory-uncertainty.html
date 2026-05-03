@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Discriminatory uncertainty — Daniel Wlazło</title>
+<meta name="description" content="A model can discriminate not only through its decisions, but through how confident it is in them. On uncertainty as a fairness object in credit-risk machine learning.">
+<link rel="canonical" href="https://datadeer.pl/notes/discriminatory-uncertainty.html">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/style.css">
+
+<meta property="og:title" content="Discriminatory uncertainty">
+<meta property="og:description" content="A model can discriminate not only through its decisions, but through how confident it is in them.">
+<meta property="og:url" content="https://datadeer.pl/notes/discriminatory-uncertainty.html">
+<meta property="og:type" content="article">
+<meta property="article:author" content="Daniel Wlazło">
+<meta property="article:published_time" content="2026-05-03">
+<meta name="twitter:card" content="summary">
+</head>
+<body>
+<a class="skiplink" href="#article">Skip to content</a>
+
+<p class="back"><a href="/">&larr;&nbsp;&nbsp;Daniel&nbsp;Wlazło</a></p>
+
+<main>
+  <article id="article" class="prose post">
+    <header class="post-head">
+      <p class="post-meta">2026 &middot; note &middot; ~ 3 min read</p>
+      <h1 class="post-title">Discriminatory uncertainty</h1>
+      <p class="post-deck">A model can discriminate not only through its decisions, but through how confident it is in them.</p>
+    </header>
+
+    <p class="lede">A credit model is judged by what it decides. Approve or reject. Score 600 or 720. Send to manual review or auto&#8209;decision. The fairness literature has spent twenty years on this surface &mdash; building tools that ask whether two people, equally creditworthy, equally observed, but differing on a protected attribute, are decided differently.</p>
+
+    <p>That work is necessary. It is also not the whole picture.</p>
+
+    <p>Modern credit models do not return decisions. They return scores, and around those scores, a rendering of how sure they are. Calibration tells you that a score of 0.05 means roughly five&#8209;in&#8209;a&#8209;hundred. Conformal prediction tells you, with a coverage guarantee, that the true outcome lies inside a stated interval. Both &mdash; the score and the interval around it &mdash; feed a downstream process that can include a human, a manual review queue, an auto&#8209;decision rule, an exposure limit, a price.</p>
+
+    <p>What if the score is fair, and the interval is not?</p>
+
+    <hr class="scene">
+
+    <p>Consider a model that, on average, gives demographic groups A and B the same expected default rate at the same input pattern. By any standard fairness test on point predictions, it passes. Now look at the prediction intervals it produces. For group A, the average interval width is 0.04 &mdash; a tight, useful estimate. For group B, the average width is 0.18 &mdash; a wide, almost uninformative band. The model does not say group B is riskier. It says, of group B, <em>I don&rsquo;t know</em>.</p>
+
+    <p>That asymmetry has consequences, even when nobody has decided yet what to do about it.</p>
+
+    <p>Wider intervals tend to be sent to manual review more often, because uncertainty itself gets read as risk. They tend to attract more conservative thresholds, smaller credit limits, more questions, longer waits. They produce more &ldquo;no, but&rdquo; decisions and fewer crisp approvals. The decision rule may be the same for both groups, but the <em>uncertainty</em> the rule is reading from is not &mdash; and so the lived process is not.</p>
+
+    <p>I call this <em>discriminatory uncertainty</em> &mdash; the systematic differentiation of certainty across groups, even when decisions on point predictions are well&#8209;calibrated and balanced.</p>
+
+    <hr class="scene">
+
+    <p>It is worth being precise about what it is and what it is not.</p>
+
+    <p>It is not the same as the model being more accurate for one group than another. A model can have identical group&#8209;conditional error rates and still produce systematically wider intervals for one group, because accuracy averages over outcomes while interval width reflects how much information the model has about <em>each individual case</em>.</p>
+
+    <p>It is not bias in the everyday sense of &ldquo;the model leans against this group&rdquo;. The score itself may be unbiased on average. The asymmetry sits one rung lower &mdash; in the model&rsquo;s confidence about the score it is producing.</p>
+
+    <p>It is not visible in a confusion matrix, an ROC curve, or a calibration plot stratified by group, because each of these reads off point predictions. The phenomenon lives in the second moment, not the first.</p>
+
+    <p>What it is, is a form of differential treatment that is real, that is measurable, and that the current fairness vocabulary does not name.</p>
+
+    <p>That is what my thesis is about.</p>
+  </article>
+</main>
+
+<footer class="colophon">
+  <p>Set in Fraunces &amp; Source&nbsp;Serif&nbsp;4. <span class="rule">&mdash;</span> &copy; 2026 Daniel&nbsp;Wlazło.</p>
+</footer>
+
+</body>
+</html>
