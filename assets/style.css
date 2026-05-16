@@ -510,7 +510,9 @@ main {
   main > .prose:nth-of-type(5)       { animation-delay: 0.48s; }
   main > .ornament:nth-of-type(5)    { animation-delay: 0.54s; }
   main > .prose:nth-of-type(6)       { animation-delay: 0.58s; }
-  .colophon                          { animation-delay: 0.66s; }
+  main > .ornament:nth-of-type(6)    { animation-delay: 0.64s; }
+  main > .prose:nth-of-type(7)       { animation-delay: 0.68s; }
+  .colophon                          { animation-delay: 0.74s; }
 }
 
 @keyframes rise {
