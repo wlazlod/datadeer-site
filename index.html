@@ -14,7 +14,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
 <link rel="stylesheet" href="/assets/style.css">
 
 <meta property="og:title" content="Daniel Wlazło">
@@ -23,250 +23,230 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
 </head>
-<body>
-<a class="skiplink" href="#about">Skip to content</a>
+<body dir="ltr" data-md-color-scheme="default">
 
-<header class="masthead">
-  <h1 class="name">Daniel&nbsp;Wlazło</h1>
-  <p class="subhead">Data Science Manager &middot; Warsaw</p>
-  <p class="langs" aria-label="Language">
-    <span class="current" aria-current="true">EN</span>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="/pl/" hreflang="pl">PL</a>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="/cs/" hreflang="cs">CS</a>
-  </p>
+<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+<a href="#about" class="md-skip">Skip to content</a>
+<label class="md-overlay" for="__drawer"></label>
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Open navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <a href="/" title="Daniel Wlazło" class="md-header__button md-logo" aria-label="datadeer.pl">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l7 9-7 9-7-9z"/></svg>
+    </a>
+    <div class="md-header__title"><a href="/">datadeer.pl</a></div>
+    <button class="md-header__button md-icon md-header__option" type="button" data-md-component="palette" aria-label="Switch color scheme" title="Switch color scheme">
+      <svg class="md-icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      <svg class="md-icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+    </button>
+    <p class="md-header__langs" aria-label="Language">
+      <span aria-current="true">EN</span>
+      <a href="/pl/" hreflang="pl">PL</a>
+      <a href="/cs/" hreflang="cs">CS</a>
+    </p>
+    <div class="md-header__source">
+      <a href="https://github.com/wlazlod" title="Go to GitHub" class="md-source" data-md-component="source">
+        <div class="md-source__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"/></svg>
+        </div>
+        <div class="md-source__repository">
+          wlazlod
+          <ul class="md-source__facts"><li>open-source XAI &amp; credit-risk tools</li></ul>
+        </div>
+      </a>
+    </div>
+  </nav>
 </header>
 
-<main>
-  <section id="about" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">I.</span>
-      <h2>About</h2>
-    </header>
-    <p>I&rsquo;m a Manager of Data Science in credit risk at <a href="https://allegro.pl/pay">Allegro&nbsp;Pay</a>, where I lead modelling work for one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation.</p>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
 
-    <p>I&rsquo;ve spent close to a decade in credit risk and data science, across <span class="nowrap">Allegro&nbsp;Pay</span>, Hexaware (for AXA), PKO Bank Polski, and ING Bank Śląski. Before that I was a robotics engineer at Samsung and a UAV constructor at Aviation Technik. Robotics was where I started &mdash; it&rsquo;s still how I think about machine learning: a system you can describe, debug, and put under load.</p>
+  <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+    <nav class="md-nav md-nav--primary" aria-label="Navigation">
+      <span class="md-nav__title">
+        <span class="md-nav__button md-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l7 9-7 9-7-9z"/></svg></span>
+        datadeer.pl
+      </span>
+      <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="/" class="md-nav__link md-nav__link--active">Overview</a></li>
+        <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty</a></li>
+        <li class="md-nav__item md-nav__item--section">
+          <span class="md-nav__label">Project docs</span>
+          <ul class="md-nav__list">
+            <li class="md-nav__item"><a href="https://wlazlod.github.io/treecf/" class="md-nav__link md-nav__link--external">treecf<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg></a></li>
+            <li class="md-nav__item"><a href="https://wlazlod.github.io/flaggam/" class="md-nav__link md-nav__link--external">flaggam<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg></a></li>
+            <li class="md-nav__item"><a href="https://wlazlod.github.io/triadxai/" class="md-nav__link md-nav__link--external">triadxai<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg></a></li>
+            <li class="md-nav__item"><a href="https://wlazlod.github.io/concept-graph-xai/" class="md-nav__link md-nav__link--external">concept-graph-xai<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg></a></li>
+            <li class="md-nav__item"><a href="https://github.com/wlazlod/swift" class="md-nav__link md-nav__link--external">swift<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg></a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
-    <p class="interests">Outside work I learn Czech, follow Formula&nbsp;1, and tinker with robotics.</p>
+  <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+    <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+      <span class="md-nav__title">Table of contents</span>
+      <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#about" class="md-nav__link">About</a></li>
+        <li class="md-nav__item"><a href="#academic" class="md-nav__link">Academic work</a></li>
+        <li class="md-nav__item"><a href="#open-source" class="md-nav__link">Open source</a>
+          <ul class="md-nav__list">
+            <li class="md-nav__item"><a href="#treecf" class="md-nav__link">treecf</a></li>
+            <li class="md-nav__item"><a href="#concept-graph-xai" class="md-nav__link">concept-graph-xai</a></li>
+            <li class="md-nav__item"><a href="#swift" class="md-nav__link">swift</a></li>
+            <li class="md-nav__item"><a href="#triadxai" class="md-nav__link">triadxai</a></li>
+            <li class="md-nav__item"><a href="#flaggam" class="md-nav__link">flaggam</a></li>
+          </ul>
+        </li>
+        <li class="md-nav__item"><a href="#didactics" class="md-nav__link">Didactics</a></li>
+        <li class="md-nav__item"><a href="#talks" class="md-nav__link">Conference talks</a></li>
+        <li class="md-nav__item"><a href="#notes" class="md-nav__link">Notes</a></li>
+        <li class="md-nav__item"><a href="#elsewhere" class="md-nav__link">Elsewhere</a></li>
+      </ul>
+    </nav>
+  </div>
 
-    <aside class="margin">
-      <p>Warsaw, Poland</p>
-      <p>Allegro Pay since 2022</p>
-      <p>manager since 2024</p>
-    </aside>
-  </section>
+  <article class="md-content md-typeset" data-md-component="content">
+    <div class="md-content__inner">
 
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
+      <h1 id="daniel-wlazlo">Daniel Wlazło<a class="headerlink" href="#daniel-wlazlo" title="Permanent link">&para;</a></h1>
 
-  <section id="academic" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">II.</span>
-      <h2>Academic work</h2>
-    </header>
+      <p><strong>Data Science Manager at Allegro Pay &mdash; trustworthy machine learning for credit risk, in Warsaw.</strong></p>
 
-    <article class="entry">
-      <h3 class="entry-title">Doctoral thesis &mdash; Trustworthy credit risk under the AI Act</h3>
-      <p class="entry-meta">SGH Warsaw School of Economics &middot; in progress &middot; submission target 2029</p>
+      <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datadeer</span> <span class="kn">import</span> <span class="n">Daniel</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">Daniel</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s2">&quot;Data Science Manager&quot;</span><span class="p">,</span> <span class="n">org</span><span class="o">=</span><span class="s2">&quot;Allegro Pay&quot;</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s2">&quot;Warsaw&quot;</span><span class="p">)</span>
+<span class="n">d</span><span class="o">.</span><span class="n">focus</span>     <span class="c1"># [&quot;application scoring&quot;, &quot;fairness&quot;, &quot;calibration&quot;, &quot;explanation&quot;]</span>
+<span class="n">d</span><span class="o">.</span><span class="n">thesis</span>    <span class="c1"># &quot;discriminatory uncertainty&quot; (SGH Warsaw, in progress)</span>
+</code></pre></div>
+
+      <div class="admonition info">
+        <p class="admonition-title">Currently</p>
+        <p>At <a href="https://allegro.pl/pay">Allegro&nbsp;Pay</a> since 2022, manager since 2024 &middot; doctoral candidate at SGH Warsaw School of Economics &middot; based in Warsaw, Poland.</p>
+      </div>
+
+      <h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h2>
+
+      <p>I&rsquo;m a Manager of Data Science in credit risk at <a href="https://allegro.pl/pay">Allegro&nbsp;Pay</a>, where I lead modelling work for one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation.</p>
+
+      <p>I&rsquo;ve spent close to a decade in credit risk and data science, across Allegro&nbsp;Pay, Hexaware (for AXA), PKO Bank Polski, and ING Bank Śląski. Before that I was a robotics engineer at Samsung and a UAV constructor at Aviation Technik. Robotics was where I started &mdash; it&rsquo;s still how I think about machine learning: a system you can describe, debug, and put under load.</p>
+
+      <p>Outside work I learn Czech, follow Formula&nbsp;1, and tinker with robotics.</p>
+
+      <h2 id="academic">Academic work<a class="headerlink" href="#academic" title="Permanent link">&para;</a></h2>
+
+      <h3 id="thesis">Doctoral thesis &mdash; Trustworthy credit risk under the AI Act<a class="headerlink" href="#thesis" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>SGH Warsaw School of Economics</code> <code>in progress</code> <code>submission target 2029</code></p>
       <p>Supervised by Prof.&nbsp;Aneta Ptak&#8209;Chmielewska. The thesis develops an integrated methodology that combines algorithmic fairness, uncertainty quantification, and interpretability, organised around a concept I call <em>discriminatory uncertainty</em> &mdash; the idea that a model can discriminate not only through its decisions, but through how confident it is in them.</p>
-      <aside class="margin">
-        <p>SGH Warsaw</p>
-        <p>supervisor:</p>
-        <p>prof. Ptak&#8209;Chmielewska</p>
-      </aside>
-    </article>
 
-    <article class="entry">
-      <h3 class="entry-title">Articles &amp; working papers</h3>
-      <p class="entry-meta">in preparation</p>
-      <p>Peer&#8209;reviewed articles and working papers from the doctoral programme will be listed here as they go up.</p>
-    </article>
-  </section>
+      <div class="admonition note">
+        <p class="admonition-title">Articles &amp; working papers</p>
+        <p>Peer&#8209;reviewed articles and working papers from the doctoral programme will be listed here as they go up.</p>
+      </div>
 
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
+      <h2 id="open-source">Open source<a class="headerlink" href="#open-source" title="Permanent link">&para;</a></h2>
 
-  <section id="open-source" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">III.</span>
-      <h2>Open source</h2>
-    </header>
-
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://github.com/wlazlod/treecf">treecf</a></h3>
-      <p class="entry-meta">python &middot; rust core &middot; pre&#8209;release v0.1 &middot; MIT</p>
+      <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>rust core</code> <code>pre-release v0.1</code> <code>MIT</code></p>
       <p>Constrained, threshold&#8209;aware counterfactual explanations for tree ensembles (XGBoost, LightGBM, CatBoost, sklearn): the minimal, feasible change that moves a declined application under the cutoff. Plans respect declarative real&#8209;world constraints, treat missing values as first&#8209;class, and every answer is float&#8209;verified against the model before it is returned. The search runs on a Rust engine bundled in the wheel &mdash; milliseconds per applicant, whole portfolios in one parallel call.</p>
-      <aside class="margin">
-        <p>wlazlod / treecf</p>
-        <p>numpy &middot; rust &middot; maturin</p>
-        <p><a href="https://wlazlod.github.io/treecf/">docs</a></p>
-      </aside>
-    </article>
+      <p><a href="https://wlazlod.github.io/treecf/">Documentation</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://github.com/wlazlod/concept-graph-xai">concept&#8209;graph&#8209;xai</a></h3>
-      <p class="entry-meta">python &middot; alpha v0.2 &middot; MIT</p>
+      <h3 id="concept-graph-xai"><a href="https://github.com/wlazlod/concept-graph-xai">concept-graph-xai</a><a class="headerlink" href="#concept-graph-xai" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>alpha v0.2</code> <code>MIT</code></p>
       <p>A library that maps a tabular model&rsquo;s raw features into business&#8209;level concepts and visualises how much of each concept the model actually uses. Includes concept&#8209;level ablation (permutation, SHAP&#8209;marginal, retrain), missingness diagnostics, and regulatory tag overlays.</p>
-      <aside class="margin">
-        <p>wlazlod / concept&#8209;graph&#8209;xai</p>
-        <p>plotly &middot; networkx</p>
-        <p><a href="https://wlazlod.github.io/concept-graph-xai/">docs</a></p>
-      </aside>
-    </article>
+      <p><a href="https://wlazlod.github.io/concept-graph-xai/">Documentation</a> &middot; <a href="https://github.com/wlazlod/concept-graph-xai">GitHub</a></p>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://github.com/wlazlod/swift">swift</a></h3>
-      <p class="entry-meta">python &middot; MIT</p>
+      <h3 id="swift"><a href="https://github.com/wlazlod/swift">swift</a><a class="headerlink" href="#swift" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>MIT</code></p>
       <p>SHAP&#8209;Weighted Impact Feature Testing for ML system monitoring. Weights feature drift by SHAP&#8209;derived impact, so the alerts you get are the alerts that actually move the model&rsquo;s output.</p>
-      <aside class="margin">
-        <p>wlazlod / swift</p>
-      </aside>
-    </article>
+      <p><a href="https://github.com/wlazlod/swift">GitHub</a></p>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://github.com/wlazlod/triadxai">triadxai</a></h3>
-      <p class="entry-meta">python &middot; v0.1 &middot; Apache&#8209;2.0</p>
+      <h3 id="triadxai"><a href="https://github.com/wlazlod/triadxai">triadxai</a><a class="headerlink" href="#triadxai" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>v0.1</code> <code>Apache-2.0</code></p>
       <p>TRIAD &mdash; a three&#8209;channel decomposition of model predictions for credit&#8209;risk explainability. Each feature&rsquo;s contribution is split into Information, Density (epistemic), and Missingness channels that sum back exactly to the score, separating &ldquo;denied because of bad information&rdquo; from &ldquo;denied because we lack information&rdquo;. Exact for additive models, SHAP&#8209;based for black&#8209;box GBMs.</p>
-      <aside class="margin">
-        <p>wlazlod / triadxai</p>
-        <p>lightgbm &middot; treeshap</p>
-        <p><a href="https://wlazlod.github.io/triadxai/">docs</a></p>
-      </aside>
-    </article>
+      <p><a href="https://wlazlod.github.io/triadxai/">Documentation</a> &middot; <a href="https://github.com/wlazlod/triadxai">GitHub</a></p>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://github.com/wlazlod/flaggam">flaggam</a></h3>
-      <p class="entry-meta">python &middot; Apache&#8209;2.0</p>
+      <h3 id="flaggam"><a href="https://github.com/wlazlod/flaggam">flaggam</a><a class="headerlink" href="#flaggam" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>Apache-2.0</code></p>
       <p>Interpretable generalized additive models built from univariate flags. A screening pass finds the threshold and category cuts where a feature&rsquo;s distribution shifts against the outcome; each cut becomes a binary rule, and a linear head fitted on top gives exact rule extraction and feature&#8209;level attribution. Sklearn&#8209;compatible estimators.</p>
-      <aside class="margin">
-        <p>wlazlod / flaggam</p>
-        <p>scikit&#8209;learn</p>
-        <p><a href="https://wlazlod.github.io/flaggam/">docs</a></p>
-      </aside>
-    </article>
-  </section>
+      <p><a href="https://wlazlod.github.io/flaggam/">Documentation</a> &middot; <a href="https://github.com/wlazlod/flaggam">GitHub</a></p>
 
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
+      <h2 id="didactics">Didactics<a class="headerlink" href="#didactics" title="Permanent link">&para;</a></h2>
 
-  <section id="didactics" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">IV.</span>
-      <h2>Didactics</h2>
-    </header>
+      <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Research Workshop<a class="headerlink" href="#conformal-workshop" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>Warsaw University of Technology</code> <code>with Allegro Pay</code></p>
+      <p>Industry&#8209;mentored project for the <em>Research Workshop</em> course at the Faculty of Mathematics and Information Science. Three companies contribute a project each year and guide the student team through it; ours is on conformal prediction applied to consumer&#8209;credit scoring. I co&#8209;prepared the brief and mentor the team.</p>
 
-    <article class="entry">
-      <h3 class="entry-title">Conformal Prediction in Credit Risk &mdash; Research Workshop</h3>
-      <p class="entry-meta">Warsaw University of Technology &middot; with Allegro Pay</p>
-      <p>Industry&#8209;mentored project for the <em>Research Workshop</em> course at the Faculty of Mathematics and Information Science. Three companies contribute a project each year and guide the student team through it; ours is on conformal prediction applied to consumer&#8209;credit scoring. I co&#8209;prepared the brief and mentor the team. Course materials and the starter repository will appear here as the iteration finishes.</p>
-      <aside class="margin">
-        <p>WUT &times; Allegro Pay</p>
-        <p>Research Workshop</p>
-        <p>materials in preparation</p>
-      </aside>
-    </article>
+      <div class="admonition note">
+        <p class="admonition-title">In preparation</p>
+        <p>Course materials and the starter repository will appear here as the iteration finishes &mdash; along with more teaching materials: lectures, talks, workshop notes.</p>
+      </div>
 
-    <p class="placeholder">More teaching materials &mdash; lectures, talks, workshop notes &mdash; will appear here as they go up.</p>
-  </section>
+      <h2 id="talks">Conference talks<a class="headerlink" href="#talks" title="Permanent link">&para;</a></h2>
 
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
+      <ul>
+        <li><a href="https://ml.dssconf.pl/#agenda"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warsaw.<br>Why a SHAP value behaves like a contribution, not a coordinate &mdash; and how reading it as a point misleads scorecard interpretation.</li>
+        <li><a href="https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznań, with Kamil&nbsp;Golis.<br>How knowledge graphs pay down the semantic debt that accumulates across ML pipelines &mdash; a practical, applied walk&#8209;through.</li>
+        <li><a href="https://main.dssconf.pl/#all-speakers-modal"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Warsaw.<br>How semantic ontologies can move ML development past the feature store, giving models a shared, reusable vocabulary.</li>
+      </ul>
 
-  <section id="talks" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">V.</span>
-      <h2>Conference talks</h2>
-    </header>
+      <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://ml.dssconf.pl/#agenda">The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</a></h3>
-      <p class="entry-meta">Data&nbsp;Science&nbsp;Summit &middot; AI&nbsp;Edition 2026 &middot; Warsaw</p>
-      <p>Why a SHAP value behaves like a contribution, not a coordinate &mdash; and how reading it as a point misleads scorecard interpretation.</p>
-    </article>
+      <ul>
+        <li><code>2026</code> <a href="/notes/discriminatory-uncertainty.html"><strong>Discriminatory uncertainty</strong></a><br>A model can discriminate not only through its decisions, but through how confident it is in them.</li>
+      </ul>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://ghostday.pl/speakers/">Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</a></h3>
-      <p class="entry-meta">GHOST&nbsp;Day 2026 &middot; Poznań &middot; with Kamil&nbsp;Golis</p>
-      <p>How knowledge graphs pay down the semantic debt that accumulates across ML pipelines &mdash; a practical, applied walk&#8209;through.</p>
-    </article>
+      <h2 id="elsewhere">Elsewhere<a class="headerlink" href="#elsewhere" title="Permanent link">&para;</a></h2>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://main.dssconf.pl/#all-speakers-modal">Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</a></h3>
-      <p class="entry-meta">Data&nbsp;Science&nbsp;Summit 2025 &middot; Warsaw</p>
-      <p>How semantic ontologies can move ML development past the feature store, giving models a shared, reusable vocabulary.</p>
-    </article>
-  </section>
+      <div class="md-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Where</th><th>Link</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>GitHub</td><td><a href="https://github.com/wlazlod">github.com/wlazlod</a></td></tr>
+          <tr><td>LinkedIn</td><td><a href="https://www.linkedin.com/in/danielwlazlorobots/">linkedin.com/in/danielwlazlorobots</a></td></tr>
+          <tr><td>ORCID</td><td><a href="https://orcid.org/0009-0003-1984-8183">0009&#8209;0003&#8209;1984&#8209;8183</a></td></tr>
+          <tr><td>Email</td><td><a href="mailto:wlazlo.daniel@gmail.com">wlazlo.daniel@gmail.com</a></td></tr>
+        </tbody>
+      </table>
+      </div>
 
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
+    </div>
+  </article>
 
-  <section id="notes" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">VI.</span>
-      <h2>Notes</h2>
-    </header>
-    <ul class="note-list">
-      <li>
-        <a href="/notes/discriminatory-uncertainty.html">
-          <span class="note-date">2026</span>
-          <span class="note-title">Discriminatory uncertainty</span>
-          <span class="note-deck">A model can discriminate not only through its decisions, but through how confident it is in them.</span>
-        </a>
-      </li>
-    </ul>
-  </section>
-
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
-
-  <section id="elsewhere" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">VII.</span>
-      <h2>Elsewhere</h2>
-    </header>
-    <ul class="links">
-      <li><span class="key">github</span><a href="https://github.com/wlazlod">github.com/wlazlod</a></li>
-      <li><span class="key">linkedin</span><a href="https://www.linkedin.com/in/danielwlazlorobots/">linkedin.com/in/danielwlazlorobots</a></li>
-      <li><span class="key">orcid</span><a href="https://orcid.org/0009-0003-1984-8183">0009&#8209;0003&#8209;1984&#8209;8183</a></li>
-      <li><span class="key">email</span><a href="mailto:wlazlo.daniel@gmail.com">wlazlo.daniel@gmail.com</a></li>
-    </ul>
-  </section>
+</div>
 </main>
 
-<footer class="colophon">
-  <p>Set in Fraunces &amp; Source&nbsp;Serif&nbsp;4. <span class="rule">&mdash;</span> &copy; 2026 Daniel&nbsp;Wlazło.</p>
+<footer class="md-footer">
+  <nav class="md-footer__inner md-grid" aria-label="Footer">
+    <a href="/notes/discriminatory-uncertainty.html" class="md-footer__link md-footer__link--next" aria-label="Next: Discriminatory uncertainty">
+      <div class="md-footer__title">
+        <span class="md-footer__direction">Next</span>
+        Discriminatory uncertainty
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+    </a>
+  </nav>
+  <div class="md-footer-meta">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">&copy; 2026 Daniel Wlazło &middot; styled after the <a href="https://wlazlod.github.io/treecf/">treecf</a> / <a href="https://wlazlod.github.io/flaggam/">flaggam</a> docs</div>
+      <div class="md-footer-social">
+        <a href="https://github.com/wlazlod" title="GitHub" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"/></svg></a>
+        <a href="https://www.linkedin.com/in/danielwlazlorobots/" title="LinkedIn" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+        <a href="https://orcid.org/0009-0003-1984-8183" title="ORCID" aria-label="ORCID"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M294.75 188.19h-45.92V342h47.47c67.62 0 83.12-51.34 83.12-76.91 0-41.64-26.54-76.9-84.67-76.9zM256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zM175.9 371.8h-29.8V180.2h29.8zm-14.9-217.6a19.6 19.6 0 1 1 19.6-19.6 19.64 19.64 0 0 1-19.6 19.6zM300 369h-81V161.26h80.6c76.73 0 110.44 54.83 110.44 103.85C410 318.39 368.38 369 300 369z"/></svg></a>
+        <a href="mailto:wlazlo.daniel@gmail.com" title="Email" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></svg></a>
+      </div>
+    </div>
+  </div>
 </footer>
+</div>
 
+<script src="/assets/app.js"></script>
 </body>
 </html>

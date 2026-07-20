@@ -14,7 +14,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
 <link rel="stylesheet" href="/assets/style.css">
 
 <meta property="og:title" content="Daniel Wlazło">
@@ -24,250 +24,230 @@
 <meta property="og:locale" content="pl_PL">
 <meta name="twitter:card" content="summary">
 </head>
-<body>
-<a class="skiplink" href="#about">Przejdź do treści</a>
+<body dir="ltr" data-md-color-scheme="default">
 
-<header class="masthead">
-  <h1 class="name">Daniel&nbsp;Wlazło</h1>
-  <p class="subhead">Manager Data Science &middot; Warszawa</p>
-  <p class="langs" aria-label="Język">
-    <a href="/" hreflang="en">EN</a>
-    <span class="sep" aria-hidden="true">·</span>
-    <span class="current" aria-current="true">PL</span>
-    <span class="sep" aria-hidden="true">·</span>
-    <a href="/cs/" hreflang="cs">CS</a>
-  </p>
+<input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+<a href="#about" class="md-skip">Przejdź do treści</a>
+<label class="md-overlay" for="__drawer"></label>
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Nagłówek">
+    <label class="md-header__button md-icon" for="__drawer" aria-label="Otwórz nawigację">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <a href="/pl/" title="Daniel Wlazło" class="md-header__button md-logo" aria-label="datadeer.pl">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l7 9-7 9-7-9z"/></svg>
+    </a>
+    <div class="md-header__title"><a href="/pl/">datadeer.pl</a></div>
+    <button class="md-header__button md-icon md-header__option" type="button" data-md-component="palette" aria-label="Przełącz motyw" title="Przełącz motyw">
+      <svg class="md-icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      <svg class="md-icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+    </button>
+    <p class="md-header__langs" aria-label="Język">
+      <a href="/" hreflang="en">EN</a>
+      <span aria-current="true">PL</span>
+      <a href="/cs/" hreflang="cs">CS</a>
+    </p>
+    <div class="md-header__source">
+      <a href="https://github.com/wlazlod" title="Przejdź do GitHub" class="md-source" data-md-component="source">
+        <div class="md-source__icon md-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"/></svg>
+        </div>
+        <div class="md-source__repository">
+          wlazlod
+          <ul class="md-source__facts"><li>open-source: XAI i ryzyko kredytowe</li></ul>
+        </div>
+      </a>
+    </div>
+  </nav>
 </header>
 
-<main>
-  <section id="about" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">I.</span>
-      <h2>O&nbsp;mnie</h2>
-    </header>
-    <p>Jestem managerem zespołu Data Science w obszarze ryzyka kredytowego w <a href="https://allegro.pl/pay">Allegro&nbsp;Pay</a>, gdzie prowadzę prace modelarskie dla jednej z największych konsumenckich platform finansowych w Europie Środkowej. Skupiam się głównie na scoringu aplikacyjnym &mdash; modelach PD dla klienta indywidualnego &mdash; oraz, coraz częściej, na tym, jak w regulowanym otoczeniu wygląda godne zaufania uczenie maszynowe: bezstronność, kalibracja, wyjaśnialność.</p>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
 
-    <p>W ryzyku kredytowym i&nbsp;data science pracuję od prawie dekady &mdash; m.in. w&nbsp;Allegro&nbsp;Pay, Hexaware (dla AXA), PKO Banku Polskim oraz ING Banku Śląskim. Wcześniej byłem inżynierem robotyki w&nbsp;Samsungu i&nbsp;konstruktorem bezzałogowych statków powietrznych w&nbsp;Aviation&nbsp;Technik. Robotyka była moim punktem startowym &mdash; nadal kształtuje sposób, w&nbsp;jaki myślę o&nbsp;uczeniu maszynowym: jako o&nbsp;systemie, który da się opisać, debugować i&nbsp;obciążyć.</p>
+  <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+    <nav class="md-nav md-nav--primary" aria-label="Nawigacja">
+      <span class="md-nav__title">
+        <span class="md-nav__button md-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3l7 9-7 9-7-9z"/></svg></span>
+        datadeer.pl
+      </span>
+      <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="/pl/" class="md-nav__link md-nav__link--active">Strona główna</a></li>
+        <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty <small>(EN)</small></a></li>
+        <li class="md-nav__item md-nav__item--section">
+          <span class="md-nav__label">Dokumentacje projektów</span>
+          <ul class="md-nav__list">
+            <li class="md-nav__item"><a href="https://wlazlod.github.io/treecf/" class="md-nav__link md-nav__link--external">treecf<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg></a></li>
+            <li class="md-nav__item"><a href="https://wlazlod.github.io/flaggam/" class="md-nav__link md-nav__link--external">flaggam<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg></a></li>
+            <li class="md-nav__item"><a href="https://wlazlod.github.io/triadxai/" class="md-nav__link md-nav__link--external">triadxai<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg></a></li>
+            <li class="md-nav__item"><a href="https://wlazlod.github.io/concept-graph-xai/" class="md-nav__link md-nav__link--external">concept-graph-xai<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg></a></li>
+            <li class="md-nav__item"><a href="https://github.com/wlazlod/swift" class="md-nav__link md-nav__link--external">swift<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3m-2 16H5V5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7h-2z"/></svg></a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
 
-    <p class="interests">Poza pracą uczę się czeskiego, kibicuję Formule&nbsp;1 i&nbsp;wciąż majsterkuję przy robotach.</p>
+  <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+    <nav class="md-nav md-nav--secondary" aria-label="Spis treści">
+      <span class="md-nav__title">Spis treści</span>
+      <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#about" class="md-nav__link">O mnie</a></li>
+        <li class="md-nav__item"><a href="#academic" class="md-nav__link">Praca naukowa</a></li>
+        <li class="md-nav__item"><a href="#open-source" class="md-nav__link">Open source</a>
+          <ul class="md-nav__list">
+            <li class="md-nav__item"><a href="#treecf" class="md-nav__link">treecf</a></li>
+            <li class="md-nav__item"><a href="#concept-graph-xai" class="md-nav__link">concept-graph-xai</a></li>
+            <li class="md-nav__item"><a href="#swift" class="md-nav__link">swift</a></li>
+            <li class="md-nav__item"><a href="#triadxai" class="md-nav__link">triadxai</a></li>
+            <li class="md-nav__item"><a href="#flaggam" class="md-nav__link">flaggam</a></li>
+          </ul>
+        </li>
+        <li class="md-nav__item"><a href="#didactics" class="md-nav__link">Dydaktyka</a></li>
+        <li class="md-nav__item"><a href="#talks" class="md-nav__link">Wystąpienia konferencyjne</a></li>
+        <li class="md-nav__item"><a href="#notes" class="md-nav__link">Notatki</a></li>
+        <li class="md-nav__item"><a href="#elsewhere" class="md-nav__link">Gdzie indziej</a></li>
+      </ul>
+    </nav>
+  </div>
 
-    <aside class="margin">
-      <p>Warszawa, Polska</p>
-      <p>Allegro Pay od 2022</p>
-      <p>manager od 2024</p>
-    </aside>
-  </section>
+  <article class="md-content md-typeset" data-md-component="content">
+    <div class="md-content__inner">
 
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
+      <h1 id="daniel-wlazlo">Daniel Wlazło<a class="headerlink" href="#daniel-wlazlo" title="Stały odnośnik">&para;</a></h1>
 
-  <section id="academic" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">II.</span>
-      <h2>Praca naukowa</h2>
-    </header>
+      <p><strong>Manager Data Science w Allegro Pay &mdash; godne zaufania uczenie maszynowe w ryzyku kredytowym. Warszawa.</strong></p>
 
-    <article class="entry">
-      <h3 class="entry-title">Rozprawa doktorska &mdash; Godne zaufania ryzyko kredytowe w&nbsp;ramach AI&nbsp;Act</h3>
-      <p class="entry-meta">Szkoła Główna Handlowa w&nbsp;Warszawie (SGH) &middot; w&nbsp;trakcie &middot; planowane złożenie 2029</p>
+      <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">datadeer</span> <span class="kn">import</span> <span class="n">Daniel</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">Daniel</span><span class="p">(</span><span class="n">role</span><span class="o">=</span><span class="s2">&quot;Manager Data Science&quot;</span><span class="p">,</span> <span class="n">org</span><span class="o">=</span><span class="s2">&quot;Allegro Pay&quot;</span><span class="p">,</span> <span class="n">city</span><span class="o">=</span><span class="s2">&quot;Warszawa&quot;</span><span class="p">)</span>
+<span class="n">d</span><span class="o">.</span><span class="n">focus</span>     <span class="c1"># [&quot;scoring aplikacyjny&quot;, &quot;bezstronność&quot;, &quot;kalibracja&quot;, &quot;wyjaśnialność&quot;]</span>
+<span class="n">d</span><span class="o">.</span><span class="n">thesis</span>    <span class="c1"># &quot;dyskryminująca niepewność&quot; (SGH, w trakcie)</span>
+</code></pre></div>
+
+      <div class="admonition info">
+        <p class="admonition-title">Obecnie</p>
+        <p>W <a href="https://allegro.pl/pay">Allegro&nbsp;Pay</a> od 2022, manager od 2024 &middot; doktorant w&nbsp;Szkole Głównej Handlowej w&nbsp;Warszawie &middot; Warszawa, Polska.</p>
+      </div>
+
+      <h2 id="about">O&nbsp;mnie<a class="headerlink" href="#about" title="Stały odnośnik">&para;</a></h2>
+
+      <p>Jestem managerem zespołu Data Science w obszarze ryzyka kredytowego w <a href="https://allegro.pl/pay">Allegro&nbsp;Pay</a>, gdzie prowadzę prace modelarskie dla jednej z największych konsumenckich platform finansowych w Europie Środkowej. Skupiam się głównie na scoringu aplikacyjnym &mdash; modelach PD dla klienta indywidualnego &mdash; oraz, coraz częściej, na tym, jak w regulowanym otoczeniu wygląda godne zaufania uczenie maszynowe: bezstronność, kalibracja, wyjaśnialność.</p>
+
+      <p>W ryzyku kredytowym i&nbsp;data science pracuję od prawie dekady &mdash; m.in. w&nbsp;Allegro&nbsp;Pay, Hexaware (dla AXA), PKO Banku Polskim oraz ING Banku Śląskim. Wcześniej byłem inżynierem robotyki w&nbsp;Samsungu i&nbsp;konstruktorem bezzałogowych statków powietrznych w&nbsp;Aviation&nbsp;Technik. Robotyka była moim punktem startowym &mdash; nadal kształtuje sposób, w&nbsp;jaki myślę o&nbsp;uczeniu maszynowym: jako o&nbsp;systemie, który da się opisać, debugować i&nbsp;obciążyć.</p>
+
+      <p>Poza pracą uczę się czeskiego, kibicuję Formule&nbsp;1 i&nbsp;wciąż majsterkuję przy robotach.</p>
+
+      <h2 id="academic">Praca naukowa<a class="headerlink" href="#academic" title="Stały odnośnik">&para;</a></h2>
+
+      <h3 id="thesis">Rozprawa doktorska &mdash; Godne zaufania ryzyko kredytowe w&nbsp;ramach AI&nbsp;Act<a class="headerlink" href="#thesis" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>Szkoła Główna Handlowa (SGH)</code> <code>w trakcie</code> <code>planowane złożenie 2029</code></p>
       <p>Praca pod opieką dr&nbsp;hab.&nbsp;Anety&nbsp;Ptak&#8209;Chmielewskiej, prof.&nbsp;SGH. Rozprawa rozwija zintegrowaną metodykę łączącą algorytmiczną bezstronność, kwantyfikację niepewności i&nbsp;interpretowalność, osnutą wokół koncepcji <em>dyskryminującej niepewności</em> &mdash; idei, że model może dyskryminować nie tylko poprzez swoje decyzje, ale także poprzez to, jak bardzo jest ich pewien.</p>
-      <aside class="margin">
-        <p>SGH Warszawa</p>
-        <p>promotor:</p>
-        <p>prof. Ptak&#8209;Chmielewska</p>
-      </aside>
-    </article>
 
-    <article class="entry">
-      <h3 class="entry-title">Artykuły i&nbsp;working papers</h3>
-      <p class="entry-meta">w przygotowaniu</p>
-      <p>Recenzowane artykuły i&nbsp;working papers powstałe w&nbsp;ramach studiów doktoranckich pojawią się tutaj po publikacji.</p>
-    </article>
-  </section>
+      <div class="admonition note">
+        <p class="admonition-title">Artykuły i&nbsp;working papers</p>
+        <p>Recenzowane artykuły i&nbsp;working papers powstałe w&nbsp;ramach studiów doktoranckich pojawią się tutaj po publikacji.</p>
+      </div>
 
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
+      <h2 id="open-source">Open source<a class="headerlink" href="#open-source" title="Stały odnośnik">&para;</a></h2>
 
-  <section id="open-source" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">III.</span>
-      <h2>Open source</h2>
-    </header>
-
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://github.com/wlazlod/treecf">treecf</a></h3>
-      <p class="entry-meta">python &middot; rdzeń w&nbsp;rust &middot; pre&#8209;release v0.1 &middot; MIT</p>
+      <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>rdzeń w rust</code> <code>pre-release v0.1</code> <code>MIT</code></p>
       <p>Wyjaśnienia kontrfaktyczne dla zespołów drzew (XGBoost, LightGBM, CatBoost, sklearn), świadome ograniczeń i&nbsp;progów decyzyjnych: minimalna, wykonalna zmiana, która przenosi odrzucony wniosek poniżej punktu odcięcia. Plany respektują deklaratywne ograniczenia świata rzeczywistego, traktują braki danych jako pełnoprawne wartości, a&nbsp;każda odpowiedź jest weryfikowana względem modelu przed zwróceniem. Wyszukiwanie działa na silniku w&nbsp;Rust dołączonym do pakietu &mdash; milisekundy na wniosek, całe portfele w&nbsp;jednym równoległym wywołaniu.</p>
-      <aside class="margin">
-        <p>wlazlod / treecf</p>
-        <p>numpy &middot; rust &middot; maturin</p>
-        <p><a href="https://wlazlod.github.io/treecf/">dokumentacja</a></p>
-      </aside>
-    </article>
+      <p><a href="https://wlazlod.github.io/treecf/">Dokumentacja</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://github.com/wlazlod/concept-graph-xai">concept&#8209;graph&#8209;xai</a></h3>
-      <p class="entry-meta">python &middot; alpha v0.2 &middot; MIT</p>
+      <h3 id="concept-graph-xai"><a href="https://github.com/wlazlod/concept-graph-xai">concept-graph-xai</a><a class="headerlink" href="#concept-graph-xai" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>alpha v0.2</code> <code>MIT</code></p>
       <p>Biblioteka, która przyporządkowuje surowe cechy modelu tabelarycznego do koncepcji biznesowych i&nbsp;wizualizuje, ile z&nbsp;każdej koncepcji model rzeczywiście wykorzystuje. Zawiera ablację na poziomie koncepcji (permutacja, SHAP&#8209;marginal, retrening), diagnostykę braków danych oraz nakładki znaczników regulacyjnych.</p>
-      <aside class="margin">
-        <p>wlazlod / concept&#8209;graph&#8209;xai</p>
-        <p>plotly &middot; networkx</p>
-        <p><a href="https://wlazlod.github.io/concept-graph-xai/">dokumentacja</a></p>
-      </aside>
-    </article>
+      <p><a href="https://wlazlod.github.io/concept-graph-xai/">Dokumentacja</a> &middot; <a href="https://github.com/wlazlod/concept-graph-xai">GitHub</a></p>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://github.com/wlazlod/swift">swift</a></h3>
-      <p class="entry-meta">python &middot; MIT</p>
+      <h3 id="swift"><a href="https://github.com/wlazlod/swift">swift</a><a class="headerlink" href="#swift" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>MIT</code></p>
       <p>SHAP&#8209;Weighted Impact Feature Testing &mdash; narzędzie do monitorowania systemów ML. Waży dryf cech wpływem wyznaczonym przez SHAP, dzięki czemu otrzymywane alerty dotyczą tych cech, które faktycznie zmieniają wyjście modelu.</p>
-      <aside class="margin">
-        <p>wlazlod / swift</p>
-      </aside>
-    </article>
+      <p><a href="https://github.com/wlazlod/swift">GitHub</a></p>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://github.com/wlazlod/triadxai">triadxai</a></h3>
-      <p class="entry-meta">python &middot; v0.1 &middot; Apache&#8209;2.0</p>
+      <h3 id="triadxai"><a href="https://github.com/wlazlod/triadxai">triadxai</a><a class="headerlink" href="#triadxai" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>v0.1</code> <code>Apache-2.0</code></p>
       <p>TRIAD &mdash; trójkanałowa dekompozycja predykcji modelu na potrzeby wyjaśnialności w&nbsp;ryzyku kredytowym. Wkład każdej cechy jest rozdzielany na kanały informacji, gęstości (epistemiczny) i&nbsp;braków danych, które sumują się dokładnie do wyniku modelu &mdash; oddziela to &bdquo;odmowę z&nbsp;powodu złych informacji&rdquo; od &bdquo;odmowy z&nbsp;powodu braku informacji&rdquo;. Dokładna dla modeli addytywnych, oparta na SHAP dla czarnoskrzynkowych GBM.</p>
-      <aside class="margin">
-        <p>wlazlod / triadxai</p>
-        <p>lightgbm &middot; treeshap</p>
-        <p><a href="https://wlazlod.github.io/triadxai/">dokumentacja</a></p>
-      </aside>
-    </article>
+      <p><a href="https://wlazlod.github.io/triadxai/">Dokumentacja</a> &middot; <a href="https://github.com/wlazlod/triadxai">GitHub</a></p>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://github.com/wlazlod/flaggam">flaggam</a></h3>
-      <p class="entry-meta">python &middot; Apache&#8209;2.0</p>
+      <h3 id="flaggam"><a href="https://github.com/wlazlod/flaggam">flaggam</a><a class="headerlink" href="#flaggam" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>Apache-2.0</code></p>
       <p>Interpretowalne uogólnione modele addytywne budowane z&nbsp;jednowymiarowych flag. Etap przesiewania znajduje progi i&nbsp;kategorie, przy których rozkład cechy wyraźnie zmienia się względem zmiennej objaśnianej; każde cięcie staje się binarną regułą, a&nbsp;dopasowana na nich część liniowa daje dokładną ekstrakcję reguł i&nbsp;atrybucję na poziomie cech. Estymatory zgodne ze scikit&#8209;learn.</p>
-      <aside class="margin">
-        <p>wlazlod / flaggam</p>
-        <p>scikit&#8209;learn</p>
-        <p><a href="https://wlazlod.github.io/flaggam/">dokumentacja</a></p>
-      </aside>
-    </article>
-  </section>
+      <p><a href="https://wlazlod.github.io/flaggam/">Dokumentacja</a> &middot; <a href="https://github.com/wlazlod/flaggam">GitHub</a></p>
 
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
+      <h2 id="didactics">Dydaktyka<a class="headerlink" href="#didactics" title="Stały odnośnik">&para;</a></h2>
 
-  <section id="didactics" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">IV.</span>
-      <h2>Dydaktyka</h2>
-    </header>
+      <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Warsztaty Badawcze<a class="headerlink" href="#conformal-workshop" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>Politechnika Warszawska</code> <code>we współpracy z Allegro Pay</code></p>
+      <p>Projekt mentorowany przez firmę w&nbsp;ramach kursu <em>Warsztaty Badawcze</em> na Wydziale Matematyki i&nbsp;Nauk Informacyjnych PW. Każdego roku trzy firmy dostarczają po jednym projekcie i&nbsp;prowadzą zespół studencki przez jego realizację; nasz dotyczy zastosowania predykcji konformalnej w&nbsp;scoringu kredytowym. Współprzygotowałem zadanie i&nbsp;prowadzę zespół.</p>
 
-    <article class="entry">
-      <h3 class="entry-title">Conformal Prediction in Credit Risk &mdash; Warsztaty Badawcze</h3>
-      <p class="entry-meta">Politechnika Warszawska &middot; we współpracy z Allegro Pay</p>
-      <p>Projekt mentorowany przez firmę w&nbsp;ramach kursu <em>Warsztaty Badawcze</em> na Wydziale Matematyki i&nbsp;Nauk Informacyjnych PW. Każdego roku trzy firmy dostarczają po jednym projekcie i&nbsp;prowadzą zespół studencki przez jego realizację; nasz dotyczy zastosowania predykcji konformalnej w&nbsp;scoringu kredytowym. Współprzygotowałem zadanie i&nbsp;prowadzę zespół. Materiały i&nbsp;repozytorium startowe pojawią się tutaj po zakończeniu edycji.</p>
-      <aside class="margin">
-        <p>PW &times; Allegro Pay</p>
-        <p>Warsztaty Badawcze</p>
-        <p>materiały w przygotowaniu</p>
-      </aside>
-    </article>
+      <div class="admonition note">
+        <p class="admonition-title">W przygotowaniu</p>
+        <p>Materiały kursu i&nbsp;repozytorium startowe pojawią się tutaj po zakończeniu edycji &mdash; razem z&nbsp;pozostałymi materiałami dydaktycznymi: wykładami, prelekcjami, notatkami z&nbsp;warsztatów.</p>
+      </div>
 
-    <p class="placeholder">Pozostałe materiały dydaktyczne &mdash; wykłady, prelekcje, notatki z&nbsp;warsztatów &mdash; będą się tu pojawiać w miarę publikacji.</p>
-  </section>
+      <h2 id="talks">Wystąpienia konferencyjne<a class="headerlink" href="#talks" title="Stały odnośnik">&para;</a></h2>
 
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
+      <ul>
+        <li><a href="https://ml.dssconf.pl/#agenda"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warszawa.<br>Dlaczego wartość SHAP zachowuje się jak wkład, a&nbsp;nie współrzędna &mdash; i&nbsp;jak odczytywanie jej jako punktu wprowadza w&nbsp;błąd przy interpretacji scoringu.</li>
+        <li><a href="https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznań, z&nbsp;Kamilem&nbsp;Golisem.<br>Jak grafy wiedzy spłacają dług semantyczny narastający w&nbsp;potokach ML &mdash; praktyczny, wdrożeniowy przegląd zastosowań.</li>
+        <li><a href="https://main.dssconf.pl/#all-speakers-modal"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Warszawa.<br>Jak ontologie semantyczne mogą wyprowadzić rozwój modeli ML poza feature store, dając modelom wspólny, wielokrotnego użytku słownik pojęć.</li>
+      </ul>
 
-  <section id="talks" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">V.</span>
-      <h2>Wystąpienia konferencyjne</h2>
-    </header>
+      <h2 id="notes">Notatki<a class="headerlink" href="#notes" title="Stały odnośnik">&para;</a></h2>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://ml.dssconf.pl/#agenda">The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</a></h3>
-      <p class="entry-meta">Data&nbsp;Science&nbsp;Summit &middot; AI&nbsp;Edition 2026 &middot; Warszawa</p>
-      <p>Dlaczego wartość SHAP zachowuje się jak wkład, a&nbsp;nie współrzędna &mdash; i&nbsp;jak odczytywanie jej jako punktu wprowadza w&nbsp;błąd przy interpretacji scoringu.</p>
-    </article>
+      <ul>
+        <li><code>2026</code> <a href="/notes/discriminatory-uncertainty.html" hreflang="en"><strong>Dyskryminująca niepewność</strong></a> <small>(EN)</small><br>Model może dyskryminować nie tylko poprzez swoje decyzje, ale poprzez to, jak bardzo jest ich pewien.</li>
+      </ul>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://ghostday.pl/speakers/">Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</a></h3>
-      <p class="entry-meta">GHOST&nbsp;Day 2026 &middot; Poznań &middot; z&nbsp;Kamilem&nbsp;Golisem</p>
-      <p>Jak grafy wiedzy spłacają dług semantyczny narastający w&nbsp;potokach ML &mdash; praktyczny, wdrożeniowy przegląd zastosowań.</p>
-    </article>
+      <h2 id="elsewhere">Gdzie&nbsp;indziej<a class="headerlink" href="#elsewhere" title="Stały odnośnik">&para;</a></h2>
 
-    <article class="entry">
-      <h3 class="entry-title"><a href="https://main.dssconf.pl/#all-speakers-modal">Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</a></h3>
-      <p class="entry-meta">Data&nbsp;Science&nbsp;Summit 2025 &middot; Warszawa</p>
-      <p>Jak ontologie semantyczne mogą wyprowadzić rozwój modeli ML poza feature store, dając modelom wspólny, wielokrotnego użytku słownik pojęć.</p>
-    </article>
-  </section>
+      <div class="md-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Gdzie</th><th>Link</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>GitHub</td><td><a href="https://github.com/wlazlod">github.com/wlazlod</a></td></tr>
+          <tr><td>LinkedIn</td><td><a href="https://www.linkedin.com/in/danielwlazlorobots/">linkedin.com/in/danielwlazlorobots</a></td></tr>
+          <tr><td>ORCID</td><td><a href="https://orcid.org/0009-0003-1984-8183">0009&#8209;0003&#8209;1984&#8209;8183</a></td></tr>
+          <tr><td>E&#8209;mail</td><td><a href="mailto:wlazlo.daniel@gmail.com">wlazlo.daniel@gmail.com</a></td></tr>
+        </tbody>
+      </table>
+      </div>
 
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
+    </div>
+  </article>
 
-  <section id="notes" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">VI.</span>
-      <h2>Notatki</h2>
-    </header>
-    <ul class="note-list">
-      <li>
-        <a href="/notes/discriminatory-uncertainty.html" hreflang="en">
-          <span class="note-date">2026</span>
-          <span class="note-title">Dyskryminująca niepewność <span class="note-lang">EN</span></span>
-          <span class="note-deck">Model może dyskryminować nie tylko poprzez swoje decyzje, ale poprzez to, jak bardzo jest ich pewien.</span>
-        </a>
-      </li>
-    </ul>
-  </section>
-
-  <svg class="ornament" viewBox="0 0 60 16" aria-hidden="true">
-    <g stroke="currentColor" fill="none" stroke-width="1">
-      <line x1="0" y1="8" x2="22" y2="8"/>
-      <path d="M 30 4 L 36 8 L 30 12 L 24 8 Z"/>
-      <line x1="38" y1="8" x2="60" y2="8"/>
-    </g>
-  </svg>
-
-  <section id="elsewhere" class="prose">
-    <header class="section-head">
-      <span class="num" aria-hidden="true">VII.</span>
-      <h2>Gdzie&nbsp;indziej</h2>
-    </header>
-    <ul class="links">
-      <li><span class="key">github</span><a href="https://github.com/wlazlod">github.com/wlazlod</a></li>
-      <li><span class="key">linkedin</span><a href="https://www.linkedin.com/in/danielwlazlorobots/">linkedin.com/in/danielwlazlorobots</a></li>
-      <li><span class="key">orcid</span><a href="https://orcid.org/0009-0003-1984-8183">0009&#8209;0003&#8209;1984&#8209;8183</a></li>
-      <li><span class="key">e&#8209;mail</span><a href="mailto:wlazlo.daniel@gmail.com">wlazlo.daniel@gmail.com</a></li>
-    </ul>
-  </section>
+</div>
 </main>
 
-<footer class="colophon">
-  <p>Skład: Fraunces &amp; Source&nbsp;Serif&nbsp;4. <span class="rule">&mdash;</span> &copy; 2026 Daniel&nbsp;Wlazło.</p>
+<footer class="md-footer">
+  <nav class="md-footer__inner md-grid" aria-label="Stopka">
+    <a href="/notes/discriminatory-uncertainty.html" class="md-footer__link md-footer__link--next" aria-label="Dalej: Discriminatory uncertainty">
+      <div class="md-footer__title">
+        <span class="md-footer__direction">Dalej</span>
+        Discriminatory uncertainty
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+    </a>
+  </nav>
+  <div class="md-footer-meta">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">&copy; 2026 Daniel Wlazło &middot; w stylu dokumentacji <a href="https://wlazlod.github.io/treecf/">treecf</a> / <a href="https://wlazlod.github.io/flaggam/">flaggam</a></div>
+      <div class="md-footer-social">
+        <a href="https://github.com/wlazlod" title="GitHub" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"/></svg></a>
+        <a href="https://www.linkedin.com/in/danielwlazlorobots/" title="LinkedIn" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
+        <a href="https://orcid.org/0009-0003-1984-8183" title="ORCID" aria-label="ORCID"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M294.75 188.19h-45.92V342h47.47c67.62 0 83.12-51.34 83.12-76.91 0-41.64-26.54-76.9-84.67-76.9zM256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zM175.9 371.8h-29.8V180.2h29.8zm-14.9-217.6a19.6 19.6 0 1 1 19.6-19.6 19.64 19.64 0 0 1-19.6 19.6zM300 369h-81V161.26h80.6c76.73 0 110.44 54.83 110.44 103.85C410 318.39 368.38 369 300 369z"/></svg></a>
+        <a href="mailto:wlazlo.daniel@gmail.com" title="E-mail" aria-label="E-mail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></svg></a>
+      </div>
+    </div>
+  </div>
 </footer>
+</div>
 
+<script src="/assets/app.js"></script>
 </body>
 </html>
