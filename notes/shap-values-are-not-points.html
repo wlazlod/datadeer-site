@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Discriminatory uncertainty — Daniel Wlazło</title>
-<meta name="description" content="A model can discriminate not only through its decisions, but through how confident it is in them. On uncertainty as a fairness object in credit-risk machine learning.">
-<link rel="canonical" href="https://datadeer.pl/notes/discriminatory-uncertainty.html">
+<title>Why SHAP values are not points — Daniel Wlazło</title>
+<meta name="description" content="A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong. Four ways the illusion breaks in credit-risk models.">
+<link rel="canonical" href="https://datadeer.pl/notes/shap-values-are-not-points.html">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,12 +13,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
 <link rel="stylesheet" href="/assets/style.css">
 
-<meta property="og:title" content="Discriminatory uncertainty">
-<meta property="og:description" content="A model can discriminate not only through its decisions, but through how confident it is in them.">
-<meta property="og:url" content="https://datadeer.pl/notes/discriminatory-uncertainty.html">
+<meta property="og:title" content="Why SHAP values are not points">
+<meta property="og:description" content="A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong.">
+<meta property="og:url" content="https://datadeer.pl/notes/shap-values-are-not-points.html">
 <meta property="og:type" content="article">
 <meta property="article:author" content="Daniel Wlazło">
-<meta property="article:published_time" content="2026-05-03">
+<meta property="article:published_time" content="2026-07-20">
 <meta name="twitter:card" content="summary">
 </head>
 <body dir="ltr" data-md-color-scheme="default">
@@ -69,8 +69,8 @@
         <li class="md-nav__item md-nav__item--section">
           <span class="md-nav__label">Notes</span>
           <ul class="md-nav__list">
-            <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link md-nav__link--active">Discriminatory uncertainty</a></li>
-            <li class="md-nav__item"><a href="/notes/shap-values-are-not-points.html" class="md-nav__link">Why SHAP values are not points</a></li>
+            <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty</a></li>
+            <li class="md-nav__item"><a href="/notes/shap-values-are-not-points.html" class="md-nav__link md-nav__link--active">Why SHAP values are not points</a></li>
           </ul>
         </li>
         <li class="md-nav__item md-nav__item--section">
@@ -90,46 +90,50 @@
   <article id="article" class="md-content md-typeset" data-md-component="content">
     <div class="md-content__inner">
 
-      <h1 id="discriminatory-uncertainty">Discriminatory uncertainty<a class="headerlink" href="#discriminatory-uncertainty" title="Permanent link">&para;</a></h1>
+      <h1 id="shap-values-are-not-points">Why SHAP values are not points<a class="headerlink" href="#shap-values-are-not-points" title="Permanent link">&para;</a></h1>
 
-      <p class="doc-meta"><code>2026</code> <code>note</code> <code>~ 3 min read</code></p>
+      <p class="doc-meta"><code>2026</code> <code>note</code> <code>~ 5 min read</code> <code>from the talk &ldquo;The Scorecard Illusion&rdquo;</code></p>
 
       <div class="admonition abstract">
         <p class="admonition-title">Abstract</p>
-        <p>A model can discriminate not only through its decisions, but through how confident it is in them.</p>
+        <p>A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong.</p>
       </div>
 
-      <p>A credit model is judged by what it decides. Approve or reject. Score 600 or 720. Send to manual review or auto&#8209;decision. The fairness literature has spent twenty years on this surface &mdash; building tools that ask whether two people, equally creditworthy, equally observed, but differing on a protected attribute, are decided differently.</p>
+      <p>Credit risk grew up on scorecards. Points for tenure, points against for delinquency; add them up and read the decision off a table. Everyone in the room &mdash; analyst, regulator, customer &mdash; could follow the arithmetic.</p>
 
-      <p>That work is necessary. It is also not the whole picture.</p>
+      <p>Then we swapped the scorecard for gradient boosting, because it wins on performance, and got a black box we are obliged to explain. SHAP seemed to hand the scorecard back: a base value, one bar per feature, and the bars sum exactly to this customer&rsquo;s prediction. One waterfall per applicant. Points restored.</p>
 
-      <p>Modern credit models do not return decisions. They return scores, and around those scores, a rendering of how sure they are. Calibration tells you that a score of 0.05 means roughly five&#8209;in&#8209;a&#8209;hundred. Conformal prediction tells you, with a coverage guarantee, that the true outcome lies inside a stated interval. Both &mdash; the score and the interval around it &mdash; feed a downstream process that can include a human, a manual review queue, an auto&#8209;decision rule, an exposure limit, a price.</p>
+      <p>The additivity is real. It is the property that makes SHAP the best post&#8209;hoc explainer we have for tabular models, and I use it daily. The illusion is in what the bars <em>are</em>. A scorecard point is a coordinate: move the input and the table tells you how the total moves. A SHAP value is a share in a settlement. It comes from cooperative game theory, and it answers one narrow question &mdash; how to split the gap between this prediction and a background average fairly across the features. It divides a number that already exists. It says nothing about what happens when that number changes.</p>
 
-      <p>What if the score is fair, and the interval is not?</p>
-
-      <hr>
-
-      <p>Consider a model that, on average, gives demographic groups A and B the same expected default rate at the same input pattern. By any standard fairness test on point predictions, it passes. Now look at the prediction intervals it produces. For group A, the average interval width is 0.04 &mdash; a tight, useful estimate. For group B, the average width is 0.18 &mdash; a wide, almost uninformative band. The model does not say group B is riskier. It says, of group B, <em>I don&rsquo;t know</em>.</p>
-
-      <p>That asymmetry has consequences, even when nobody has decided yet what to do about it.</p>
-
-      <p>Wider intervals tend to be sent to manual review more often, because uncertainty itself gets read as risk. They tend to attract more conservative thresholds, smaller credit limits, more questions, longer waits. They produce more &ldquo;no, but&rdquo; decisions and fewer crisp approvals. The decision rule may be the same for both groups, but the <em>uncertainty</em> the rule is reading from is not &mdash; and so the lived process is not.</p>
-
-      <p>I call this <em>discriminatory uncertainty</em> &mdash; the systematic differentiation of certainty across groups, even when decisions on point predictions are well&#8209;calibrated and balanced.</p>
+      <p>Read the bars as coordinates anyway, and four things go wrong.</p>
 
       <hr>
 
-      <p>It is worth being precise about what it is and what it is not.</p>
+      <p>The first is recourse. Utilization shows +5 risk points, so the letter to the declined customer says: lower your utilization and your risk drops. SHAP never simulated that move. Take a customer with high limit utilization, long tenure, and a history of products closed on time. Inside the model those signals interact; utilization in that context reads as the normal mode of a trusted customer, and its bar is small. The customer follows the letter literally &mdash; pays the limit down to zero, closes half the products &mdash; and steps out of the very interaction that made them safe. The PD does not improve. Sometimes it gets worse.</p>
 
-      <p>It is not the same as the model being more accurate for one group than another. A model can have identical group&#8209;conditional error rates and still produce systematically wider intervals for one group, because accuracy averages over outcomes while interval width reflects how much information the model has about <em>each individual case</em>.</p>
+      <p>This is not an edge case; by now it is a theorem. Complete, linear attribution methods &mdash; SHAP included &mdash; provably cannot beat a coin flip at predicting how the model behaves under intervention (<a href="https://www.pnas.org/doi/10.1073/pnas.2304406120">Bilodeau et al., PNAS 2024</a>). &ldquo;What should this customer change&rdquo; is a counterfactual question, and you answer it by simulating the model until the decision flips. That question is the reason <a href="https://wlazlod.github.io/treecf/">treecf</a> exists.</p>
 
-      <p>It is not bias in the everyday sense of &ldquo;the model leans against this group&rdquo;. The score itself may be unbiased on average. The asymmetry sits one rung lower &mdash; in the model&rsquo;s confidence about the score it is producing.</p>
+      <hr>
 
-      <p>It is not visible in a confusion matrix, an ROC curve, or a calibration plot stratified by group, because each of these reads off point predictions. The phenomenon lives in the second moment, not the first.</p>
+      <p>The second is subtraction. Monday the PD is 3%; Tuesday it is 4%. The reflex is to compute SHAP on both days, subtract, and call the biggest mover the cause. Two things break at once. Interactions: a single new delinquency episode shifts the attributions of features that did not change, so five bars move when one thing happened. The background: every SHAP value is measured against a reference set of customers &mdash; the base value on the waterfall <em>is</em> that reference &mdash; and when it drifts, every attribution moves under identical inputs. There is an engineering trap underneath, too: <code>TreeExplainer</code> without an explicit background silently uses path&#8209;dependent rather than interventional attribution, and the two give different numbers. If a prediction moved, diagnose it from the inputs and the attributions together. The bar that moved is often not the feature that did.</p>
 
-      <p>What it is, is a form of differential treatment that is real, that is measurable, and that the current fairness vocabulary does not name.</p>
+      <hr>
 
-      <p>That is what my thesis is about.</p>
+      <p>The third is importance. Mean |SHAP| looks like an objective ranking, and it is an artifact twice over. Correlation first: a delinquency family &mdash; max delay over three, six, twelve months, overdue now, overdue at peak &mdash; splits one phenomenon across five bars, while age keeps its bar whole. Age tops the ranking not because it matters most but because it has no one to share with. Under the same correlation SHAP also queries the model on rows that cannot exist &mdash; a max delay of 90 days over three months and zero over six &mdash; so part of the explanation is computed on data the model will never see (<a href="https://doi.org/10.1016/j.artint.2021.103502">Aas, Jullum &amp; L&oslash;land, 2021</a>).</p>
+
+      <p>Distribution second: importance is measured on today&rsquo;s data. A counter of applications sharing one phone number was 99.5% zeros in training, so by mean |SHAP| it ranked among the least important features. Then operators started recycling numbers, the share of zeros drifted to 90%, and the feature became a real driver &mdash; from the bottom of the ranking, where nobody was watching. The remedies are unglamorous. Group correlated features and compare phenomena, not columns. Rank by the tail of |SHAP|, not only the mean, because rare&#8209;but&#8209;decisive features live there.</p>
+
+      <hr>
+
+      <p>The fourth is intuition. A feature&rsquo;s effect inside the full model is not its effect alone. Build a model on short delinquency episodes and it behaves the way intuition says: more episodes, more risk. Inside the full model, correlated with &ldquo;always closes on time&rdquo;, the same feature can push the opposite way. Read its SHAP as if the feature stood alone and the business conclusion comes out backwards.</p>
+
+      <hr>
+
+      <p>One sentence covers all four: <em>SHAP explains the model, not the world.</em> It answers &mdash; precisely, additively, fast &mdash; how the model decomposed this prediction against this background. It does not answer causal questions, counterfactual questions, or questions about the world, and it will not warn you when you ask one. It can even be deliberately steered: a discriminatory model can be dressed up to produce innocent&#8209;looking attributions (<a href="https://dl.acm.org/doi/10.1145/3375627.3375830">Slack et al., AIES 2020</a>).</p>
+
+      <p>None of this is a reason to bin it. It is a reason to ask it only the question it answers &mdash; and, when the stakes are high enough, to prefer a model that is transparent by construction over a black box with a good lawyer. In our benchmarks an EBM gave up roughly one point of AUROC against XGBoost and returned an exact, drawn shape per feature in exchange.</p>
+
+      <p>This note distils my Data Science Summit AI&nbsp;Edition 2026 talk, <em>The Scorecard Illusion</em>. Slides and full references: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a>.</p>
 
     </div>
   </article>
@@ -139,19 +143,12 @@
 
 <footer class="md-footer">
   <nav class="md-footer__inner md-grid" aria-label="Footer">
-    <a href="/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview">
+    <a href="/notes/discriminatory-uncertainty.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Discriminatory uncertainty">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       <div class="md-footer__title">
         <span class="md-footer__direction">Previous</span>
-        Overview
+        Discriminatory uncertainty
       </div>
-    </a>
-    <a href="/notes/shap-values-are-not-points.html" class="md-footer__link md-footer__link--next" aria-label="Next: Why SHAP values are not points">
-      <div class="md-footer__title">
-        <span class="md-footer__direction">Next</span>
-        Why SHAP values are not points
-      </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
     </a>
   </nav>
   <div class="md-footer-meta">
