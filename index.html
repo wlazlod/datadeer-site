@@ -73,7 +73,12 @@
       </span>
       <ul class="md-nav__list">
         <li class="md-nav__item"><a href="/" class="md-nav__link md-nav__link--active">Overview</a></li>
-        <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty</a></li>
+        <li class="md-nav__item md-nav__item--section">
+          <span class="md-nav__label">Notes</span>
+          <ul class="md-nav__list">
+            <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty</a></li>
+          </ul>
+        </li>
         <li class="md-nav__item md-nav__item--section">
           <span class="md-nav__label">Project docs</span>
           <ul class="md-nav__list">
@@ -93,6 +98,7 @@
       <span class="md-nav__title">Table of contents</span>
       <ul class="md-nav__list">
         <li class="md-nav__item"><a href="#about" class="md-nav__link">About</a></li>
+        <li class="md-nav__item"><a href="#didactics" class="md-nav__link">Didactics</a></li>
         <li class="md-nav__item"><a href="#academic" class="md-nav__link">Academic work</a></li>
         <li class="md-nav__item"><a href="#open-source" class="md-nav__link">Open source</a>
           <ul class="md-nav__list">
@@ -103,7 +109,6 @@
             <li class="md-nav__item"><a href="#flaggam" class="md-nav__link">flaggam</a></li>
           </ul>
         </li>
-        <li class="md-nav__item"><a href="#didactics" class="md-nav__link">Didactics</a></li>
         <li class="md-nav__item"><a href="#talks" class="md-nav__link">Conference talks</a></li>
         <li class="md-nav__item"><a href="#notes" class="md-nav__link">Notes</a></li>
         <li class="md-nav__item"><a href="#elsewhere" class="md-nav__link">Elsewhere</a></li>
@@ -127,16 +132,30 @@
 
       <div class="admonition info">
         <p class="admonition-title">Currently</p>
-        <p>At <a href="https://allegro.pl/pay">Allegro&nbsp;Pay</a> since 2022, manager since 2024 &middot; doctoral candidate at SGH Warsaw School of Economics &middot; based in Warsaw, Poland.</p>
+        <p>At <a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a> since 2022, manager since 2024 &middot; doctoral candidate at SGH Warsaw School of Economics &middot; based in Warsaw, Poland.</p>
       </div>
 
       <h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h2>
 
-      <p>I&rsquo;m a Manager of Data Science in credit risk at <a href="https://allegro.pl/pay">Allegro&nbsp;Pay</a>, where I lead modelling work for one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation.</p>
+      <p>I&rsquo;m a Manager of Data Science in credit risk at <a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a>, where I lead modelling work for one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation.</p>
 
       <p>I&rsquo;ve spent close to a decade in credit risk and data science, across Allegro&nbsp;Pay, Hexaware (for AXA), PKO Bank Polski, and ING Bank Śląski. Before that I was a robotics engineer at Samsung and a UAV constructor at Aviation Technik. Robotics was where I started &mdash; it&rsquo;s still how I think about machine learning: a system you can describe, debug, and put under load.</p>
 
       <p>Outside work I learn Czech, follow Formula&nbsp;1, and tinker with robotics.</p>
+
+      <h2 id="didactics">Didactics<a class="headerlink" href="#didactics" title="Permanent link">&para;</a></h2>
+
+      <p>Teaching materials: <a href="https://github.com/wlazlod/didactics">github.com/wlazlod/didactics</a></p>
+
+      <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Research Workshop<a class="headerlink" href="#conformal-workshop" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>Warsaw University of Technology</code> <code>with Allegro Pay</code></p>
+      <p>Industry&#8209;mentored project for the <em>Research Workshop</em> course at the Faculty of Mathematics and Information Science. Three companies contribute a project each year and guide the student team through it; ours is on conformal prediction applied to consumer&#8209;credit scoring. I co&#8209;prepared the brief and mentor the team.</p>
+      <p><a href="https://github.com/wlazlod/wut-counterfactual-explanations">Starter repository</a> &middot; <a href="https://github.com/wlazlod/didactics">Teaching materials</a></p>
+
+      <div class="admonition note">
+        <p class="admonition-title">In preparation</p>
+        <p>More teaching materials &mdash; lectures, talks, workshop notes &mdash; will appear here as they go up.</p>
+      </div>
 
       <h2 id="academic">Academic work<a class="headerlink" href="#academic" title="Permanent link">&para;</a></h2>
 
@@ -176,18 +195,9 @@
       <p>Interpretable generalized additive models built from univariate flags. A screening pass finds the threshold and category cuts where a feature&rsquo;s distribution shifts against the outcome; each cut becomes a binary rule, and a linear head fitted on top gives exact rule extraction and feature&#8209;level attribution. Sklearn&#8209;compatible estimators.</p>
       <p><a href="https://wlazlod.github.io/flaggam/">Documentation</a> &middot; <a href="https://github.com/wlazlod/flaggam">GitHub</a></p>
 
-      <h2 id="didactics">Didactics<a class="headerlink" href="#didactics" title="Permanent link">&para;</a></h2>
-
-      <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Research Workshop<a class="headerlink" href="#conformal-workshop" title="Permanent link">&para;</a></h3>
-      <p class="doc-meta"><code>Warsaw University of Technology</code> <code>with Allegro Pay</code></p>
-      <p>Industry&#8209;mentored project for the <em>Research Workshop</em> course at the Faculty of Mathematics and Information Science. Three companies contribute a project each year and guide the student team through it; ours is on conformal prediction applied to consumer&#8209;credit scoring. I co&#8209;prepared the brief and mentor the team.</p>
-
-      <div class="admonition note">
-        <p class="admonition-title">In preparation</p>
-        <p>Course materials and the starter repository will appear here as the iteration finishes &mdash; along with more teaching materials: lectures, talks, workshop notes.</p>
-      </div>
-
       <h2 id="talks">Conference talks<a class="headerlink" href="#talks" title="Permanent link">&para;</a></h2>
+
+      <p>Slides and materials: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a></p>
 
       <ul>
         <li><a href="https://ml.dssconf.pl/#agenda"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warsaw.<br>Why a SHAP value behaves like a contribution, not a coordinate &mdash; and how reading it as a point misleads scorecard interpretation.</li>
