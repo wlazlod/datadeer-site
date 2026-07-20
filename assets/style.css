@@ -519,13 +519,35 @@ body {
 }
 
 /* Pygments-style token colors (same class names mkdocs emits) */
-.highlight .k, .highlight .kn, .highlight .kc { color: var(--md-code-hl-keyword-color); }
+.highlight .k, .highlight .kn, .highlight .kc, .highlight .kd, .highlight .ow { color: var(--md-code-hl-keyword-color); }
 .highlight .n, .highlight .nn { color: var(--md-code-hl-name-color); }
-.highlight .nf { color: var(--md-code-hl-function-color); }
-.highlight .s, .highlight .s1, .highlight .s2 { color: var(--md-code-hl-string-color); }
+.highlight .nf, .highlight .nb, .highlight .nd { color: var(--md-code-hl-function-color); }
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sd, .highlight .si { color: var(--md-code-hl-string-color); }
 .highlight .mi, .highlight .mf { color: var(--md-code-hl-number-color); }
 .highlight .o, .highlight .p { color: var(--md-code-hl-operator-color); }
 .highlight .c1, .highlight .c { color: var(--md-code-hl-comment-color); font-style: italic; }
+
+/* ----- Figures ----- */
+.md-typeset figure {
+  margin: 1.6em auto;
+  max-width: 100%;
+  text-align: center;
+}
+.md-typeset figure img {
+  max-width: 100%;
+  height: auto;
+}
+.md-typeset figcaption {
+  margin: 0.5em auto 0;
+  max-width: 30rem;
+  font-size: 0.64rem;
+  color: var(--md-default-fg-color--light);
+  text-align: center;
+}
+
+/* Light/dark image variants — mkdocs-material's #only-light/#only-dark convention */
+[data-md-color-scheme="slate"] img[src$="#only-light"] { display: none; }
+[data-md-color-scheme="default"] img[src$="#only-dark"] { display: none; }
 
 /* ----- Admonitions ----- */
 .md-typeset .admonition {

@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Why SHAP values are not points — Daniel Wlazło</title>
-<meta name="description" content="A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong. Four ways the illusion breaks in credit-risk models.">
+<meta name="description" content="A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong. Four failures reproduced on a real XGBoost model, with code and figures.">
 <link rel="canonical" href="https://datadeer.pl/notes/shap-values-are-not-points.html">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
@@ -87,16 +87,30 @@
     </nav>
   </div>
 
+  <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+    <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+      <span class="md-nav__title">Table of contents</span>
+      <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#setup" class="md-nav__link">A model to argue with</a></li>
+        <li class="md-nav__item"><a href="#not-a-what-if" class="md-nav__link">Pitfall 1 — It is not a what-if</a></li>
+        <li class="md-nav__item"><a href="#day-over-day" class="md-nav__link">Pitfall 2 — Don&rsquo;t subtract it day over day</a></li>
+        <li class="md-nav__item"><a href="#importance" class="md-nav__link">Pitfall 3 — Importance has two faces</a></li>
+        <li class="md-nav__item"><a href="#feature-alone" class="md-nav__link">Pitfall 4 — A feature in the model&hellip;</a></li>
+        <li class="md-nav__item"><a href="#one-rule" class="md-nav__link">The one rule</a></li>
+      </ul>
+    </nav>
+  </div>
+
   <article id="article" class="md-content md-typeset" data-md-component="content">
     <div class="md-content__inner">
 
       <h1 id="shap-values-are-not-points">Why SHAP values are not points<a class="headerlink" href="#shap-values-are-not-points" title="Permanent link">&para;</a></h1>
 
-      <p class="doc-meta"><code>2026</code> <code>note</code> <code>~ 5 min read</code> <code>from the talk &ldquo;The Scorecard Illusion&rdquo;</code></p>
+      <p class="doc-meta"><code>2026</code> <code>note</code> <code>~ 12 min read</code> <code>from the talk &ldquo;The Scorecard Illusion&rdquo;</code></p>
 
       <div class="admonition abstract">
         <p class="admonition-title">Abstract</p>
-        <p>A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong.</p>
+        <p>A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong. Below, every claim is run against a real XGBoost model on synthetic credit data &mdash; code and figures included.</p>
       </div>
 
       <p>Credit risk grew up on scorecards. Points for tenure, points against for delinquency; add them up and read the decision off a table. Everyone in the room &mdash; analyst, regulator, customer &mdash; could follow the arithmetic.</p>
@@ -105,35 +119,146 @@
 
       <p>The additivity is real. It is the property that makes SHAP the best post&#8209;hoc explainer we have for tabular models, and I use it daily. The illusion is in what the bars <em>are</em>. A scorecard point is a coordinate: move the input and the table tells you how the total moves. A SHAP value is a share in a settlement. It comes from cooperative game theory, and it answers one narrow question &mdash; how to split the gap between this prediction and a background average fairly across the features. It divides a number that already exists. It says nothing about what happens when that number changes.</p>
 
-      <p>Read the bars as coordinates anyway, and four things go wrong.</p>
+      <p>Read the bars as coordinates anyway, and four things go wrong. This time I won&rsquo;t just assert it &mdash; each failure below is reproduced on a model you can rebuild from the code on this page.</p>
 
-      <hr>
+      <h2 id="setup">A model to argue with<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
 
-      <p>The first is recourse. Utilization shows +5 risk points, so the letter to the declined customer says: lower your utilization and your risk drops. SHAP never simulated that move. Take a customer with high limit utilization, long tenure, and a history of products closed on time. Inside the model those signals interact; utilization in that context reads as the normal mode of a trusted customer, and its bar is small. The customer follows the letter literally &mdash; pays the limit down to zero, closes half the products &mdash; and steps out of the very interaction that made them safe. The PD does not improve. Sometimes it gets worse.</p>
+      <p>Everything below runs on synthetic consumer&#8209;credit data with the correlation structure that makes SHAP interesting: a <em>delinquency family</em> of nested windows (max delay over 3, 6 and 12 months, plus current overdue), a utilization&nbsp;&times;&nbsp;tenure interaction, a count of short delinquency episodes whose meaning depends on repayment history, and a rare fraud&#8209;style signal (<code>phone_reuse</code>) that is zero for 99.5% of applicants. An XGBoost model predicts default; SHAP explains it:</p>
 
-      <p>This is not an edge case; by now it is a theorem. Complete, linear attribution methods &mdash; SHAP included &mdash; provably cannot beat a coin flip at predicting how the model behaves under intervention (<a href="https://www.pnas.org/doi/10.1073/pnas.2304406120">Bilodeau et al., PNAS 2024</a>). &ldquo;What should this customer change&rdquo; is a counterfactual question, and you answer it by simulating the model until the decision flips. That question is the reason <a href="https://wlazlod.github.io/treecf/">treecf</a> exists.</p>
+      <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span><span class="o">,</span> <span class="nn">shap</span>
 
-      <hr>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_credit_data</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">60_000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>     <span class="c1"># 10 features, one row per applicant</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.08</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
-      <p>The second is subtraction. Monday the PD is 3%; Tuesday it is 4%. The reflex is to compute SHAP on both days, subtract, and call the biggest mover the cause. Two things break at once. Interactions: a single new delinquency episode shifts the attributions of features that did not change, so five bars move when one thing happened. The background: every SHAP value is measured against a reference set of customers &mdash; the base value on the waterfall <em>is</em> that reference &mdash; and when it drifts, every attribution moves under identical inputs. There is an engineering trap underneath, too: <code>TreeExplainer</code> without an explicit background silently uses path&#8209;dependent rather than interventional attribution, and the two give different numbers. If a prediction moved, diagnose it from the inputs and the attributions together. The bar that moved is often not the feature that did.</p>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">background</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">rng</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="mi">200</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)]</span>
+<span class="n">explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
+                               <span class="n">feature_perturbation</span><span class="o">=</span><span class="s2">&quot;interventional&quot;</span><span class="p">)</span>
+<span class="n">shap_values</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>         <span class="c1"># one row of attributions per applicant</span>
+</code></pre></div>
 
-      <hr>
+      <p>Take one applicant &mdash; the kind every risk analyst recognises: limit utilization 0.86, but 96 months of tenure and seven products closed on time. The model puts their PD at 4.0%, and the waterfall decomposes that score against the background:</p>
 
-      <p>The third is importance. Mean |SHAP| looks like an objective ranking, and it is an artifact twice over. Correlation first: a delinquency family &mdash; max delay over three, six, twelve months, overdue now, overdue at peak &mdash; splits one phenomenon across five bars, while age keeps its bar whole. Age tops the ranking not because it matters most but because it has no one to share with. Under the same correlation SHAP also queries the model on rows that cannot exist &mdash; a max delay of 90 days over three months and zero over six &mdash; so part of the explanation is computed on data the model will never see (<a href="https://doi.org/10.1016/j.artint.2021.103502">Aas, Jullum &amp; L&oslash;land, 2021</a>).</p>
+      <figure>
+        <img src="/assets/img/shap/waterfall-light.svg#only-light" alt="SHAP waterfall for one applicant, from base value to f(x)" loading="lazy">
+        <img src="/assets/img/shap/waterfall-dark.svg#only-dark" alt="SHAP waterfall for one applicant, from base value to f(x)" loading="lazy">
+        <figcaption>One applicant, decomposed. Bars sum exactly from the base value (&minus;2.20) to this applicant&rsquo;s output (&minus;3.17 log-odds, PD 4.0%). Utilization carries the biggest positive bar: +0.66.</figcaption>
+      </figure>
 
-      <p>Distribution second: importance is measured on today&rsquo;s data. A counter of applications sharing one phone number was 99.5% zeros in training, so by mean |SHAP| it ranked among the least important features. Then operators started recycling numbers, the share of zeros drifted to 90%, and the feature became a real driver &mdash; from the bottom of the ranking, where nobody was watching. The remedies are unglamorous. Group correlated features and compare phenomena, not columns. Rank by the tail of |SHAP|, not only the mean, because rare&#8209;but&#8209;decisive features live there.</p>
+      <p>It looks exactly like a scorecard. Utilization &ldquo;costs&rdquo; +0.66 log&#8209;odds; tenure &ldquo;earns&rdquo; &minus;0.26. The four failures start the moment you treat those numbers as things you can push on.</p>
 
-      <hr>
+      <h2 id="not-a-what-if">Pitfall 1 &mdash; It is not a what&#8209;if<a class="headerlink" href="#not-a-what-if" title="Permanent link">&para;</a></h2>
 
-      <p>The fourth is intuition. A feature&rsquo;s effect inside the full model is not its effect alone. Build a model on short delinquency episodes and it behaves the way intuition says: more episodes, more risk. Inside the full model, correlated with &ldquo;always closes on time&rdquo;, the same feature can push the opposite way. Read its SHAP as if the feature stood alone and the business conclusion comes out backwards.</p>
+      <p>The first failure is recourse. Utilization is the biggest positive bar, so the decline letter says: lower your utilization and your risk drops. SHAP never simulated that move &mdash; and the model disagrees:</p>
 
-      <hr>
+      <div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">trusted_applicant</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>      <span class="c1"># utilization 0.86, tenure 96 m, 7 products closed on time</span>
+<span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>      <span class="c1"># 0.040 -&gt; PD 4.0%</span>
+<span class="n">shap_row</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="s2">&quot;utilization&quot;</span><span class="p">]</span>        <span class="c1"># +0.66 log-odds: the biggest positive bar</span>
+
+<span class="n">x</span><span class="p">[</span><span class="n">UTILIZATION</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.02</span>             <span class="c1"># &quot;lower your utilization&quot;, says the letter</span>
+<span class="n">x</span><span class="p">[</span><span class="n">N_CLOSED_OK</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>                <span class="c1"># ...and they closed products while they were at it</span>
+<span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">x</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>      <span class="c1"># 0.089 -&gt; PD 8.9%. It went up.</span>
+</code></pre></div>
+
+      <p>Nothing here is exotic. Inside the model, high utilization on a nine&#8209;time, seven&#8209;product profile reads as the normal mode of a trusted customer. The customer who follows the letter literally &mdash; pays the limit to zero, closes half the products &mdash; steps out of the very interaction that made them safe. Their PD does not drop toward the 2.1% the bar arithmetic implies. It more than doubles, to 8.9%:</p>
+
+      <figure>
+        <img src="/assets/img/shap/whatif-light.svg#only-light" alt="Model PD versus utilization for one applicant, against the straight line the SHAP bar suggests" loading="lazy">
+        <img src="/assets/img/shap/whatif-dark.svg#only-dark" alt="Model PD versus utilization for one applicant, against the straight line the SHAP bar suggests" loading="lazy">
+        <figcaption>What the bar suggests versus what the model does. The dashed line is the scorecard reading of the +0.66 bar; the solid line is the model&rsquo;s actual PD as utilization varies; the &times; is where the applicant lands after following the letter.</figcaption>
+      </figure>
+
+      <p>This is not an edge case; by now it is a theorem. Complete, linear attribution methods &mdash; SHAP included &mdash; provably cannot beat a coin flip at predicting how the model behaves under intervention (<a href="https://www.pnas.org/doi/10.1073/pnas.2304406120">Bilodeau et al., PNAS 2024</a>). &ldquo;What should this customer change&rdquo; is a counterfactual question, and you answer it by simulating the model until the decision flips, under constraints the real world imposes. That question is the reason <a href="https://wlazlod.github.io/treecf/">treecf</a> exists.</p>
+
+      <h2 id="day-over-day">Pitfall 2 &mdash; Don&rsquo;t subtract it day over day<a class="headerlink" href="#day-over-day" title="Permanent link">&para;</a></h2>
+
+      <p>The second failure is subtraction. Monday the PD is 14.8%; Tuesday it is 31.0%. The monitoring reflex is to compute SHAP on both days, subtract, and call the biggest mover the cause:</p>
+
+      <div class="highlight"><pre><span></span><code><span class="n">sv_mon</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">x_monday</span><span class="p">)</span>     <span class="c1"># PD 14.8%</span>
+<span class="n">sv_tue</span> <span class="o">=</span> <span class="n">explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">x_tuesday</span><span class="p">)</span>    <span class="c1"># PD 31.0% after one new delinquency event</span>
+
+<span class="p">(</span><span class="n">x_tuesday</span> <span class="o">!=</span> <span class="n">x_monday</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>                <span class="c1"># 3 of 10 inputs changed (the delay windows)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">sv_tue</span> <span class="o">-</span> <span class="n">sv_mon</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.01</span>               <span class="c1"># ...but the attributions of age, tenure,</span>
+                                             <span class="c1"># utilization moved too</span>
+</code></pre></div>
+
+      <p>One thing happened to this customer &mdash; a single new delinquency event, which flows into the three nested delay windows. But the attribution deltas move almost everywhere, including on features whose values are identical on both days:</p>
+
+      <figure>
+        <img src="/assets/img/shap/daydelta-light.svg#only-light" alt="Left panel: which inputs changed. Right panel: change in SHAP attribution for every feature" loading="lazy">
+        <img src="/assets/img/shap/daydelta-dark.svg#only-dark" alt="Left panel: which inputs changed. Right panel: change in SHAP attribution for every feature" loading="lazy">
+        <figcaption>One event, many moved bars. Three inputs changed (the delay windows &mdash; one event propagates through them); the attributions of age, tenure, utilization and products closed moved too, without their inputs changing.</figcaption>
+      </figure>
+
+      <p>Two mechanisms drive this. Interactions: the new delinquency changes which tree paths fire, so the credit assigned to <em>unchanged</em> features is renegotiated. The background: every SHAP value is measured against a reference set of customers &mdash; the base value on the waterfall <em>is</em> that reference &mdash; and if the background drifts between two runs, every attribution moves under identical inputs. There is an engineering trap underneath, too: <code>TreeExplainer</code> without an explicit <code>data=</code> argument silently switches to path&#8209;dependent attribution instead of interventional, and the two produce different numbers for the same applicant. If a prediction moved, diagnose it from the inputs and the attributions together. The bar that moved is often not the feature that did.</p>
+
+      <h2 id="importance">Pitfall 3 &mdash; Importance has two faces<a class="headerlink" href="#importance" title="Permanent link">&para;</a></h2>
+
+      <p>The third failure is the importance ranking. Mean |SHAP| looks objective, and it is an artifact twice over.</p>
+
+      <p><strong>Face one: correlation splits the credit.</strong> The delinquency family describes one phenomenon in four columns, so the trees spread their splits across the windows and the attribution splits with them. Each member of the family ranks <em>below</em> age. Sum the family per applicant before taking the mean, and delinquency moves to the top of the ranking &mdash; where, in this data&#8209;generating process, it belongs:</p>
+
+      <div class="highlight"><pre><span></span><code><span class="n">family</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;max_dpd_3m&quot;</span><span class="p">,</span> <span class="s2">&quot;max_dpd_6m&quot;</span><span class="p">,</span> <span class="s2">&quot;max_dpd_12m&quot;</span><span class="p">,</span> <span class="s2">&quot;overdue_now&quot;</span><span class="p">]</span>
+<span class="n">fam_idx</span> <span class="o">=</span> <span class="p">[</span><span class="n">FEATURES</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">family</span><span class="p">]</span>
+
+<span class="n">mean_abs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">shap_values</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>             <span class="c1"># per-column ranking</span>
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">shap_values</span><span class="p">[:,</span> <span class="n">fam_idx</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>   <span class="c1"># one phenomenon, one number</span>
+<span class="n">grouped</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>                                          <span class="c1"># tops the ranking once summed</span>
+</code></pre></div>
+
+      <figure>
+        <img src="/assets/img/shap/importance-light.svg#only-light" alt="Mean absolute SHAP ranking before and after grouping the correlated delinquency family" loading="lazy">
+        <img src="/assets/img/shap/importance-dark.svg#only-dark" alt="Mean absolute SHAP ranking before and after grouping the correlated delinquency family" loading="lazy">
+        <figcaption>The same model, two rankings. Ungrouped (left), every delinquency column ranks below age. Grouped (right), delinquency is the most important thing the model knows. Age never mattered most &mdash; it just had no one to share with.</figcaption>
+      </figure>
+
+      <p>Under the same correlation there is a second, quieter problem: interventional SHAP builds its counterfactual rows by mixing the applicant&rsquo;s values with background draws, feature by feature. With nested windows that manufactures rows that cannot exist &mdash; a max delay of 90 days over three months next to a smaller delay over six. For an applicant with <code>max_dpd_3m&nbsp;=&nbsp;90</code>, 98.5% of the rows SHAP queries against my background violate the nesting constraint. The model is evaluated far outside the data manifold, and whatever it predicts out there leaks into the explanation (<a href="https://doi.org/10.1016/j.artint.2021.103502">Aas, Jullum &amp; L&oslash;land, 2021</a>):</p>
+
+      <figure>
+        <img src="/assets/img/shap/impossible-light.svg#only-light" alt="Scatter of real applicants in the feasible region versus the impossible rows SHAP queries" loading="lazy">
+        <img src="/assets/img/shap/impossible-dark.svg#only-dark" alt="Scatter of real applicants in the feasible region versus the impossible rows SHAP queries" loading="lazy">
+        <figcaption>Real applicants live in the wedge where the 6-month delay is at least the 3-month delay. Pinning max_dpd_3m = 90 and drawing max_dpd_6m from the background puts 98.5% of SHAP&rsquo;s queries outside it.</figcaption>
+      </figure>
+
+      <p><strong>Face two: importance is measured on today&rsquo;s distribution.</strong> The <code>phone_reuse</code> counter &mdash; applications sharing one phone number across different identities &mdash; is 99.5% zeros in training, so by mean |SHAP| it is the least important feature in the model, rank 10 of 10. Rank by the maximum instead and it is the single most powerful feature the model has &mdash; when it fires, no other feature moves a score as far:</p>
+
+      <div class="highlight"><pre><span></span><code><span class="n">mean_abs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">shap_values</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>   <span class="c1"># phone_reuse: rank 10 of 10</span>
+<span class="n">max_abs</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">shap_values</span><span class="p">)</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>    <span class="c1"># phone_reuse: rank 1 of 10</span>
+</code></pre></div>
+
+      <figure>
+        <img src="/assets/img/shap/meanmax-light.svg#only-light" alt="Mean absolute SHAP versus max absolute SHAP per feature, with phone reuse an outlier on max" loading="lazy">
+        <img src="/assets/img/shap/meanmax-dark.svg#only-dark" alt="Mean absolute SHAP versus max absolute SHAP per feature, with phone reuse an outlier on max" loading="lazy">
+        <figcaption>Rare but decisive. By mean |SHAP| (x-axis) phone reuse is the least important feature in the model; by max |SHAP| (y-axis) it is the strongest. Averages hide the features you most need to monitor.</figcaption>
+      </figure>
+
+      <p>In production this is exactly the feature that bites: operators start recycling phone numbers, the share of zeros drifts from 99.5% to 90%, and a &ldquo;bottom of the ranking&rdquo; feature quietly becomes a top driver while nobody is watching it. The remedies are unglamorous. Group correlated features and compare phenomena, not columns. Rank and monitor by the tail of |SHAP|, not only the mean, because rare&#8209;but&#8209;decisive features live there.</p>
+
+      <h2 id="feature-alone">Pitfall 4 &mdash; A feature in the model is not a model of the feature<a class="headerlink" href="#feature-alone" title="Permanent link">&para;</a></h2>
+
+      <p>The fourth failure is intuition. Train a model on short delinquency episodes alone and it behaves the way intuition says: a clean staircase, more episodes, more risk. That curve is what most people silently picture when they read a SHAP dependence plot. The full model does something else &mdash; the same episode count carries a systematically different attribution depending on the rest of the profile, and for applicants who always close on time the contribution is dragged toward zero and below:</p>
+
+      <figure>
+        <img src="/assets/img/shap/dependence-light.svg#only-light" alt="Left: single-feature model of episodes, a rising staircase. Right: SHAP values of episodes in the full model, split by repayment history" loading="lazy">
+        <img src="/assets/img/shap/dependence-dark.svg#only-dark" alt="Left: single-feature model of episodes, a rising staircase. Right: SHAP values of episodes in the full model, split by repayment history" loading="lazy">
+        <figcaption>Alone versus in context. A one-feature model of episodes (left) matches intuition. Inside the full model (right), the same count of episodes is attributed differently depending on repayment history &mdash; context, not the column, decides.</figcaption>
+      </figure>
+
+      <p>Read the SHAP of a single feature as if the feature stood alone and your business conclusion can come out backwards &mdash; especially under correlation, where part of a feature&rsquo;s &ldquo;effect&rdquo; is credit borrowed from its neighbours.</p>
+
+      <h2 id="one-rule">The one rule<a class="headerlink" href="#one-rule" title="Permanent link">&para;</a></h2>
 
       <p>One sentence covers all four: <em>SHAP explains the model, not the world.</em> It answers &mdash; precisely, additively, fast &mdash; how the model decomposed this prediction against this background. It does not answer causal questions, counterfactual questions, or questions about the world, and it will not warn you when you ask one. It can even be deliberately steered: a discriminatory model can be dressed up to produce innocent&#8209;looking attributions (<a href="https://dl.acm.org/doi/10.1145/3375627.3375830">Slack et al., AIES 2020</a>).</p>
 
       <p>None of this is a reason to bin it. It is a reason to ask it only the question it answers &mdash; and, when the stakes are high enough, to prefer a model that is transparent by construction over a black box with a good lawyer. In our benchmarks an EBM gave up roughly one point of AUROC against XGBoost and returned an exact, drawn shape per feature in exchange.</p>
 
-      <p>This note distils my Data Science Summit AI&nbsp;Edition 2026 talk, <em>The Scorecard Illusion</em>. Slides and full references: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a>.</p>
+      <div class="admonition info">
+        <p class="admonition-title">Reproduce the figures</p>
+        <p>Every figure on this page comes from one seeded script &mdash; synthetic data, the XGBoost model, interventional TreeSHAP, matplotlib: <a href="/assets/img/shap/gen_figs.py">gen_figs.py</a>. Numbers in the text are its output, not illustrations.</p>
+      </div>
+
+      <p>This note distils my Data Science Summit AI&nbsp;Edition 2026 talk, <em>The Scorecard Illusion</em>. Slides: <a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf">The Scorecard Illusion (PDF)</a> &middot; full references: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a>.</p>
 
     </div>
   </article>
@@ -158,7 +283,7 @@
         <a href="https://github.com/wlazlod" title="GitHub" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"/></svg></a>
         <a href="https://www.linkedin.com/in/danielwlazlorobots/" title="LinkedIn" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
         <a href="https://orcid.org/0009-0003-1984-8183" title="ORCID" aria-label="ORCID"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M294.75 188.19h-45.92V342h47.47c67.62 0 83.12-51.34 83.12-76.91 0-41.64-26.54-76.9-84.67-76.9zM256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zM175.9 371.8h-29.8V180.2h29.8zm-14.9-217.6a19.6 19.6 0 1 1 19.6-19.6 19.64 19.64 0 0 1-19.6 19.6zM300 369h-81V161.26h80.6c76.73 0 110.44 54.83 110.44 103.85C410 318.39 368.38 369 300 369z"/></svg></a>
-        <a href="mailto:wlazlo.daniel@gmail.com" title="Email" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></svg></a>
+        <a href="mailto:daniel.wlazlo@datadeer.pl" title="Email" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2m0 4-8 5-8-5V6l8 5 8-5z"/></svg></a>
       </div>
     </div>
   </div>
