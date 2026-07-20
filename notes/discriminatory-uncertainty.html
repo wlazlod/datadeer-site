@@ -92,7 +92,7 @@
 
       <h1 id="discriminatory-uncertainty">Discriminatory uncertainty<a class="headerlink" href="#discriminatory-uncertainty" title="Permanent link">&para;</a></h1>
 
-      <p class="doc-meta"><code>2026</code> <code>note</code> <code>~ 3 min read</code></p>
+      <p class="doc-meta"><code>2026</code> <code>note</code> <code>~ 4 min read</code></p>
 
       <div class="admonition abstract">
         <p class="admonition-title">Abstract</p>
@@ -111,9 +111,21 @@
 
       <p>Consider a model that, on average, gives demographic groups A and B the same expected default rate at the same input pattern. By any standard fairness test on point predictions, it passes. Now look at the prediction intervals it produces. For group A, the average interval width is 0.04 &mdash; a tight, useful estimate. For group B, the average width is 0.18 &mdash; a wide, almost uninformative band. The model does not say group B is riskier. It says, of group B, <em>I don&rsquo;t know</em>.</p>
 
+      <figure>
+        <img src="/assets/img/du/du-intervals-light.svg#only-light" alt="Nine applicants per group, all scored near five percent PD, shown with their 90 percent prediction intervals; group A intervals are tight, group B intervals are wide" loading="lazy">
+        <img src="/assets/img/du/du-intervals-dark.svg#only-dark" alt="Nine applicants per group, all scored near five percent PD, shown with their 90 percent prediction intervals; group A intervals are tight, group B intervals are wide" loading="lazy">
+        <figcaption>Eighteen applicants, all scored &asymp;&nbsp;5% PD. The point predictions are indistinguishable; the intervals around them are not. (Simulated: two groups whose credit files carry different amounts of information; 90% intervals.)</figcaption>
+      </figure>
+
       <p>That asymmetry has consequences, even when nobody has decided yet what to do about it.</p>
 
       <p>Wider intervals tend to be sent to manual review more often, because uncertainty itself gets read as risk. They tend to attract more conservative thresholds, smaller credit limits, more questions, longer waits. They produce more &ldquo;no, but&rdquo; decisions and fewer crisp approvals. The decision rule may be the same for both groups, but the <em>uncertainty</em> the rule is reading from is not &mdash; and so the lived process is not.</p>
+
+      <figure>
+        <img src="/assets/img/du/du-review-light.svg#only-light" alt="Share of each group routed to manual review under a rule that sends wide intervals to review: six percent of group A, seventy percent of group B" loading="lazy">
+        <img src="/assets/img/du/du-review-dark.svg#only-dark" alt="Share of each group routed to manual review under a rule that sends wide intervals to review: six percent of group A, seventy percent of group B" loading="lazy">
+        <figcaption>One neutral-looking rule &mdash; &ldquo;interval wider than 0.10 goes to manual review&rdquo; &mdash; routes 6% of group A and 70% of group B to the slower, more conservative path.</figcaption>
+      </figure>
 
       <p>I call this <em>discriminatory uncertainty</em> &mdash; the systematic differentiation of certainty across groups, even when decisions on point predictions are well&#8209;calibrated and balanced.</p>
 
@@ -126,6 +138,12 @@
       <p>It is not bias in the everyday sense of &ldquo;the model leans against this group&rdquo;. The score itself may be unbiased on average. The asymmetry sits one rung lower &mdash; in the model&rsquo;s confidence about the score it is producing.</p>
 
       <p>It is not visible in a confusion matrix, an ROC curve, or a calibration plot stratified by group, because each of these reads off point predictions. The phenomenon lives in the second moment, not the first.</p>
+
+      <figure>
+        <img src="/assets/img/du/du-audit-light.svg#only-light" alt="Left: calibration curves for both groups lie on the diagonal. Right: distributions of interval width by group are far apart" loading="lazy">
+        <img src="/assets/img/du/du-audit-dark.svg#only-dark" alt="Left: calibration curves for both groups lie on the diagonal. Right: distributions of interval width by group are far apart" loading="lazy">
+        <figcaption>The audit that sees nothing. Both groups are calibrated &mdash; the standard fairness check passes (left). The distribution of interval widths tells the real story (right): mean width 0.04 for group A, 0.18 for group B.</figcaption>
+      </figure>
 
       <p>What it is, is a form of differential treatment that is real, that is measurable, and that the current fairness vocabulary does not name.</p>
 
