@@ -23,6 +23,46 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pl_PL">
 <meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://datadeer.pl/#person",
+  "name": "Daniel Wlazło",
+  "url": "https://datadeer.pl/",
+  "email": "mailto:daniel.wlazlo@datadeer.pl",
+  "jobTitle": "Data Science Manager",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Allegro Pay",
+    "url": "https://allegro.pl/metody-platnosci/allegro-pay"
+  },
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "SGH Warsaw School of Economics",
+    "url": "https://www.sgh.waw.pl/"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Warsaw",
+    "addressCountry": "PL"
+  },
+  "sameAs": [
+    "https://github.com/wlazlod",
+    "https://www.linkedin.com/in/danielwlazlorobots/",
+    "https://orcid.org/0009-0003-1984-8183"
+  ],
+  "knowsAbout": [
+    "credit risk",
+    "machine learning",
+    "explainable AI",
+    "algorithmic fairness",
+    "probability calibration",
+    "uncertainty quantification"
+  ]
+}
+</script>
 </head>
 <body dir="ltr" data-md-color-scheme="default">
 
@@ -79,6 +119,13 @@
           <ul class="md-nav__list">
             <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty <small>(EN)</small></a></li>
             <li class="md-nav__item"><a href="/notes/shap-values-are-not-points.html" class="md-nav__link">Why SHAP values are not points <small>(EN)</small></a></li>
+            <li class="md-nav__item"><a href="/notes/treecf.html" class="md-nav__link">treecf: counterfactuals you can act on <small>(EN)</small></a></li>
+          </ul>
+        </li>
+        <li class="md-nav__item md-nav__item--section">
+          <span class="md-nav__label">Dydaktyka</span>
+          <ul class="md-nav__list">
+            <li class="md-nav__item"><a href="/didactics/data-mining.html" class="md-nav__link">Data Mining (SGH) <small>(EN)</small></a></li>
           </ul>
         </li>
         <li class="md-nav__item md-nav__item--section">
@@ -151,15 +198,15 @@
 
       <p>Materiały dydaktyczne: <a href="https://github.com/wlazlod/didactics">github.com/wlazlod/didactics</a></p>
 
+      <h3 id="data-mining-sgh">Data Mining &mdash; wykład<a class="headerlink" href="#data-mining-sgh" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>Szkoła Główna Handlowa (SGH)</code> <code>jesień 2026</code> <code>w języku angielskim</code></p>
+      <p>Kurs Data Mining osadzony w&nbsp;finansach i&nbsp;prowadzony od problemu, dla studiów magisterskich SMMD&#8209;ADA i&nbsp;SMMD&#8209;AAB (do wyboru dla trzech kolejnych kierunków). Siedem bloków, 102&#8209;stronicowy skrypt, jeden notebook laboratoryjny na zajęcia &mdash; a&nbsp;cały kurs zakotwiczony na jednym zbiorze danych kredytu detalicznego (PD), z&nbsp;wbudowanymi pułapkami dydaktycznymi: trzema rodzajami braków danych i&nbsp;jedną celową kolumną z&nbsp;wyciekiem.</p>
+      <p><a href="/didactics/data-mining.html" hreflang="en">Skrypt kursu (HTML)</a> <small>(EN)</small> &middot; <a href="https://github.com/wlazlod/didactics">Repozytorium</a></p>
+
       <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Warsztaty Badawcze<a class="headerlink" href="#conformal-workshop" title="Stały odnośnik">&para;</a></h3>
       <p class="doc-meta"><code>Politechnika Warszawska</code> <code>we współpracy z Allegro Pay</code></p>
       <p>Projekt mentorowany przez firmę w&nbsp;ramach kursu <em>Warsztaty Badawcze</em> na Wydziale Matematyki i&nbsp;Nauk Informacyjnych PW. Każdego roku trzy firmy dostarczają po jednym projekcie i&nbsp;prowadzą zespół studencki przez jego realizację; nasz dotyczy zastosowania predykcji konformalnej w&nbsp;scoringu kredytowym. Współprzygotowałem zadanie i&nbsp;prowadzę zespół.</p>
       <p><a href="https://github.com/wlazlod/wut-counterfactual-explanations">Repozytorium startowe</a> &middot; <a href="https://github.com/wlazlod/didactics">Materiały dydaktyczne</a></p>
-
-      <div class="admonition note">
-        <p class="admonition-title">W przygotowaniu</p>
-        <p>Pozostałe materiały dydaktyczne &mdash; wykłady, prelekcje, notatki z&nbsp;warsztatów &mdash; będą się tu pojawiać w&nbsp;miarę publikacji.</p>
-      </div>
 
       <h2 id="academic">Praca naukowa<a class="headerlink" href="#academic" title="Stały odnośnik">&para;</a></h2>
 
@@ -209,9 +256,48 @@
       <p>Slajdy i&nbsp;materiały: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a></p>
 
       <ul>
-        <li><a href="https://ml.dssconf.pl/#agenda"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warszawa.<br>Dlaczego wartość SHAP zachowuje się jak wkład, a&nbsp;nie współrzędna &mdash; i&nbsp;jak odczytywanie jej jako punktu wprowadza w&nbsp;błąd przy interpretacji scoringu. <a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf">Slajdy (PDF)</a> &middot; <a href="/notes/shap-values-are-not-points.html">notatka</a>.</li>
-        <li><a href="https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznań, z&nbsp;Kamilem&nbsp;Golisem.<br>Jak grafy wiedzy spłacają dług semantyczny narastający w&nbsp;potokach ML &mdash; praktyczny, wdrożeniowy przegląd zastosowań.</li>
-        <li><a href="https://main.dssconf.pl/#all-speakers-modal"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Warszawa.<br>Jak ontologie semantyczne mogą wyprowadzić rozwój modeli ML poza feature store, dając modelom wspólny, wielokrotnego użytku słownik pojęć.</li>
+        <li><a href="https://ml.dssconf.pl/#agenda"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warszawa.<br>Dlaczego wartość SHAP zachowuje się jak wkład, a&nbsp;nie współrzędna &mdash; i&nbsp;jak odczytywanie jej jako punktu wprowadza w&nbsp;błąd przy interpretacji scoringu. <a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf">Slajdy (PDF)</a> &middot; <a href="/notes/shap-values-are-not-points.html">notatka</a>.
+          <details class="cite">
+            <summary>Cytuj (BibTeX)</summary>
+            <div class="highlight"><pre><code>@misc{wlazlo2026scorecard,
+  author       = {Wlaz{\l}o, Daniel},
+  title        = {The Scorecard Illusion: Why {SHAP} Values Are Not Points
+                  (and How They Can Fool You)},
+  year         = {2026},
+  month        = jun,
+  howpublished = {Talk at the Data Science Summit, AI Edition, Warsaw, Poland},
+  url          = {https://github.com/wlazlod/conference-talks}
+}</code></pre></div>
+          </details>
+        </li>
+        <li><a href="https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznań, z&nbsp;Kamilem&nbsp;Golisem.<br>Jak grafy wiedzy spłacają dług semantyczny narastający w&nbsp;potokach ML &mdash; praktyczny, wdrożeniowy przegląd zastosowań.
+          <details class="cite">
+            <summary>Cytuj (BibTeX)</summary>
+            <div class="highlight"><pre><code>@misc{wlazlo2026semanticdebt,
+  author       = {Wlaz{\l}o, Daniel and Golis, Kamil},
+  title        = {Curing Semantic Debt: Practical Applications of
+                  Knowledge Graphs in {ML}},
+  year         = {2026},
+  howpublished = {Talk at GHOST Day: Applied Machine Learning Conference,
+                  Pozna{\'n}, Poland},
+  url          = {https://github.com/wlazlod/conference-talks}
+}</code></pre></div>
+          </details>
+        </li>
+        <li><a href="https://main.dssconf.pl/#all-speakers-modal"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Warszawa.<br>Jak ontologie semantyczne mogą wyprowadzić rozwój modeli ML poza feature store, dając modelom wspólny, wielokrotnego użytku słownik pojęć.
+          <details class="cite">
+            <summary>Cytuj (BibTeX)</summary>
+            <div class="highlight"><pre><code>@misc{wlazlo2025ontologie,
+  author       = {Wlaz{\l}o, Daniel},
+  title        = {Poza Feature Store: jak Ontologie Semantyczne mog{\k{a}}
+                  przyspieszy{\'c} rozw{\'o}j modeli {ML}},
+  year         = {2025},
+  howpublished = {Talk at the Data Science Summit, Warsaw, Poland},
+  note         = {In Polish},
+  url          = {https://github.com/wlazlod/conference-talks}
+}</code></pre></div>
+          </details>
+        </li>
       </ul>
 
       <h2 id="notes">Notatki<a class="headerlink" href="#notes" title="Stały odnośnik">&para;</a></h2>
@@ -219,6 +305,7 @@
       <ul>
         <li><code>2026</code> <a href="/notes/discriminatory-uncertainty.html" hreflang="en"><strong>Dyskryminująca niepewność</strong></a> <small>(EN)</small><br>Model może dyskryminować nie tylko poprzez swoje decyzje, ale poprzez to, jak bardzo jest ich pewien.</li>
         <li><code>2026</code> <a href="/notes/shap-values-are-not-points.html" hreflang="en"><strong>Dlaczego wartości SHAP nie są punktami</strong></a> <small>(EN)</small><br>Wykres SHAP wygląda jak karta scoringowa. Czytany w&nbsp;ten sposób podsuwa rady pewne siebie &mdash; i&nbsp;błędne.</li>
+        <li><code>2026</code> <a href="/notes/treecf.html" hreflang="en"><strong>treecf: kontrfakty, na których można działać</strong></a> <small>(EN)</small><br>Jedyną uczciwą odpowiedzią na pytanie &bdquo;co musiałoby się zmienić, żeby wniosek przeszedł?&rdquo; jest kontrfakt &mdash; z&nbsp;ograniczeniami, zweryfikowany, szybki.</li>
       </ul>
 
       <h2 id="elsewhere">Gdzie&nbsp;indziej<a class="headerlink" href="#elsewhere" title="Stały odnośnik">&para;</a></h2>

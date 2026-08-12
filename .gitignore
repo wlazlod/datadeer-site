@@ -2,6 +2,9 @@
 Profile.pdf
 *.pdf
 
+# Claude Code session files
+.claude/
+
 # Editor + OS noise
 .DS_Store
 Thumbs.db

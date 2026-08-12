@@ -21,6 +21,8 @@ python3 -m http.server 8000
 ├── index.html            # English (root)
 ├── pl/index.html         # Polish
 ├── cs/index.html         # Czech
+├── notes/                # standalone notes (English only)
+├── didactics/            # course pages (English only)
 ├── assets/
 │   ├── style.css         # one stylesheet, all three pages
 │   └── favicon.svg

@@ -23,6 +23,46 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
 <meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://datadeer.pl/#person",
+  "name": "Daniel Wlazło",
+  "url": "https://datadeer.pl/",
+  "email": "mailto:daniel.wlazlo@datadeer.pl",
+  "jobTitle": "Data Science Manager",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Allegro Pay",
+    "url": "https://allegro.pl/metody-platnosci/allegro-pay"
+  },
+  "affiliation": {
+    "@type": "CollegeOrUniversity",
+    "name": "SGH Warsaw School of Economics",
+    "url": "https://www.sgh.waw.pl/"
+  },
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Warsaw",
+    "addressCountry": "PL"
+  },
+  "sameAs": [
+    "https://github.com/wlazlod",
+    "https://www.linkedin.com/in/danielwlazlorobots/",
+    "https://orcid.org/0009-0003-1984-8183"
+  ],
+  "knowsAbout": [
+    "credit risk",
+    "machine learning",
+    "explainable AI",
+    "algorithmic fairness",
+    "probability calibration",
+    "uncertainty quantification"
+  ]
+}
+</script>
 </head>
 <body dir="ltr" data-md-color-scheme="default">
 
@@ -79,6 +119,13 @@
           <ul class="md-nav__list">
             <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty <small>(EN)</small></a></li>
             <li class="md-nav__item"><a href="/notes/shap-values-are-not-points.html" class="md-nav__link">Why SHAP values are not points <small>(EN)</small></a></li>
+            <li class="md-nav__item"><a href="/notes/treecf.html" class="md-nav__link">treecf: counterfactuals you can act on <small>(EN)</small></a></li>
+          </ul>
+        </li>
+        <li class="md-nav__item md-nav__item--section">
+          <span class="md-nav__label">Výuka</span>
+          <ul class="md-nav__list">
+            <li class="md-nav__item"><a href="/didactics/data-mining.html" class="md-nav__link">Data Mining (SGH) <small>(EN)</small></a></li>
           </ul>
         </li>
         <li class="md-nav__item md-nav__item--section">
@@ -151,15 +198,15 @@
 
       <p>Výukové materiály: <a href="https://github.com/wlazlod/didactics">github.com/wlazlod/didactics</a></p>
 
+      <h3 id="data-mining-sgh">Data Mining &mdash; přednáškový kurz<a class="headerlink" href="#data-mining-sgh" title="Trvalý odkaz">&para;</a></h3>
+      <p class="doc-meta"><code>Varšavská ekonomická škola (SGH)</code> <code>podzim 2026</code> <code>v angličtině</code></p>
+      <p>Kurz Data Mining zakotvený ve&nbsp;financích a&nbsp;vedený od problému, pro magisterské programy SMMD&#8209;ADA a&nbsp;SMMD&#8209;AAB (volitelný pro tři další). Sedm bloků, 102&#8209;stránková skripta, jeden laboratorní notebook na hodinu &mdash; a&nbsp;celý kurz postavený na jednom datasetu retailových úvěrů (PD) s&nbsp;vestavěnými didaktickými pastmi: třemi druhy chybějících hodnot a&nbsp;jedním záměrným únikovým sloupcem.</p>
+      <p><a href="/didactics/data-mining.html" hreflang="en">Skripta kurzu (HTML)</a> <small>(EN)</small> &middot; <a href="https://github.com/wlazlod/didactics">Repozitář</a></p>
+
       <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Výzkumný workshop<a class="headerlink" href="#conformal-workshop" title="Trvalý odkaz">&para;</a></h3>
       <p class="doc-meta"><code>Varšavská technická univerzita</code> <code>ve spolupráci s Allegro Pay</code></p>
       <p>Firemně vedený projekt v&nbsp;rámci kurzu <em>Výzkumný workshop</em> na Fakultě matematiky a&nbsp;informačních věd VTU. Každý rok přispívají tři firmy jedním projektem a&nbsp;vedou studentský tým jeho realizací; náš se týká uplatnění konformní predikce v&nbsp;úvěrovém skóringu. Zadání jsem spolupřipravil a&nbsp;vedu tým.</p>
       <p><a href="https://github.com/wlazlod/wut-counterfactual-explanations">Startovací repozitář</a> &middot; <a href="https://github.com/wlazlod/didactics">Výukové materiály</a></p>
-
-      <div class="admonition note">
-        <p class="admonition-title">V přípravě</p>
-        <p>Další výukové materiály &mdash; přednášky, prezentace, poznámky z&nbsp;workshopů &mdash; se zde objeví průběžně.</p>
-      </div>
 
       <h2 id="academic">Akademická práce<a class="headerlink" href="#academic" title="Trvalý odkaz">&para;</a></h2>
 
@@ -209,9 +256,48 @@
       <p>Slidy a&nbsp;materiály: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a></p>
 
       <ul>
-        <li><a href="https://ml.dssconf.pl/#agenda"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Varšava.<br>Proč se hodnota SHAP chová jako příspěvek, nikoli souřadnice &mdash; a&nbsp;jak její čtení jako bodu klame při interpretaci skóringu. <a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf">Slidy (PDF)</a> &middot; <a href="/notes/shap-values-are-not-points.html">poznámka</a>.</li>
-        <li><a href="https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznaň, s&nbsp;Kamilem&nbsp;Golisem.<br>Jak znalostní grafy splácejí sémantický dluh, který se hromadí v&nbsp;ML pipelinách &mdash; praktický, aplikační průřez.</li>
-        <li><a href="https://main.dssconf.pl/#all-speakers-modal"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Varšava.<br>Jak sémantické ontologie mohou posunout vývoj ML modelů za feature store a&nbsp;dát modelům sdílený, znovupoužitelný slovník pojmů.</li>
+        <li><a href="https://ml.dssconf.pl/#agenda"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Varšava.<br>Proč se hodnota SHAP chová jako příspěvek, nikoli souřadnice &mdash; a&nbsp;jak její čtení jako bodu klame při interpretaci skóringu. <a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf">Slidy (PDF)</a> &middot; <a href="/notes/shap-values-are-not-points.html">poznámka</a>.
+          <details class="cite">
+            <summary>Citovat (BibTeX)</summary>
+            <div class="highlight"><pre><code>@misc{wlazlo2026scorecard,
+  author       = {Wlaz{\l}o, Daniel},
+  title        = {The Scorecard Illusion: Why {SHAP} Values Are Not Points
+                  (and How They Can Fool You)},
+  year         = {2026},
+  month        = jun,
+  howpublished = {Talk at the Data Science Summit, AI Edition, Warsaw, Poland},
+  url          = {https://github.com/wlazlod/conference-talks}
+}</code></pre></div>
+          </details>
+        </li>
+        <li><a href="https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznaň, s&nbsp;Kamilem&nbsp;Golisem.<br>Jak znalostní grafy splácejí sémantický dluh, který se hromadí v&nbsp;ML pipelinách &mdash; praktický, aplikační průřez.
+          <details class="cite">
+            <summary>Citovat (BibTeX)</summary>
+            <div class="highlight"><pre><code>@misc{wlazlo2026semanticdebt,
+  author       = {Wlaz{\l}o, Daniel and Golis, Kamil},
+  title        = {Curing Semantic Debt: Practical Applications of
+                  Knowledge Graphs in {ML}},
+  year         = {2026},
+  howpublished = {Talk at GHOST Day: Applied Machine Learning Conference,
+                  Pozna{\'n}, Poland},
+  url          = {https://github.com/wlazlod/conference-talks}
+}</code></pre></div>
+          </details>
+        </li>
+        <li><a href="https://main.dssconf.pl/#all-speakers-modal"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Varšava.<br>Jak sémantické ontologie mohou posunout vývoj ML modelů za feature store a&nbsp;dát modelům sdílený, znovupoužitelný slovník pojmů.
+          <details class="cite">
+            <summary>Citovat (BibTeX)</summary>
+            <div class="highlight"><pre><code>@misc{wlazlo2025ontologie,
+  author       = {Wlaz{\l}o, Daniel},
+  title        = {Poza Feature Store: jak Ontologie Semantyczne mog{\k{a}}
+                  przyspieszy{\'c} rozw{\'o}j modeli {ML}},
+  year         = {2025},
+  howpublished = {Talk at the Data Science Summit, Warsaw, Poland},
+  note         = {In Polish},
+  url          = {https://github.com/wlazlod/conference-talks}
+}</code></pre></div>
+          </details>
+        </li>
       </ul>
 
       <h2 id="notes">Poznámky<a class="headerlink" href="#notes" title="Trvalý odkaz">&para;</a></h2>
@@ -219,6 +305,7 @@
       <ul>
         <li><code>2026</code> <a href="/notes/discriminatory-uncertainty.html" hreflang="en"><strong>Diskriminační nejistota</strong></a> <small>(EN)</small><br>Model může diskriminovat nejen svým rozhodnutím, ale i&nbsp;tím, jak je si v&nbsp;něm jistý.</li>
         <li><code>2026</code> <a href="/notes/shap-values-are-not-points.html" hreflang="en"><strong>Proč hodnoty SHAP nejsou body</strong></a> <small>(EN)</small><br>Vodopádový graf SHAP vypadá jako skórovací karta. Čtený tímto způsobem dává sebejisté, ale chybné rady.</li>
+        <li><code>2026</code> <a href="/notes/treecf.html" hreflang="en"><strong>treecf: kontrafakty, podle kterých lze jednat</strong></a> <small>(EN)</small><br>Jedinou poctivou odpovědí na otázku &bdquo;co by se muselo změnit, aby žádost prošla?&ldquo; je kontrafakt &mdash; s&nbsp;omezeními, ověřený, rychlý.</li>
       </ul>
 
       <h2 id="elsewhere">Jinde<a class="headerlink" href="#elsewhere" title="Trvalý odkaz">&para;</a></h2>

@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Discriminatory uncertainty — Daniel Wlazło</title>
-<meta name="description" content="A model can discriminate not only through its decisions, but through how confident it is in them. On uncertainty as a fairness object in credit-risk machine learning.">
-<link rel="canonical" href="https://datadeer.pl/notes/discriminatory-uncertainty.html">
+<title>treecf: counterfactuals you can act on — Daniel Wlazło</title>
+<meta name="description" content="When a model declines an application, the only honest answer to &quot;what would it take?&quot; is a counterfactual. treecf computes that answer for tree ensembles — constrained, verified against the model, in milliseconds.">
+<link rel="canonical" href="https://datadeer.pl/notes/treecf.html">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,29 +13,36 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
 <link rel="stylesheet" href="/assets/style.css">
 
-<meta property="og:title" content="Discriminatory uncertainty">
-<meta property="og:description" content="A model can discriminate not only through its decisions, but through how confident it is in them.">
-<meta property="og:url" content="https://datadeer.pl/notes/discriminatory-uncertainty.html">
+<meta property="og:title" content="treecf: counterfactuals you can act on">
+<meta property="og:description" content="The only honest answer to &quot;what would it take to be approved?&quot; is a counterfactual. treecf computes it — constrained, verified, fast.">
+<meta property="og:url" content="https://datadeer.pl/notes/treecf.html">
 <meta property="og:type" content="article">
 <meta property="article:author" content="Daniel Wlazło">
-<meta property="article:published_time" content="2026-05-03">
+<meta property="article:published_time" content="2026-08-13">
 <meta name="twitter:card" content="summary">
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
-  "headline": "Discriminatory uncertainty",
-  "description": "A model can discriminate not only through its decisions, but through how confident it is in them. On uncertainty as a fairness object in credit-risk machine learning.",
-  "url": "https://datadeer.pl/notes/discriminatory-uncertainty.html",
-  "mainEntityOfPage": "https://datadeer.pl/notes/discriminatory-uncertainty.html",
-  "datePublished": "2026-05-03",
+  "headline": "treecf: counterfactuals you can act on",
+  "description": "When a model declines an application, the only honest answer to \"what would it take?\" is a counterfactual. treecf computes that answer for tree ensembles — constrained, verified against the model, in milliseconds.",
+  "url": "https://datadeer.pl/notes/treecf.html",
+  "mainEntityOfPage": "https://datadeer.pl/notes/treecf.html",
+  "datePublished": "2026-08-13",
   "inLanguage": "en",
   "author": {
     "@type": "Person",
     "@id": "https://datadeer.pl/#person",
     "name": "Daniel Wlazło",
     "url": "https://datadeer.pl/"
+  },
+  "about": {
+    "@type": "SoftwareSourceCode",
+    "name": "treecf",
+    "codeRepository": "https://github.com/wlazlod/treecf",
+    "programmingLanguage": ["Python", "Rust"],
+    "license": "https://opensource.org/licenses/MIT"
   },
   "isPartOf": {
     "@type": "WebSite",
@@ -93,9 +100,9 @@
         <li class="md-nav__item md-nav__item--section">
           <span class="md-nav__label">Notes</span>
           <ul class="md-nav__list">
-            <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link md-nav__link--active">Discriminatory uncertainty</a></li>
+            <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty</a></li>
             <li class="md-nav__item"><a href="/notes/shap-values-are-not-points.html" class="md-nav__link">Why SHAP values are not points</a></li>
-            <li class="md-nav__item"><a href="/notes/treecf.html" class="md-nav__link">treecf: counterfactuals you can act on</a></li>
+            <li class="md-nav__item"><a href="/notes/treecf.html" class="md-nav__link md-nav__link--active">treecf: counterfactuals you can act on</a></li>
           </ul>
         </li>
         <li class="md-nav__item md-nav__item--section">
@@ -119,77 +126,105 @@
     </nav>
   </div>
 
+  <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+    <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+      <span class="md-nav__title">Table of contents</span>
+      <ul class="md-nav__list">
+        <li class="md-nav__item"><a href="#the-question" class="md-nav__link">The question SHAP cannot answer</a></li>
+        <li class="md-nav__item"><a href="#what-it-does" class="md-nav__link">What treecf does</a></li>
+        <li class="md-nav__item"><a href="#constraints" class="md-nav__link">Feasible means constrained</a></li>
+        <li class="md-nav__item"><a href="#verified" class="md-nav__link">Verified, not estimated</a></li>
+        <li class="md-nav__item"><a href="#fast" class="md-nav__link">Fast enough for the portfolio</a></li>
+        <li class="md-nav__item"><a href="#try-it" class="md-nav__link">Try it</a></li>
+      </ul>
+    </nav>
+  </div>
+
   <article id="article" class="md-content md-typeset" data-md-component="content">
     <div class="md-content__inner">
 
-      <h1 id="discriminatory-uncertainty">Discriminatory uncertainty<a class="headerlink" href="#discriminatory-uncertainty" title="Permanent link">&para;</a></h1>
+      <h1 id="treecf">treecf: counterfactuals you can act on<a class="headerlink" href="#treecf" title="Permanent link">&para;</a></h1>
 
-      <p class="doc-meta"><code>2026</code> <code>note</code> <code>~ 4 min read</code></p>
+      <p class="doc-meta"><code>2026</code> <code>note</code> <code>~ 4 min read</code> <code>project: treecf</code></p>
 
       <div class="admonition abstract">
         <p class="admonition-title">Abstract</p>
-        <p>A model can discriminate not only through its decisions, but through how confident it is in them.</p>
+        <p>When a model declines an application, the only honest answer to <em>&ldquo;what would it take?&rdquo;</em> is a counterfactual: the smallest feasible change that flips the decision. <a href="https://github.com/wlazlod/treecf">treecf</a> computes that answer for tree ensembles &mdash; under real&#8209;world constraints, verified against the model, in milliseconds.</p>
       </div>
 
-      <p>A credit model is judged by what it decides. Approve or reject. Score 600 or 720. Send to manual review or auto&#8209;decision. The fairness literature has spent twenty years on this surface &mdash; building tools that ask whether two people, equally creditworthy, equally observed, but differing on a protected attribute, are decided differently.</p>
+      <h2 id="the-question">The question SHAP cannot answer<a class="headerlink" href="#the-question" title="Permanent link">&para;</a></h2>
 
-      <p>That work is necessary. It is also not the whole picture.</p>
+      <p>Every declined credit application ends with the same question: <em>what would it take?</em> Regulation increasingly requires an answer &mdash; adverse&#8209;action notices, the AI&nbsp;Act&rsquo;s transparency duties &mdash; and customers deserve one either way.</p>
 
-      <p>Modern credit models do not return decisions. They return scores, and around those scores, a rendering of how sure they are. Calibration tells you that a score of 0.05 means roughly five&#8209;in&#8209;a&#8209;hundred. Conformal prediction tells you, with a coverage guarantee, that the true outcome lies inside a stated interval. Both &mdash; the score and the interval around it &mdash; feed a downstream process that can include a human, a manual review queue, an auto&#8209;decision rule, an exposure limit, a price.</p>
+      <p>The tempting shortcut is to read the answer off an attribution chart: take the biggest SHAP bar and tell the customer to push on it. In <a href="/notes/shap-values-are-not-points.html">a previous note</a> I showed how that goes wrong on a real XGBoost model: the letter says &ldquo;lower your utilization&rdquo;, the customer complies, and their probability of default more than doubles. That is not a bug in SHAP. Attribution divides up a prediction that already exists; it says nothing about what happens when the inputs change. &ldquo;What should this customer do&rdquo; is a <em>counterfactual</em> question, and you answer it the only way that is honest &mdash; by simulating the model until the decision actually flips.</p>
 
-      <p>What if the score is fair, and the interval is not?</p>
+      <p>That is the question <a href="https://github.com/wlazlod/treecf">treecf</a> exists to answer.</p>
 
-      <hr>
+      <h2 id="what-it-does">What treecf does<a class="headerlink" href="#what-it-does" title="Permanent link">&para;</a></h2>
 
-      <p>Consider a model that, on average, gives demographic groups A and B the same expected default rate at the same input pattern. By any standard fairness test on point predictions, it passes. Now look at the prediction intervals it produces. For group A, the average interval width is 0.04 &mdash; a tight, useful estimate. For group B, the average width is 0.18 &mdash; a wide, almost uninformative band. The model does not say group B is riskier. It says, of group B, <em>I don&rsquo;t know</em>.</p>
+      <p>Given a model, an instance, and a target, treecf searches for the minimal feasible change that moves the model&rsquo;s raw output into a target interval. It works directly on XGBoost, LightGBM, CatBoost and scikit&#8209;learn tree ensembles, parsed into one shared tree representation &mdash; you hand it the model object or its dump file, not a wrapper.</p>
 
-      <figure>
-        <img src="/assets/img/du/du-intervals-light.svg#only-light" alt="Nine applicants per group, all scored near five percent PD, shown with their 90 percent prediction intervals; group A intervals are tight, group B intervals are wide" loading="lazy">
-        <img src="/assets/img/du/du-intervals-dark.svg#only-dark" alt="Nine applicants per group, all scored near five percent PD, shown with their 90 percent prediction intervals; group A intervals are tight, group B intervals are wide" loading="lazy">
-        <figcaption>Eighteen applicants, all scored &asymp;&nbsp;5% PD. The point predictions are indistinguishable; the intervals around them are not. (Simulated: two groups whose credit files carry different amounts of information; 90% intervals.)</figcaption>
-      </figure>
+      <p>Decision thresholds are first&#8209;class, because in credit risk the threshold <em>is</em> the product. A target is an interval on the model output: a probability cutoff (&ldquo;get this applicant under 4%&nbsp;PD&rdquo;), a regression range, or a whole rating&#8209;grade ladder in one call. The result is not &ldquo;the score improves&rdquo; but &ldquo;the application crosses the line the business actually draws&rdquo;.</p>
 
-      <p>That asymmetry has consequences, even when nobody has decided yet what to do about it.</p>
+      <h2 id="constraints">Feasible means constrained<a class="headerlink" href="#constraints" title="Permanent link">&para;</a></h2>
 
-      <p>Wider intervals tend to be sent to manual review more often, because uncertainty itself gets read as risk. They tend to attract more conservative thresholds, smaller credit limits, more questions, longer waits. They produce more &ldquo;no, but&rdquo; decisions and fewer crisp approvals. The decision rule may be the same for both groups, but the <em>uncertainty</em> the rule is reading from is not &mdash; and so the lived process is not.</p>
+      <p>An unconstrained counterfactual is a fantasy: <em>become five years younger and delete your delinquency history.</em> No customer can follow it, no regulator will accept it, no analyst will sign it. treecf treats the constraint layer as the core of the product, not an afterthought:</p>
 
-      <figure>
-        <img src="/assets/img/du/du-review-light.svg#only-light" alt="Share of each group routed to manual review under a rule that sends wide intervals to review: six percent of group A, seventy percent of group B" loading="lazy">
-        <img src="/assets/img/du/du-review-dark.svg#only-dark" alt="Share of each group routed to manual review under a rule that sends wide intervals to review: six percent of group A, seventy percent of group B" loading="lazy">
-        <figcaption>One neutral-looking rule &mdash; &ldquo;interval wider than 0.10 goes to manual review&rdquo; &mdash; routes 6% of group A and 70% of group B to the slower, more conservative path.</figcaption>
-      </figure>
+      <ul>
+        <li><strong>Immutability and direction.</strong> Age and bureau history are frozen; income may only plausibly move one way.</li>
+        <li><strong>Consistency.</strong> Ranges, one&#8209;hot groups, and arbitrary linear inter&#8209;feature rules such as <code>max_dpd_30d &lt;= max_dpd_12m</code> &mdash; declared once, enforced by every backend.</li>
+        <li><strong>Missing values are values.</strong> NaN can be a legitimate counterfactual state &mdash; closing an account genuinely turns a number into a blank &mdash; with per&#8209;feature opt&#8209;in and explicit transition costs.</li>
+        <li><strong>Constraint mining.</strong> Candidate invariants are mined from your data and presented for human review &mdash; never silently applied.</li>
+      </ul>
 
-      <p>I call this <em>discriminatory uncertainty</em> &mdash; the systematic differentiation of certainty across groups, even when decisions on point predictions are well&#8209;calibrated and balanced.</p>
+      <p>The plans that come out are ones a person could actually execute &mdash; which is the difference between a recourse engine and a search toy.</p>
 
-      <hr>
+      <h2 id="verified">Verified, not estimated<a class="headerlink" href="#verified" title="Permanent link">&para;</a></h2>
 
-      <p>It is worth being precise about what it is and what it is not.</p>
+      <p>Every candidate plan is float&#8209;verified against the parsed model before it is returned: treecf re&#8209;scores the counterfactual and confirms the output really lands in the target interval. There is no &ldquo;approximately&rdquo; in the answer. If treecf returns a plan, the model &mdash; the same trees, the same floating&#8209;point arithmetic &mdash; agrees with it. For anything that ends up in a customer letter or a validation report, that property is not optional.</p>
 
-      <p>It is not the same as the model being more accurate for one group than another. A model can have identical group&#8209;conditional error rates and still produce systematically wider intervals for one group, because accuracy averages over outcomes while interval width reflects how much information the model has about <em>each individual case</em>.</p>
+      <h2 id="fast">Fast enough for the portfolio<a class="headerlink" href="#fast" title="Permanent link">&para;</a></h2>
 
-      <p>It is not bias in the everyday sense of &ldquo;the model leans against this group&rdquo;. The score itself may be unbiased on average. The asymmetry sits one rung lower &mdash; in the model&rsquo;s confidence about the score it is producing.</p>
+      <p>The constrained search runs on a Rust engine bundled in the wheel &mdash; no toolchain to install, numpy the only Python dependency &mdash; measured at 44&ndash;58&times; the speed of the equivalent numpy implementation. In practice that means milliseconds per applicant and whole portfolios in one parallel call. Recourse stops being a per&#8209;case favour and becomes a batch job: every declined applicant can get a feasible plan, nightly. The same speed serves validation teams probing how close the portfolio sits to the cutoff, and analysts running honest what&#8209;ifs instead of reading bars.</p>
 
-      <p>It is not visible in a confusion matrix, an ROC curve, or a calibration plot stratified by group, because each of these reads off point predictions. The phenomenon lives in the second moment, not the first.</p>
+      <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
 
-      <figure>
-        <img src="/assets/img/du/du-audit-light.svg#only-light" alt="Left: calibration curves for both groups lie on the diagonal. Right: distributions of interval width by group are far apart" loading="lazy">
-        <img src="/assets/img/du/du-audit-dark.svg#only-dark" alt="Left: calibration curves for both groups lie on the diagonal. Right: distributions of interval width by group are far apart" loading="lazy">
-        <figcaption>The audit that sees nothing. Both groups are calibrated &mdash; the standard fairness check passes (left). The distribution of interval widths tells the real story (right): mean width 0.04 for group A, 0.18 for group B.</figcaption>
-      </figure>
+      <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">treecf</span> <span class="kn">import</span> <span class="n">Explainer</span><span class="p">,</span> <span class="n">Target</span><span class="p">,</span> <span class="n">constraint</span><span class="p">,</span> <span class="n">Freeze</span>
 
-      <p>What it is, is a form of differential treatment that is real, that is measurable, and that the current fairness vocabulary does not name.</p>
+<span class="n">exp</span> <span class="o">=</span> <span class="n">Explainer</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;model.json&quot;</span><span class="p">,</span>                       <span class="c1"># native object or dump file</span>
+    <span class="n">background</span><span class="o">=</span><span class="n">X_train_sample</span><span class="p">,</span>
+    <span class="n">constraints</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">constraint</span><span class="p">(</span><span class="s2">&quot;max_dpd_30d &lt;= max_dpd_12m&quot;</span><span class="p">),</span>
+        <span class="n">Freeze</span><span class="p">(</span><span class="s2">&quot;age_of_bureau_file&quot;</span><span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">Target</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">)),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
 
-      <p>That is what my thesis is about.</p>
+      <p><code>pip install treecf</code> &mdash; v0.1.1 on PyPI, MIT&#8209;licensed. Model parsers ship as extras (<code>treecf[xgboost]</code>); JSON dumps work without them.</p>
+
+      <p><a href="https://wlazlod.github.io/treecf/">Documentation</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a> &middot; <a href="https://pypi.org/project/treecf/">PyPI</a></p>
 
       <details class="cite">
-        <summary>Cite this note (BibTeX)</summary>
-        <div class="highlight"><pre><code>@misc{wlazlo2026discriminatory,
+        <summary>Cite this note / the software (BibTeX)</summary>
+        <div class="highlight"><pre><code>@misc{wlazlo2026treecfnote,
   author       = {Wlaz{\l}o, Daniel},
-  title        = {Discriminatory Uncertainty},
+  title        = {treecf: Counterfactuals You Can Act On},
   year         = {2026},
-  month        = may,
+  month        = aug,
   howpublished = {datadeer.pl},
-  url          = {https://datadeer.pl/notes/discriminatory-uncertainty.html}
+  url          = {https://datadeer.pl/notes/treecf.html}
+}
+
+@software{wlazlo2026treecf,
+  author  = {Wlaz{\l}o, Daniel},
+  title   = {treecf: constrained, threshold-aware counterfactual
+             explanations for tree ensembles},
+  year    = {2026},
+  version = {0.1.1},
+  license = {MIT},
+  url     = {https://github.com/wlazlod/treecf}
 }</code></pre></div>
       </details>
 
@@ -201,19 +236,12 @@
 
 <footer class="md-footer">
   <nav class="md-footer__inner md-grid" aria-label="Footer">
-    <a href="/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview">
+    <a href="/notes/shap-values-are-not-points.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Why SHAP values are not points">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       <div class="md-footer__title">
         <span class="md-footer__direction">Previous</span>
-        Overview
-      </div>
-    </a>
-    <a href="/notes/shap-values-are-not-points.html" class="md-footer__link md-footer__link--next" aria-label="Next: Why SHAP values are not points">
-      <div class="md-footer__title">
-        <span class="md-footer__direction">Next</span>
         Why SHAP values are not points
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
     </a>
   </nav>
   <div class="md-footer-meta">
