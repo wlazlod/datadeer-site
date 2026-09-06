@@ -38,3 +38,18 @@
     if (el) observer.observe(el);
   });
 })();
+
+/* Fill PyPI version badges at load time; badges stay hidden if the lookup fails */
+(function () {
+  var badges = document.querySelectorAll("code[data-pypi]");
+  if (!badges.length || !("fetch" in window)) return;
+  badges.forEach(function (el) {
+    fetch("https://pypi.org/pypi/" + el.getAttribute("data-pypi") + "/json")
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      .then(function (data) {
+        el.textContent = "v" + data.info.version;
+        el.removeAttribute("hidden");
+      })
+      .catch(function () {});
+  });
+})();
