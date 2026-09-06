@@ -30,6 +30,7 @@ python3 -m http.server 8000
 ├── .nojekyll             # tell Pages: skip Jekyll, serve files as-is
 ├── .gitignore            # excludes Profile.pdf etc. from deploys
 ├── robots.txt
+├── sitemap.xml          # submitted to Search Console; update when pages are added
 └── README.md
 ```
 

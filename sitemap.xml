@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://datadeer.pl/</loc>
+    <lastmod>2026-09-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://datadeer.pl/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://datadeer.pl/pl/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://datadeer.pl/cs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://datadeer.pl/"/>
+  </url>
+  <url>
+    <loc>https://datadeer.pl/pl/</loc>
+    <lastmod>2026-09-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://datadeer.pl/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://datadeer.pl/pl/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://datadeer.pl/cs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://datadeer.pl/"/>
+  </url>
+  <url>
+    <loc>https://datadeer.pl/cs/</loc>
+    <lastmod>2026-09-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://datadeer.pl/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://datadeer.pl/pl/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://datadeer.pl/cs/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://datadeer.pl/"/>
+  </url>
+  <url>
+    <loc>https://datadeer.pl/notes/discriminatory-uncertainty.html</loc>
+    <lastmod>2026-08-13</lastmod>
+  </url>
+  <url>
+    <loc>https://datadeer.pl/notes/shap-values-are-not-points.html</loc>
+    <lastmod>2026-08-13</lastmod>
+  </url>
+  <url>
+    <loc>https://datadeer.pl/notes/treecf.html</loc>
+    <lastmod>2026-08-13</lastmod>
+  </url>
+  <url>
+    <loc>https://datadeer.pl/didactics/data-mining.html</loc>
+    <lastmod>2026-08-28</lastmod>
+  </url>
+</urlset>
