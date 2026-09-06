@@ -122,7 +122,7 @@
           </ul>
         </li>
         <li class="md-nav__item md-nav__item--section">
-          <span class="md-nav__label">Didactics</span>
+          <span class="md-nav__label">Teaching</span>
           <ul class="md-nav__list">
             <li class="md-nav__item"><a href="/didactics/data-mining.html" class="md-nav__link">Data Mining (SGH)</a></li>
           </ul>
@@ -145,7 +145,7 @@
         </li>
         <li class="md-nav__item"><a href="#academic" class="md-nav__link">Academic work</a></li>
         <li class="md-nav__item"><a href="#talks" class="md-nav__link">Conference talks</a></li>
-        <li class="md-nav__item"><a href="#didactics" class="md-nav__link">Didactics</a></li>
+        <li class="md-nav__item"><a href="#didactics" class="md-nav__link">Teaching</a></li>
         <li class="md-nav__item"><a href="#elsewhere" class="md-nav__link">Elsewhere</a></li>
       </ul>
     </nav>
@@ -160,26 +160,33 @@
 
       <h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h2>
 
-      <p>I&rsquo;m a Manager of Data Science in credit risk at <a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a>, where I lead modelling work for one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation. I&rsquo;ve spent close to a decade in credit risk and data science, across Allegro&nbsp;Pay, Hexaware (for AXA), PKO Bank Polski, and ING Bank Śląski; before that I was a robotics engineer at Samsung and a UAV constructor at Aviation Technik, and robotics is still how I think about machine learning &mdash; a system you can describe, debug, and put under load.</p>
+      <p>I&rsquo;m a Manager of Data Science in credit risk at <a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a>, where I lead modelling work for one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation.</p>
+
+      <p>I&rsquo;ve spent close to a decade in credit risk and data science, across Allegro&nbsp;Pay, Hexaware (for AXA), PKO Bank Polski, and ING Bank Śląski. Before that I was a robotics engineer at Samsung and a UAV constructor at Aviation Technik. Robotics was where I started &mdash; it&rsquo;s still how I think about machine learning: a system you can describe, debug, and put under load. Outside work I learn Czech, follow Formula&nbsp;1, and tinker with robotics.</p>
+
+      <figure>
+        <img src="/assets/img/about-me.jpg" alt="Three photos of Daniel Wlazło: a portrait, holding a multirotor drone in a forest, and standing behind a small robot at a robotics competition." width="1400" height="711" decoding="async">
+        <figcaption>Credit risk by day; drones and robots the rest of the time.</figcaption>
+      </figure>
 
       <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 
       <ul>
-        <li><code>2026</code> <a href="/notes/discriminatory-uncertainty.html"><strong>Discriminatory uncertainty</strong></a><br>A model can discriminate not only through its decisions, but through how confident it is in them.</li>
-        <li><code>2026</code> <a href="/notes/shap-values-are-not-points.html"><strong>Why SHAP values are not points</strong></a><br>A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong.</li>
-        <li><code>2026</code> <a href="/notes/treecf.html"><strong>treecf: counterfactuals you can act on</strong></a><br>The only honest answer to &ldquo;what would it take to be approved?&rdquo; is a counterfactual &mdash; constrained, verified, fast.</li>
+        <li><code>May 2026</code> <a href="/notes/discriminatory-uncertainty.html"><strong>Discriminatory uncertainty</strong></a><br>A model can discriminate not only through its decisions, but through how confident it is in them.</li>
+        <li><code>July 2026</code> <a href="/notes/shap-values-are-not-points.html"><strong>Why SHAP values are not points</strong></a><br>A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong.</li>
+        <li><code>August 2026</code> <a href="/notes/treecf.html"><strong>treecf: counterfactuals you can act on</strong></a><br>The only honest answer to &ldquo;what would it take to be approved?&rdquo; is a counterfactual &mdash; constrained, verified, fast.</li>
       </ul>
 
       <h2 id="open-source">Open source<a class="headerlink" href="#open-source" title="Permanent link">&para;</a></h2>
 
       <h3 id="probcal"><a href="https://github.com/wlazlod/probcal">probcal</a><a class="headerlink" href="#probcal" title="Permanent link">&para;</a></h3>
       <p class="doc-meta"><code>python</code> <code>numpy-only</code> <a href="https://pypi.org/project/probcal/"><code data-pypi="probcal" hidden></code></a> <code>MIT</code></p>
-      <p>Universal post&#8209;hoc probability calibration for binary classifiers &mdash; and the governance around a deployed calibration. Unifies the calibration literature (Platt, temperature, beta, isotonic, Venn&#8209;Abers, spline calibration and more) behind one API, with an extensive catalog of calibration metrics and statistical tests, CORP diagnostics on both probability and logit scales, automatic method selection under nested validation, and exact inverse maps that translate policy cutoffs back to raw scores. Fitted maps serialize to plain JSON; monitoring is anytime&#8209;valid (e&#8209;process alarms, drift&#8209;onset estimates, an auditable re&#8209;offset loop); most&#8209;prudent PDs (Pluto&ndash;Tasche), margins of conservatism and a self&#8209;contained validation report cover the regulatory side. Built for credit&#8209;risk PD models; fully general &mdash; and numpy is the only runtime dependency.</p>
+      <p>Post&#8209;hoc probability calibration for binary classifiers, built for regulated PD models. Three things scikit&#8209;learn will not give you: logit&#8209;scale diagnostics that keep a 1% default rate readable, a central&#8209;tendency adjustment that ships as an auditable offset stage rather than a silent refit, and per&#8209;grade regulatory backtests (binomial, Jeffreys). Around them: eleven calibration methods behind one API, exact inverse maps from policy cutoffs to raw scores, anytime&#8209;valid monitoring, and JSON serialization. numpy is the only runtime dependency.</p>
       <p><a href="https://wlazlod.github.io/probcal/">Documentation</a> &middot; <a href="https://pypi.org/project/probcal/">PyPI</a> &middot; <a href="https://github.com/wlazlod/probcal">GitHub</a></p>
 
       <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Permanent link">&para;</a></h3>
       <p class="doc-meta"><code>python</code> <code>rust core</code> <a href="https://pypi.org/project/treecf/"><code data-pypi="treecf" hidden></code></a> <code>MIT</code></p>
-      <p>Constrained, threshold&#8209;aware counterfactual explanations for tree ensembles (XGBoost, LightGBM, CatBoost, sklearn): the minimal, feasible change that moves a declined application under the cutoff. Plans respect declarative real&#8209;world constraints, treat missing values as first&#8209;class, and every answer is float&#8209;verified against the parsed model before it is returned. The search runs on a Rust engine bundled in the wheel &mdash; milliseconds per applicant, whole portfolios in one parallel call.</p>
+      <p>Constrained, threshold&#8209;aware counterfactual explanations for tree ensembles (XGBoost, LightGBM, CatBoost, sklearn): the minimal, feasible change that moves a declined application under the cutoff. Plans respect declarative real&#8209;world constraints, treat missing values as first&#8209;class, and every answer is float&#8209;verified against the parsed model before it is returned. It can also prove a plan is the cheapest available, or that none exists under the constraints. The search runs on a Rust engine bundled in the wheel &mdash; milliseconds per applicant, whole portfolios in one parallel call.</p>
       <p><a href="https://wlazlod.github.io/treecf/">Documentation</a> &middot; <a href="https://pypi.org/project/treecf/">PyPI</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
 
       <p><strong>Earlier and experimental:</strong> <a href="https://wlazlod.github.io/concept-graph-xai/">concept-graph-xai</a> (concept&#8209;level feature usage and ablation), <a href="https://wlazlod.github.io/triadxai/">triadxai</a> (three&#8209;channel decomposition of credit scores), <a href="https://wlazlod.github.io/flaggam/">flaggam</a> (interpretable GAMs built from univariate flags), <a href="https://wlazlod.github.io/swift/">swift</a> (SHAP&#8209;weighted drift monitoring).</p>
@@ -207,7 +214,7 @@
 
       <p>BibTeX entries for all talks: <a href="https://github.com/wlazlod/conference-talks#readme">conference-talks README</a>.</p>
 
-      <h2 id="didactics">Didactics<a class="headerlink" href="#didactics" title="Permanent link">&para;</a></h2>
+      <h2 id="didactics">Teaching<a class="headerlink" href="#didactics" title="Permanent link">&para;</a></h2>
 
       <p>Teaching materials: <a href="https://github.com/wlazlod/didactics">github.com/wlazlod/didactics</a></p>
 
@@ -254,7 +261,7 @@
   </nav>
   <div class="md-footer-meta">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">&copy; 2026 Daniel Wlazło &middot; styled after the <a href="https://wlazlod.github.io/treecf/">treecf</a> / <a href="https://wlazlod.github.io/flaggam/">flaggam</a> docs</div>
+      <div class="md-copyright">&copy; 2026 Daniel Wlazło &middot; styled after <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a></div>
       <div class="md-footer-social">
         <a href="https://github.com/wlazlod" title="GitHub" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"/></svg></a>
         <a href="https://www.linkedin.com/in/danielwlazlorobots/" title="LinkedIn" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
