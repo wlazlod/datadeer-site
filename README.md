@@ -1,128 +1,84 @@
 # datadeer.pl
 
-Personal site for Daniel Wlazło. Static HTML/CSS, no build step, deployed
-via GitHub Pages with `datadeer.pl` as the custom domain. Trilingual: EN
-(default), PL, CS.
+Personal site for Daniel Wlazło. Static HTML/CSS served by GitHub Pages with
+`datadeer.pl` as the custom domain. Trilingual homepage (EN default, PL, CS);
+notes and course pages are English only.
 
 ## Local preview
 
 ```bash
-cd /home/danielwlazlo/Code/datadeer.pl
 python3 -m http.server 8000
-# open http://localhost:8000        (English)
-# open http://localhost:8000/pl/    (Polish)
-# open http://localhost:8000/cs/    (Czech)
+# http://localhost:8000        English
+# http://localhost:8000/pl/    Polish
+# http://localhost:8000/cs/    Czech
 ```
 
 ## Files
 
 ```
 .
-├── index.html            # English (root)
-├── pl/index.html         # Polish
-├── cs/index.html         # Czech
-├── notes/                # standalone notes (English only)
-├── didactics/            # course pages (English only)
+├── index.html, pl/, cs/      # generated homepages — edit src/home/, then build
+├── src/home/
+│   ├── chrome.html           # shared header, sidebars, footer with {{slots}}
+│   └── en.html, pl.html, cs.html   # per-language strings + article body
+├── scripts/
+│   ├── build.py              # assembles the homepages; --check flags stale output
+│   └── figures/              # generators for the note figures (not referenced by pages)
+├── notes/                    # standalone notes, hand-edited
+├── didactics/                # course pages, hand-edited
+├── 404.html                  # served by GitHub Pages for missing paths
 ├── assets/
-│   ├── style.css         # one stylesheet, all three pages
+│   ├── style.css             # one stylesheet for every page
+│   ├── app.js                # palette toggle, TOC highlighting
+│   ├── fonts/                # self-hosted Roboto + Roboto Mono (latin, latin-ext)
+│   ├── img/                  # headshot, Open Graph card, note figures
 │   └── favicon.svg
-├── CNAME                 # custom-domain marker for GitHub Pages
-├── .nojekyll             # tell Pages: skip Jekyll, serve files as-is
-├── .gitignore            # excludes Profile.pdf etc. from deploys
-├── robots.txt
-├── sitemap.xml          # submitted to Search Console; update when pages are added
-└── README.md
+├── sitemap.xml, robots.txt
+├── CNAME                     # custom-domain marker for GitHub Pages
+└── .nojekyll                 # serve files as-is
 ```
 
-`Profile.pdf` is intentionally not committed — it's source material, not a
-deployable asset. Edit `.gitignore` if that ever needs to change.
+Everything committed is served. Source material that must not ship (PDFs) is
+excluded through `.gitignore`.
 
-## Editing copy
+## Editing the homepage
 
-Each language is its own HTML file. There's no shared layout file because
-there isn't a build step. When you change a section heading or paragraph,
-update all three. The structure is identical across languages, so a copy/
-diff/translate workflow works fine.
+The three homepages are generated. Edit `src/home/<lang>.html`, then:
 
-To add the next language, copy `pl/index.html`, change `<html lang="…">`,
-the `hreflang` tags, the language switcher's `current` marker, and the
-content. Add a row to the language switcher in all existing pages.
-
-## Deploy to GitHub Pages
-
-1. Create the repo on GitHub: `wlazlod/datadeer-site` (public).
-2. Push this directory:
-
-   ```bash
-   cd /home/danielwlazlo/Code/datadeer.pl
-   git init
-   git add -A
-   git commit -m "feat: initial trilingual site"
-   git branch -M main
-   git remote add origin git@github.com:wlazlod/datadeer-site.git
-   git push -u origin main
-   ```
-3. On GitHub: **Settings → Pages**.
-   - Source: *Deploy from a branch*
-   - Branch: `main` / `(root)`
-   - Custom domain: `datadeer.pl`
-   - Tick **Enforce HTTPS** once the cert is provisioned (a few minutes
-     after DNS lands).
-
-## DNS — switch `datadeer.pl` from WordPress to GitHub Pages
-
-At your registrar (the one currently pointing `datadeer.pl` at the WP host),
-replace the existing A records for the apex with the four GitHub Pages IPs,
-and point `www` at your `github.io` URL.
-
-**Apex `datadeer.pl` — A records (IPv4):**
-
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
+```bash
+python3 scripts/build.py          # rewrites index.html, pl/index.html, cs/index.html
+python3 scripts/build.py --check  # exits 1 if the generated files are stale
 ```
 
-**Apex `datadeer.pl` — AAAA records (IPv6, optional but recommended):**
+Each language file starts with `key: value` lines (page metadata and the
+translated chrome strings), a `---` line, and the article body. The table of
+contents, the language switcher, and the "(EN)" markers in the sidebar are
+derived by the script, so they cannot drift between languages. Chrome changes
+(header, footer, sidebar) go in `chrome.html` once.
 
-```
-2606:50c0:8000::153
-2606:50c0:8001::153
-2606:50c0:8002::153
-2606:50c0:8003::153
-```
+Package versions in the Open source section are static text. Bump them in all
+three language files when probcal or treecf releases.
 
-**Subdomain `www` — CNAME:**
+## Adding a note
 
-```
-www  →  wlazlod.github.io.
-```
+1. Create `notes/<slug>.html` from an existing note (they share the chrome by copy).
+2. Add it to the Notes list in the three `src/home/*.html` bodies (newest first),
+   to the sidebar in `chrome.html`, and to the sidebar of the other notes.
+3. If it is the newest note, point `next_href` / `next_label` in the three
+   language files at it.
+4. Add a `<url>` entry to `sitemap.xml`.
+5. Rebuild.
 
-(Reference: GitHub docs on [apex domain configuration](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain).)
+## Palette and fonts
 
-### Cutover plan (no downtime risk)
+The colour scheme is chosen by an inline script at the top of `<body>`: the
+stored choice wins, otherwise `prefers-color-scheme`. Fonts are self-hosted
+under `assets/fonts/`; no request leaves the domain.
 
-1. Push the site, configure custom domain in Pages → wait for the green
-   check under *Custom domain*.
-2. Lower the TTL on the existing WordPress DNS records to 300 s, **the day
-   before** you flip.
-3. Replace the records as above.
-4. Once `https://datadeer.pl/` serves the new site, decommission the
-   WordPress hosting at your leisure. Keep a backup of the old site if it
-   has anything you might want to reuse.
+## Deploy
 
-## Adding writing later
-
-When you have your first essay:
-
-1. Create `notes/<slug>.html` (copy `index.html` as a starting layout, swap
-   the body for the essay content).
-2. Replace each language's *Notes / Notatki / Poznámky* placeholder with a
-   list linking to the post (translate the title in each language file).
-
-When the essay count justifies it, switch to a static-site generator
-(11ty / Astro / Hugo) without changing the URL structure.
+Push to `main`. GitHub Pages serves the root of the branch. DNS for the apex
+points at the GitHub Pages IPs; `www` is a CNAME to `wlazlod.github.io`.
 
 ## License
 
