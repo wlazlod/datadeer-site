@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>treecf: counterfactuals you can act on — Daniel Wlazło</title>
-<meta name="description" content="When a model declines an application, the only honest answer to &quot;what would it take?&quot; is a counterfactual. treecf computes that answer for tree ensembles — constrained, verified against the model, in milliseconds.">
+<meta name="description" content="When a model declines an application, the only honest answer to &quot;what would it take?&quot; is a counterfactual. treecf computes that answer for tree ensembles — under real-world constraints, verified against the parsed model, with a proof that the plan is the cheapest available or that none exists.">
 <link rel="canonical" href="https://datadeer.pl/notes/treecf.html">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
@@ -26,7 +26,7 @@
   "@context": "https://schema.org",
   "@type": "ScholarlyArticle",
   "headline": "treecf: counterfactuals you can act on",
-  "description": "When a model declines an application, the only honest answer to \"what would it take?\" is a counterfactual. treecf computes that answer for tree ensembles — constrained, verified against the model, in milliseconds.",
+  "description": "When a model declines an application, the only honest answer to \"what would it take?\" is a counterfactual. treecf computes that answer for tree ensembles — under real-world constraints, verified against the parsed model, with a proof that the plan is the cheapest available or that none exists.",
   "url": "https://datadeer.pl/notes/treecf.html",
   "mainEntityOfPage": "https://datadeer.pl/notes/treecf.html",
   "datePublished": "2026-08-13",
@@ -106,7 +106,7 @@
           </ul>
         </li>
         <li class="md-nav__item md-nav__item--section">
-          <span class="md-nav__label">Didactics</span>
+          <span class="md-nav__label">Teaching</span>
           <ul class="md-nav__list">
             <li class="md-nav__item"><a href="/didactics/data-mining.html" class="md-nav__link">Data Mining (SGH)</a></li>
           </ul>
@@ -123,6 +123,7 @@
         <li class="md-nav__item"><a href="#what-it-does" class="md-nav__link">What treecf does</a></li>
         <li class="md-nav__item"><a href="#constraints" class="md-nav__link">Feasible means constrained</a></li>
         <li class="md-nav__item"><a href="#verified" class="md-nav__link">Verified, not estimated</a></li>
+        <li class="md-nav__item"><a href="#proved" class="md-nav__link">Proved, not just found</a></li>
         <li class="md-nav__item"><a href="#fast" class="md-nav__link">Fast enough for the portfolio</a></li>
         <li class="md-nav__item"><a href="#try-it" class="md-nav__link">Try it</a></li>
       </ul>
@@ -134,11 +135,11 @@
 
       <h1 id="treecf">treecf: counterfactuals you can act on<a class="headerlink" href="#treecf" title="Permanent link">&para;</a></h1>
 
-      <p class="doc-meta"><code>2026</code> <code>note</code> <code>~ 4 min read</code> <code>project: treecf</code></p>
+      <p class="doc-meta"><code>August 2026</code> <code>note</code> <code>~ 6 min read</code> <code>project: treecf</code></p>
 
       <div class="admonition abstract">
         <p class="admonition-title">Abstract</p>
-        <p>When a model declines an application, the only honest answer to <em>&ldquo;what would it take?&rdquo;</em> is a counterfactual: the smallest feasible change that flips the decision. <a href="https://github.com/wlazlod/treecf">treecf</a> computes that answer for tree ensembles &mdash; under real&#8209;world constraints, verified against the model, in milliseconds.</p>
+        <p>When a model declines an application, the only honest answer to <em>&ldquo;what would it take?&rdquo;</em> is a counterfactual: the smallest feasible change that flips the decision. <a href="https://github.com/wlazlod/treecf">treecf</a> computes that answer for tree ensembles &mdash; under real&#8209;world constraints, verified against the parsed model &mdash; and can prove the plan is the cheapest available, or that none exists.</p>
       </div>
 
       <h2 id="the-question">The question SHAP cannot answer<a class="headerlink" href="#the-question" title="Permanent link">&para;</a></h2>
@@ -170,26 +171,54 @@
 
       <h2 id="verified">Verified, not estimated<a class="headerlink" href="#verified" title="Permanent link">&para;</a></h2>
 
-      <p>Every candidate plan is float&#8209;verified against the parsed model before it is returned: treecf re&#8209;scores the counterfactual and confirms the output really lands in the target interval. There is no &ldquo;approximately&rdquo; in the answer. If treecf returns a plan, the model &mdash; the same trees, the same floating&#8209;point arithmetic &mdash; agrees with it. For anything that ends up in a customer letter or a validation report, that property is not optional.</p>
+      <p>Every candidate plan is float&#8209;verified against the parsed model before it is returned: treecf re&#8209;scores the counterfactual and confirms the output really lands in the target interval. There is no &ldquo;approximately&rdquo; in the answer. If treecf returns a plan, the model agrees with it &mdash; the same trees, with routing conformance&#8209;tested against the native library, including at threshold boundaries. For anything that ends up in a customer letter or a validation report, that property is not optional.</p>
+
+      <h2 id="proved">Proved, not just found<a class="headerlink" href="#proved" title="Permanent link">&para;</a></h2>
+
+      <p>Verification says a plan works. It does not say the plan is the cheapest one, and when the search comes back empty it does not say whether a plan exists at all. Sampling&#8209;based libraries such as DiCE stop there: a plan, or a shrug after a timeout. treecf&rsquo;s exact backend goes further. It branch&#8209;and&#8209;bounds the same candidate grid the heuristic search uses and returns one of three things, each labelled by its <code>proof</code> field:</p>
+
+      <ul>
+        <li><strong>An optimal plan.</strong> <code>proof="optimal"</code>: no cheaper feasible row exists in the searched grid, under these constraints, for this model.</li>
+        <li><strong>A certified &ldquo;no&rdquo;.</strong> <code>Infeasible(proof="certified")</code>: every assignment the grid allows was tried and none reaches the target. &ldquo;No recourse exists within these constraints&rdquo; becomes a provable statement &mdash; the sentence a validator, or a regulator, actually needs.</li>
+        <li><strong>An honest downgrade.</strong> If a budget runs out or a constraint repair cannot be settled, the result says <code>proof="heuristic"</code> or <code>"search_exhausted"</code>, with a warning naming the cause. The claim is withdrawn rather than overstated.</li>
+      </ul>
+
+      <p>Two constructions build on the proof. A <strong>recourse region</strong> widens any verified plan into a certified box &mdash; &ldquo;reduce utilization to &le;&nbsp;0.40&rdquo;, not &ldquo;to 0.3972&rdquo; &mdash; with every point in the box provably in&#8209;target and constraint&#8209;feasible. That is the form a customer letter can carry. A <strong>recourse menu</strong> solves every lever set up to a chosen size and reports which combinations reach the target, at what cost, and which provably cannot: &ldquo;no acceptance is reachable by changing only <code>dpd_12m</code>&rdquo; is a certified statement, not an absence of luck.</p>
+
+      <p>A certificate is a statement about the artifact handed to the explainer &mdash; this parsed model, these compiled constraints, at the moment the search ran. It says nothing about whether the model generalises, or whether the applicant can execute the plan in life. Within that scope, the claim is exact.</p>
 
       <h2 id="fast">Fast enough for the portfolio<a class="headerlink" href="#fast" title="Permanent link">&para;</a></h2>
 
-      <p>The constrained search runs on a Rust engine bundled in the wheel &mdash; no toolchain to install, numpy the only Python dependency &mdash; measured at 44&ndash;58&times; the speed of the equivalent numpy implementation. In practice that means milliseconds per applicant and whole portfolios in one parallel call. Recourse stops being a per&#8209;case favour and becomes a batch job: every declined applicant can get a feasible plan, nightly. The same speed serves validation teams probing how close the portfolio sits to the cutoff, and analysts running honest what&#8209;ifs instead of reading bars.</p>
+      <p>The heuristic search runs on a Rust engine bundled in the wheel &mdash; no toolchain to install, numpy the only Python dependency &mdash; and answers in milliseconds per applicant, whole portfolios in one parallel call. The exact backend is slower, as proofs are, and is what you reach for when a plan goes into a letter. Recourse stops being a per&#8209;case favour and becomes a batch job: every declined applicant can get a feasible plan, nightly, and the ones that matter get a proof.</p>
 
       <h2 id="try-it">Try it<a class="headerlink" href="#try-it" title="Permanent link">&para;</a></h2>
 
-      <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">treecf</span> <span class="kn">import</span> <span class="n">Explainer</span><span class="p">,</span> <span class="n">Target</span><span class="p">,</span> <span class="n">constraint</span><span class="p">,</span> <span class="n">Freeze</span>
+      <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">from</span> <span class="nn">treecf</span> <span class="kn">import</span> <span class="n">Explainer</span><span class="p">,</span> <span class="n">Target</span><span class="p">,</span> <span class="n">Freeze</span><span class="p">,</span> <span class="n">constraint</span>
+
+<span class="c1"># X_train, y_train, X_test: your own data</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
 <span class="n">exp</span> <span class="o">=</span> <span class="n">Explainer</span><span class="p">(</span>
-    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;model.json&quot;</span><span class="p">,</span>                       <span class="c1"># native object or dump file</span>
-    <span class="n">background</span><span class="o">=</span><span class="n">X_train_sample</span><span class="p">,</span>
+    <span class="n">model</span><span class="o">=</span><span class="n">clf</span><span class="p">,</span>                                    <span class="c1"># or &quot;model.json&quot;</span>
+    <span class="n">background</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>                           <span class="c1"># fits the distance normalizers</span>
     <span class="n">constraints</span><span class="o">=</span><span class="p">[</span>
-        <span class="n">constraint</span><span class="p">(</span><span class="s2">&quot;max_dpd_30d &lt;= max_dpd_12m&quot;</span><span class="p">),</span>
         <span class="n">Freeze</span><span class="p">(</span><span class="s2">&quot;age_of_bureau_file&quot;</span><span class="p">),</span>
+        <span class="n">constraint</span><span class="p">(</span><span class="s2">&quot;max_dpd_30d &lt;= max_dpd_12m&quot;</span><span class="p">),</span>
     <span class="p">],</span>
 <span class="p">)</span>
-<span class="n">res</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">Target</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">)),</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">target</span> <span class="o">=</span> <span class="n">Target</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">))</span>    <span class="c1"># PD under 4%</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>                                <span class="c1"># one declined applicant</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;exact&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">res</span><span class="o">.</span><span class="n">proof</span>                    <span class="c1"># &quot;optimal&quot; | &quot;optimal_within_gap&quot; | &quot;heuristic&quot;</span>
+<span class="n">res</span><span class="o">.</span><span class="n">changes</span>                  <span class="c1"># {&quot;utilization&quot;: (0.61, 0.39), ...}</span>
+
+<span class="n">boxed</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">boxed</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>      <span class="c1"># &quot;utilization &lt;= 0.4&quot;</span>
 </code></pre></div>
+
+      <p>The same flow, executed end to end on a synthetic credit model: <a href="https://wlazlod.github.io/treecf/notebooks/01-quickstart/">quickstart notebook</a>.</p>
 
       <p><code>pip install treecf</code> &mdash; <a href="https://pypi.org/project/treecf/">on PyPI</a>, MIT&#8209;licensed. Model parsers ship as extras (<code>treecf[xgboost]</code>); JSON dumps work without them.</p>
 
@@ -211,7 +240,6 @@
   title   = {treecf: constrained, threshold-aware counterfactual
              explanations for tree ensembles},
   year    = {2026},
-  version = {0.1.1},
   license = {MIT},
   url     = {https://github.com/wlazlod/treecf}
 }</code></pre></div>
@@ -235,7 +263,7 @@
   </nav>
   <div class="md-footer-meta">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-copyright">&copy; 2026 Daniel Wlazło &middot; styled after the <a href="https://wlazlod.github.io/treecf/">treecf</a> / <a href="https://wlazlod.github.io/flaggam/">flaggam</a> docs</div>
+      <div class="md-copyright">&copy; 2026 Daniel Wlazło &middot; styled after <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a></div>
       <div class="md-footer-social">
         <a href="https://github.com/wlazlod" title="GitHub" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8z"/></svg></a>
         <a href="https://www.linkedin.com/in/danielwlazlorobots/" title="LinkedIn" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg></a>
