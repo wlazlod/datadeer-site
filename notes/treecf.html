@@ -19,6 +19,7 @@
 <meta property="og:type" content="article">
 <meta property="article:author" content="Daniel Wlazło">
 <meta property="article:published_time" content="2026-08-13">
+<meta property="article:modified_time" content="2026-09-06">
 <meta name="twitter:card" content="summary">
 
 <script type="application/ld+json">
@@ -30,6 +31,7 @@
   "url": "https://datadeer.pl/notes/treecf.html",
   "mainEntityOfPage": "https://datadeer.pl/notes/treecf.html",
   "datePublished": "2026-08-13",
+  "dateModified": "2026-09-06",
   "inLanguage": "en",
   "author": {
     "@type": "Person",
@@ -135,7 +137,7 @@
 
       <h1 id="treecf">treecf: counterfactuals you can act on<a class="headerlink" href="#treecf" title="Permanent link">&para;</a></h1>
 
-      <p class="doc-meta"><code>August 2026</code> <code>note</code> <code>~ 6 min read</code> <code>project: treecf</code></p>
+      <p class="doc-meta"><code>August 2026</code> <code>updated September 2026</code> <code>note</code> <code>~ 6 min read</code> <code>project: treecf</code></p>
 
       <div class="admonition abstract">
         <p class="admonition-title">Abstract</p>
@@ -175,15 +177,15 @@
 
       <h2 id="proved">Proved, not just found<a class="headerlink" href="#proved" title="Permanent link">&para;</a></h2>
 
-      <p>Verification says a plan works. It does not say the plan is the cheapest one, and when the search comes back empty it does not say whether a plan exists at all. Sampling&#8209;based libraries such as DiCE stop there: a plan, or a shrug after a timeout. treecf&rsquo;s exact backend goes further. It branch&#8209;and&#8209;bounds the same candidate grid the heuristic search uses and returns one of three things, each labelled by its <code>proof</code> field:</p>
+      <p>Verification says a plan works. It does not say the plan is the cheapest one, and when the search comes back empty it does not say whether a plan exists at all. DiCE returns plans it has checked; it cannot say whether a cheaper one exists or whether none exists. treecf&rsquo;s exact backend goes further. It branch&#8209;and&#8209;bounds the same candidate grid the heuristic search uses and returns one of three things, each labelled by its <code>proof</code> field:</p>
 
       <ul>
         <li><strong>An optimal plan.</strong> <code>proof="optimal"</code>: no cheaper feasible row exists in the searched grid, under these constraints, for this model.</li>
-        <li><strong>A certified &ldquo;no&rdquo;.</strong> <code>Infeasible(proof="certified")</code>: every assignment the grid allows was tried and none reaches the target. &ldquo;No recourse exists within these constraints&rdquo; becomes a provable statement &mdash; the sentence a validator, or a regulator, actually needs.</li>
+        <li><strong>A certified &ldquo;no&rdquo;.</strong> <code>Infeasible(proof="certified")</code>: the search closed every branch &mdash; by bound or by exhaustion &mdash; without finding one. &ldquo;No recourse exists within these constraints&rdquo; becomes a provable statement &mdash; the sentence a validator, or a regulator, actually needs.</li>
         <li><strong>An honest downgrade.</strong> If a budget runs out or a constraint repair cannot be settled, the result says <code>proof="heuristic"</code> or <code>"search_exhausted"</code>, with a warning naming the cause. The claim is withdrawn rather than overstated.</li>
       </ul>
 
-      <p>Two constructions build on the proof. A <strong>recourse region</strong> widens any verified plan into a certified box &mdash; &ldquo;reduce utilization to &le;&nbsp;0.40&rdquo;, not &ldquo;to 0.3972&rdquo; &mdash; with every point in the box provably in&#8209;target and constraint&#8209;feasible. That is the form a customer letter can carry. A <strong>recourse menu</strong> solves every lever set up to a chosen size and reports which combinations reach the target, at what cost, and which provably cannot: &ldquo;no acceptance is reachable by changing only <code>dpd_12m</code>&rdquo; is a certified statement, not an absence of luck.</p>
+      <p>Two constructions build on the proof. A <strong>recourse region</strong> widens any verified plan into a certified box &mdash; &ldquo;utilization in [0.31,&nbsp;0.40)&rdquo;, not &ldquo;utilization = 0.3972&rdquo;, with the interval strict or half&#8209;open wherever rounding would otherwise overstate it &mdash; with every point in the box provably in&#8209;target and constraint&#8209;feasible. That is the form a customer letter can carry. A <strong>recourse menu</strong> solves every lever set up to a chosen size and reports which combinations reach the target, at what cost, and which provably cannot: &ldquo;no acceptance is reachable by changing only <code>dpd_12m</code>&rdquo; is a certified statement, not an absence of luck.</p>
 
       <p>A certificate is a statement about the artifact handed to the explainer &mdash; this parsed model, these compiled constraints, at the moment the search ran. It says nothing about whether the model generalises, or whether the applicant can execute the plan in life. Within that scope, the claim is exact.</p>
 
@@ -206,16 +208,18 @@
         <span class="n">Freeze</span><span class="p">(</span><span class="s2">&quot;age_of_bureau_file&quot;</span><span class="p">),</span>
         <span class="n">constraint</span><span class="p">(</span><span class="s2">&quot;max_dpd_30d &lt;= max_dpd_12m&quot;</span><span class="p">),</span>
     <span class="p">],</span>
+    <span class="n">value_policy</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;max_dpd_30d&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">,</span>       <span class="c1"># counts stay counts</span>
+                  <span class="s2">&quot;max_dpd_12m&quot;</span><span class="p">:</span> <span class="s2">&quot;integer&quot;</span><span class="p">},</span>
 <span class="p">)</span>
 <span class="n">target</span> <span class="o">=</span> <span class="n">Target</span><span class="o">.</span><span class="n">probability</span><span class="p">(</span><span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">))</span>    <span class="c1"># PD under 4%</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">X_test</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>                                <span class="c1"># one declined applicant</span>
 
 <span class="n">res</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;exact&quot;</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">res</span><span class="o">.</span><span class="n">proof</span>                    <span class="c1"># &quot;optimal&quot; | &quot;optimal_within_gap&quot; | &quot;heuristic&quot;</span>
-<span class="n">res</span><span class="o">.</span><span class="n">changes</span>                  <span class="c1"># {&quot;utilization&quot;: (0.61, 0.39), ...}</span>
+<span class="n">res</span><span class="o">.</span><span class="n">changes</span>                  <span class="c1"># {&quot;utilization&quot;: (0.61, 0.39), &quot;max_dpd_30d&quot;: (3, 1)}</span>
 
 <span class="n">boxed</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">boxed</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>      <span class="c1"># &quot;utilization &lt;= 0.4&quot;</span>
+<span class="n">boxed</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>      <span class="c1"># {&quot;utilization&quot;: &quot;in [0.31, 0.40)&quot;, &quot;max_dpd_30d&quot;: &quot;in [0, 1]&quot;}</span>
 </code></pre></div>
 
       <p>The same flow, executed end to end on a synthetic credit model: <a href="https://wlazlod.github.io/treecf/notebooks/01-quickstart/">quickstart notebook</a>.</p>
