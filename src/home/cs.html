@@ -1,0 +1,95 @@
+home: /cs/
+description: Daniel Wlazło — Manažer datové vědy v Allegro Pay. Důvěryhodné strojové učení v úvěrovém riziku. Varšava.
+og_description: Manažer datové vědy v Allegro Pay. Důvěryhodné strojové učení v úvěrovém riziku.
+og_locale: cs_CZ
+skip: Přejít na obsah
+header_aria: Záhlaví
+open_nav: Otevřít navigaci
+palette: Přepnout barevné schéma
+langs_aria: Jazyk
+github_title: Přejít na GitHub
+source_facts: open-source: XAI a úvěrové riziko
+nav_aria: Navigace
+overview: Úvod
+notes_label: Poznámky
+teaching_label: Výuka
+toc_title: Obsah
+footer_aria: Patička
+next_direction: Další
+next_href: /notes/treecf.html
+next_label: treecf: counterfactuals you can act on
+styled_after: ve stylu
+email_label: E-mail
+---
+      <h1 id="daniel-wlazlo">Daniel Wlazło<a class="headerlink" href="#daniel-wlazlo" title="Trvalý odkaz">&para;</a></h1>
+
+      <p><strong>Manažer datové vědy v Allegro Pay &mdash; důvěryhodné strojové učení v úvěrovém riziku. Varšava.</strong></p>
+      <p class="strapline-meta">Správce balíčků <a href="#probcal">probcal</a> a&nbsp;<a href="#treecf">treecf</a> &middot; píšu o&nbsp;<a href="#notes">férovosti a&nbsp;kalibraci</a> &middot; <a href="mailto:daniel.wlazlo@datadeer.pl">daniel.wlazlo@datadeer.pl</a></p>
+
+      <h2 id="about">O&nbsp;mně<a class="headerlink" href="#about" title="Trvalý odkaz">&para;</a></h2>
+
+      <img class="headshot" src="/assets/img/headshot.webp" alt="Daniel Wlazło" width="400" height="468" fetchpriority="high" decoding="async">
+
+      <p>V&nbsp;<a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a> vedu modelovací práce pro jednu z&nbsp;největších spotřebitelských finančních platforem ve&nbsp;střední Evropě. Soustředím se hlavně na aplikační skóring &mdash; modely PD pro individuální klienty &mdash; a&nbsp;čím dál častěji na to, jak vypadá důvěryhodné strojové učení v&nbsp;regulovaném prostředí: férovost, kalibrace, vysvětlitelnost.</p>
+
+      <p>V&nbsp;úvěrovém riziku a&nbsp;datové vědě pracuji téměř deset let, mimo jiné v&nbsp;Allegro&nbsp;Pay, Hexaware (pro AXA), PKO Bank Polski a&nbsp;ING&nbsp;Bank&nbsp;Śląski. Předtím jsem byl inženýrem robotiky v&nbsp;Samsungu a&nbsp;konstruktérem bezpilotních letounů v&nbsp;Aviation&nbsp;Technik. Robotika byla mým výchozím bodem &mdash; dodnes určuje, jak přemýšlím o&nbsp;strojovém učení: jako o&nbsp;systému, který lze popsat, ladit a&nbsp;zatížit. Mimo práci se učím česky, sleduji Formuli&nbsp;1 a&nbsp;věnuji se robotice.</p>
+
+
+      <h2 id="notes">Poznámky<a class="headerlink" href="#notes" title="Trvalý odkaz">&para;</a></h2>
+
+      <ul>
+        <li><code>srpen 2026</code> <a href="/notes/treecf.html" hreflang="en"><strong>treecf: kontrafakty, podle kterých lze jednat</strong></a> <small>(EN)</small><br>Jedinou poctivou odpovědí na otázku &bdquo;co by se muselo změnit, aby žádost prošla?&ldquo; je kontrafakt &mdash; s&nbsp;omezeními, ověřený, rychlý.</li>
+        <li><code>červenec 2026</code> <a href="/notes/shap-values-are-not-points.html" hreflang="en"><strong>Proč hodnoty SHAP nejsou body</strong></a> <small>(EN)</small><br>Vodopádový graf SHAP vypadá jako skórovací karta. Čtený tímto způsobem dává sebejisté, ale chybné rady.</li>
+        <li><code>květen 2026</code> <a href="/notes/discriminatory-uncertainty.html" hreflang="en"><strong>Diskriminační nejistota</strong></a> <small>(EN)</small><br>Model může diskriminovat nejen svým rozhodnutím, ale i&nbsp;tím, jak je si v&nbsp;něm jistý.</li>
+      </ul>
+
+      <h2 id="open-source">Open source<a class="headerlink" href="#open-source" title="Trvalý odkaz">&para;</a></h2>
+
+      <h3 id="probcal"><a href="https://github.com/wlazlod/probcal">probcal</a><a class="headerlink" href="#probcal" title="Trvalý odkaz">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>pouze numpy</code> <a href="https://pypi.org/project/probcal/"><code>v0.3.1</code></a> <code>MIT</code></p>
+      <p>Post&#8209;hoc kalibrace pravděpodobností pro binární klasifikátory, postavená pro regulované PD modely. Tři věci, které scikit&#8209;learn nenabídne: diagnostika na logitové škále, ve které zůstává 1&nbsp;% default rate čitelné, korekce centrální tendence jako auditovatelný krok offsetu místo tichého refitu a&nbsp;regulatorní backtesty po ratingových stupních (binomický, Jeffreysův). Kolem nich: kalibrační literatura za jedním API, přesné inverzní mapy z&nbsp;cutoffů politiky na surová skóre, anytime&#8209;valid monitoring a&nbsp;serializace do JSON. Jedinou runtime závislostí je numpy.</p>
+      <p><a href="https://wlazlod.github.io/probcal/">Dokumentace</a> &middot; <a href="https://pypi.org/project/probcal/">PyPI</a> &middot; <a href="https://github.com/wlazlod/probcal">GitHub</a></p>
+
+      <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Trvalý odkaz">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>jádro v rustu</code> <a href="https://pypi.org/project/treecf/"><code>v0.3.1</code></a> <code>MIT</code></p>
+      <p>Kontrfaktická vysvětlení pro stromové ansámbly (XGBoost, LightGBM, CatBoost, sklearn): nejmenší proveditelná změna, která přesune zamítnutou žádost pod práh, při dodržení deklarovaných omezení. Na rozdíl od nástrojů založených na vzorkování umí dokázat, že plán je nejlevnější možný &mdash; nebo že žádný neexistuje &mdash; a&nbsp;každá odpověď je ověřena proti naparsovanému modelu.</p>
+      <p><a href="https://wlazlod.github.io/treecf/">Dokumentace</a> &middot; <a href="https://pypi.org/project/treecf/">PyPI</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
+
+      <p><strong>Starší a&nbsp;experimentální:</strong> <a href="https://wlazlod.github.io/concept-graph-xai/">concept-graph-xai</a> (využití rysů na úrovni konceptů a&nbsp;ablace), <a href="https://wlazlod.github.io/triadxai/">triadxai</a> (tříkanálová dekompozice úvěrového skóre), <a href="https://wlazlod.github.io/flaggam/">flaggam</a> (interpretovatelné GAM z&nbsp;jednorozměrných příznaků), <a href="https://wlazlod.github.io/swift/">swift</a> (monitoring driftu vážený SHAP).</p>
+
+      <h2 id="academic">Akademická práce<a class="headerlink" href="#academic" title="Trvalý odkaz">&para;</a></h2>
+
+      <h3 id="thesis">Disertační práce &mdash; Důvěryhodné úvěrové riziko v&nbsp;rámci AI&nbsp;Act<a class="headerlink" href="#thesis" title="Trvalý odkaz">&para;</a></h3>
+      <p class="doc-meta"><code>Varšavská ekonomická škola (SGH)</code> <code>rozpracováno</code> <code>plánované odevzdání 2029</code></p>
+      <p>Práce pod vedením prof.&nbsp;Anety&nbsp;Ptak&#8209;Chmielewské. Disertace rozvíjí integrovanou metodiku spojující algoritmickou férovost, kvantifikaci nejistoty a&nbsp;interpretovatelnost a&nbsp;je vystavěna kolem konceptu, který nazývám <em>diskriminační nejistota</em>: otázky, zda se mezi skupinami spravedlivě rozkládají nejen rozhodnutí modelu, ale i&nbsp;jeho jistota. Hlavní myšlenku popisuji v&nbsp;poznámce <a href="/notes/discriminatory-uncertainty.html" hreflang="en">Discriminatory uncertainty</a> (EN).</p>
+
+      <h2 id="talks">Konferenční přednášky<a class="headerlink" href="#talks" title="Trvalý odkaz">&para;</a></h2>
+
+      <p>Slidy a&nbsp;materiály: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a></p>
+
+      <ul>
+        <li><a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Varšava.<br>Proč se hodnota SHAP chová jako příspěvek, nikoli souřadnice &mdash; a&nbsp;jak její čtení jako bodu klame při interpretaci skóringu. <a href="/notes/shap-values-are-not-points.html">Poznámka</a>.
+        </li>
+        <li><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong> &mdash; GHOST&nbsp;Day 2026, Poznaň, s&nbsp;Kamilem&nbsp;Golisem.<br>Jak znalostní grafy splácejí sémantický dluh, který se hromadí v&nbsp;ML pipelinách &mdash; praktický, aplikační průřez.
+        </li>
+        <li><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong> &mdash; Data Science Summit 2025, Varšava.<br>Jak sémantické ontologie mohou posunout vývoj ML modelů za feature store a&nbsp;dát modelům sdílený, znovupoužitelný slovník pojmů.
+        </li>
+      </ul>
+
+      <p>Dvě z&nbsp;těchto přednášek se týkají znalostních grafů a&nbsp;ontologií. Je to stejná linie práce viděná z&nbsp;druhého konce: sdílený slovník je předpokladem důvěryhodného ML, protože nelze auditovat férovost ani kalibraci rysu, který nikdo neumí definovat.</p>
+
+      <p>Záznamy BibTeX ke všem přednáškám: <a href="https://github.com/wlazlod/conference-talks#readme">README repozitáře conference-talks</a>.</p>
+
+      <h2 id="didactics">Výuka<a class="headerlink" href="#didactics" title="Trvalý odkaz">&para;</a></h2>
+
+      <p>Výukové materiály: <a href="https://github.com/wlazlod/didactics">github.com/wlazlod/didactics</a></p>
+
+      <h3 id="data-mining-sgh">Data Mining &mdash; přednáškový kurz<a class="headerlink" href="#data-mining-sgh" title="Trvalý odkaz">&para;</a></h3>
+      <p class="doc-meta"><code>Varšavská ekonomická škola (SGH)</code> <code>podzim 2026</code> <code>v angličtině</code></p>
+      <p>Kurz Data Mining zakotvený ve&nbsp;financích a&nbsp;vedený od problému, pro magisterské programy SMMD&#8209;ADA a&nbsp;SMMD&#8209;AAB (volitelný pro tři další). Sedm bloků, 102&#8209;stránková skripta, jeden laboratorní notebook na hodinu &mdash; a&nbsp;celý kurz postavený na jednom datasetu retailových úvěrů (PD) s&nbsp;vestavěnými didaktickými pastmi: třemi druhy chybějících hodnot a&nbsp;jedním záměrným únikovým sloupcem.</p>
+      <p><a href="/didactics/data-mining.html" hreflang="en">Skripta kurzu (HTML)</a> <small>(EN)</small> &middot; <a href="https://github.com/wlazlod/didactics">Repozitář</a></p>
+
+      <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Výzkumný workshop<a class="headerlink" href="#conformal-workshop" title="Trvalý odkaz">&para;</a></h3>
+      <p class="doc-meta"><code>Varšavská technická univerzita</code> <code>ve spolupráci s Allegro Pay</code> <code>2025 &middot; 2026</code></p>
+      <p>Firemně vedený projekt v&nbsp;rámci kurzu <em>Výzkumný workshop</em> na Fakultě matematiky a&nbsp;informačních věd VTU. Každý rok přispívají tři firmy jedním projektem a&nbsp;vedou studentský tým jeho realizací; zadání spolupřipravuji a&nbsp;vedu tým. 2025: konformní predikce ve&nbsp;spotřebitelském úvěrovém skóringu. 2026: kontrfaktická vysvětlení v&nbsp;modelování úvěrového rizika.</p>
+      <p><a href="https://github.com/wlazlod/wut-counterfactual-explanations">Startovací repozitář (2026)</a> &middot; <a href="https://github.com/wlazlod/didactics">Výukové materiály</a></p>

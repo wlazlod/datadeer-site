@@ -1,0 +1,95 @@
+home: /pl/
+description: Daniel Wlazło — Manager Data Science w Allegro Pay. Godne zaufania uczenie maszynowe w ryzyku kredytowym. Warszawa.
+og_description: Manager Data Science w Allegro Pay. Godne zaufania uczenie maszynowe w ryzyku kredytowym.
+og_locale: pl_PL
+skip: Przejdź do treści
+header_aria: Nagłówek
+open_nav: Otwórz nawigację
+palette: Przełącz motyw
+langs_aria: Język
+github_title: Przejdź do GitHub
+source_facts: open-source: XAI i ryzyko kredytowe
+nav_aria: Nawigacja
+overview: Strona główna
+notes_label: Notatki
+teaching_label: Dydaktyka
+toc_title: Spis treści
+footer_aria: Stopka
+next_direction: Dalej
+next_href: /notes/treecf.html
+next_label: treecf: counterfactuals you can act on
+styled_after: w stylu
+email_label: E-mail
+---
+      <h1 id="daniel-wlazlo">Daniel Wlazło<a class="headerlink" href="#daniel-wlazlo" title="Stały odnośnik">&para;</a></h1>
+
+      <p><strong>Manager Data Science w Allegro Pay &mdash; godne zaufania uczenie maszynowe w ryzyku kredytowym. Warszawa.</strong></p>
+      <p class="strapline-meta">Opiekun pakietów <a href="#probcal">probcal</a> i&nbsp;<a href="#treecf">treecf</a> &middot; piszę o&nbsp;<a href="#notes">bezstronności i&nbsp;kalibracji</a> &middot; <a href="mailto:daniel.wlazlo@datadeer.pl">daniel.wlazlo@datadeer.pl</a></p>
+
+      <h2 id="about">O&nbsp;mnie<a class="headerlink" href="#about" title="Stały odnośnik">&para;</a></h2>
+
+      <img class="headshot" src="/assets/img/headshot.webp" alt="Daniel Wlazło" width="400" height="468" fetchpriority="high" decoding="async">
+
+      <p>W <a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a> prowadzę prace modelarskie dla jednej z największych konsumenckich platform finansowych w Europie Środkowej. Skupiam się głównie na scoringu aplikacyjnym &mdash; modelach PD dla klienta indywidualnego &mdash; oraz, coraz częściej, na tym, jak w regulowanym otoczeniu wygląda godne zaufania uczenie maszynowe: bezstronność, kalibracja, wyjaśnialność.</p>
+
+      <p>W ryzyku kredytowym i&nbsp;data science pracuję od prawie dekady &mdash; m.in. w&nbsp;Allegro&nbsp;Pay, Hexaware (dla AXA), PKO Banku Polskim oraz ING Banku Śląskim. Wcześniej byłem inżynierem robotyki w&nbsp;Samsungu i&nbsp;konstruktorem bezzałogowych statków powietrznych w&nbsp;Aviation&nbsp;Technik. Robotyka była moim punktem startowym &mdash; nadal kształtuje sposób, w&nbsp;jaki myślę o&nbsp;uczeniu maszynowym: jako o&nbsp;systemie, który da się opisać, debugować i&nbsp;obciążyć. Poza pracą uczę się czeskiego, kibicuję Formule&nbsp;1 i&nbsp;wciąż majsterkuję przy robotach.</p>
+
+
+      <h2 id="notes">Notatki<a class="headerlink" href="#notes" title="Stały odnośnik">&para;</a></h2>
+
+      <ul>
+        <li><code>sierpień 2026</code> <a href="/notes/treecf.html" hreflang="en"><strong>treecf: kontrfakty, na których można działać</strong></a> <small>(EN)</small><br>Jedyną uczciwą odpowiedzią na pytanie &bdquo;co musiałoby się zmienić, żeby wniosek przeszedł?&rdquo; jest kontrfakt &mdash; z&nbsp;ograniczeniami, zweryfikowany, szybki.</li>
+        <li><code>lipiec 2026</code> <a href="/notes/shap-values-are-not-points.html" hreflang="en"><strong>Dlaczego wartości SHAP nie są punktami</strong></a> <small>(EN)</small><br>Wykres SHAP wygląda jak karta scoringowa. Czytany w&nbsp;ten sposób podsuwa rady pewne siebie &mdash; i&nbsp;błędne.</li>
+        <li><code>maj 2026</code> <a href="/notes/discriminatory-uncertainty.html" hreflang="en"><strong>Dyskryminująca niepewność</strong></a> <small>(EN)</small><br>Model może dyskryminować nie tylko poprzez swoje decyzje, ale poprzez to, jak bardzo jest ich pewien.</li>
+      </ul>
+
+      <h2 id="open-source">Open source<a class="headerlink" href="#open-source" title="Stały odnośnik">&para;</a></h2>
+
+      <h3 id="probcal"><a href="https://github.com/wlazlod/probcal">probcal</a><a class="headerlink" href="#probcal" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>tylko numpy</code> <a href="https://pypi.org/project/probcal/"><code>v0.3.1</code></a> <code>MIT</code></p>
+      <p>Kalibracja prawdopodobieństw post&#8209;hoc dla klasyfikatorów binarnych, zbudowana z&nbsp;myślą o&nbsp;regulowanych modelach PD. Trzy rzeczy, których nie da scikit&#8209;learn: diagnostyka na skali logitowej, w&nbsp;której 1% default rate pozostaje czytelny, korekta tendencji centralnej jako audytowalny etap offsetu zamiast cichego refitu, oraz regulacyjne backtesty per klasa ratingowa (dwumianowy, Jeffreysa). Wokół nich: literatura kalibracyjna w&nbsp;jednym API, dokładne odwzorowania odwrotne z&nbsp;progów polityki kredytowej na surowe scory, monitoring anytime&#8209;valid i&nbsp;serializacja do JSON. Jedyną zależnością runtime jest numpy.</p>
+      <p><a href="https://wlazlod.github.io/probcal/">Dokumentacja</a> &middot; <a href="https://pypi.org/project/probcal/">PyPI</a> &middot; <a href="https://github.com/wlazlod/probcal">GitHub</a></p>
+
+      <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>rdzeń w rust</code> <a href="https://pypi.org/project/treecf/"><code>v0.3.1</code></a> <code>MIT</code></p>
+      <p>Wyjaśnienia kontrfaktyczne dla zespołów drzew (XGBoost, LightGBM, CatBoost, sklearn): najmniejsza wykonalna zmiana, która przenosi odrzucony wniosek poniżej progu, z&nbsp;poszanowaniem zadeklarowanych ograniczeń. W&nbsp;odróżnieniu od narzędzi opartych na próbkowaniu potrafi udowodnić, że plan jest najtańszym możliwym &mdash; albo że żaden nie istnieje &mdash; a&nbsp;każda odpowiedź jest weryfikowana względem sparsowanego modelu.</p>
+      <p><a href="https://wlazlod.github.io/treecf/">Dokumentacja</a> &middot; <a href="https://pypi.org/project/treecf/">PyPI</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
+
+      <p><strong>Wcześniejsze i&nbsp;eksperymentalne:</strong> <a href="https://wlazlod.github.io/concept-graph-xai/">concept-graph-xai</a> (wykorzystanie cech na poziomie konceptów i&nbsp;ablacje), <a href="https://wlazlod.github.io/triadxai/">triadxai</a> (trójkanałowa dekompozycja scoringu kredytowego), <a href="https://wlazlod.github.io/flaggam/">flaggam</a> (interpretowalne GAM&#8209;y zbudowane z&nbsp;jednowymiarowych flag), <a href="https://wlazlod.github.io/swift/">swift</a> (monitoring dryfu ważony SHAP).</p>
+
+      <h2 id="academic">Praca naukowa<a class="headerlink" href="#academic" title="Stały odnośnik">&para;</a></h2>
+
+      <h3 id="thesis">Rozprawa doktorska &mdash; Godne zaufania ryzyko kredytowe w&nbsp;ramach AI&nbsp;Act<a class="headerlink" href="#thesis" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>Szkoła Główna Handlowa (SGH)</code> <code>w trakcie</code> <code>planowane złożenie 2029</code></p>
+      <p>Praca pod opieką dr&nbsp;hab.&nbsp;Anety&nbsp;Ptak&#8209;Chmielewskiej, prof.&nbsp;SGH. Rozprawa rozwija zintegrowaną metodykę łączącą algorytmiczną bezstronność, kwantyfikację niepewności i&nbsp;interpretowalność, osnutą wokół koncepcji <em>dyskryminującej niepewności</em> : pytania, czy nie tylko decyzje modelu, ale i&nbsp;jego pewność rozkłada się sprawiedliwie między grupami. Główną ideę opisuję w&nbsp;notatce <a href="/notes/discriminatory-uncertainty.html" hreflang="en">Discriminatory uncertainty</a> (EN).</p>
+
+      <h2 id="talks">Wystąpienia konferencyjne<a class="headerlink" href="#talks" title="Stały odnośnik">&para;</a></h2>
+
+      <p>Slajdy i&nbsp;materiały: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a></p>
+
+      <ul>
+        <li><a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warszawa.<br>Dlaczego wartość SHAP zachowuje się jak wkład, a&nbsp;nie współrzędna &mdash; i&nbsp;jak odczytywanie jej jako punktu wprowadza w&nbsp;błąd przy interpretacji scoringu. <a href="/notes/shap-values-are-not-points.html">Notatka</a>.
+        </li>
+        <li><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong> &mdash; GHOST&nbsp;Day 2026, Poznań, z&nbsp;Kamilem&nbsp;Golisem.<br>Jak grafy wiedzy spłacają dług semantyczny narastający w&nbsp;potokach ML &mdash; praktyczny, wdrożeniowy przegląd zastosowań.
+        </li>
+        <li><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong> &mdash; Data Science Summit 2025, Warszawa.<br>Jak ontologie semantyczne mogą wyprowadzić rozwój modeli ML poza feature store, dając modelom wspólny, wielokrotnego użytku słownik pojęć.
+        </li>
+      </ul>
+
+      <p>Dwa z&nbsp;tych wystąpień dotyczą grafów wiedzy i&nbsp;ontologii. To ten sam wątek widziany z&nbsp;drugiej strony: wspólny słownik jest warunkiem godnego zaufania ML, bo nie da się audytować bezstronności ani kalibracji cechy, której nikt nie potrafi zdefiniować.</p>
+
+      <p>Wpisy BibTeX dla wszystkich wystąpień: <a href="https://github.com/wlazlod/conference-talks#readme">README repozytorium conference-talks</a>.</p>
+
+      <h2 id="didactics">Dydaktyka<a class="headerlink" href="#didactics" title="Stały odnośnik">&para;</a></h2>
+
+      <p>Materiały dydaktyczne: <a href="https://github.com/wlazlod/didactics">github.com/wlazlod/didactics</a></p>
+
+      <h3 id="data-mining-sgh">Data Mining &mdash; wykład<a class="headerlink" href="#data-mining-sgh" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>Szkoła Główna Handlowa (SGH)</code> <code>jesień 2026</code> <code>w języku angielskim</code></p>
+      <p>Kurs Data Mining osadzony w&nbsp;finansach i&nbsp;prowadzony od problemu, dla studiów magisterskich SMMD&#8209;ADA i&nbsp;SMMD&#8209;AAB (do wyboru dla trzech kolejnych kierunków). Siedem bloków, 102&#8209;stronicowy skrypt, jeden notebook laboratoryjny na zajęcia &mdash; a&nbsp;cały kurs zakotwiczony na jednym zbiorze danych kredytu detalicznego (PD), z&nbsp;wbudowanymi pułapkami dydaktycznymi: trzema rodzajami braków danych i&nbsp;jedną celową kolumną z&nbsp;wyciekiem.</p>
+      <p><a href="/didactics/data-mining.html" hreflang="en">Skrypt kursu (HTML)</a> <small>(EN)</small> &middot; <a href="https://github.com/wlazlod/didactics">Repozytorium</a></p>
+
+      <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Warsztaty Badawcze<a class="headerlink" href="#conformal-workshop" title="Stały odnośnik">&para;</a></h3>
+      <p class="doc-meta"><code>Politechnika Warszawska</code> <code>we współpracy z Allegro Pay</code> <code>2025 &middot; 2026</code></p>
+      <p>Projekt mentorowany przez firmę w&nbsp;ramach kursu <em>Warsztaty Badawcze</em> na Wydziale Matematyki i&nbsp;Nauk Informacyjnych PW. Każdego roku trzy firmy dostarczają po jednym projekcie i&nbsp;prowadzą zespół studencki przez jego realizację; współprzygotowuję zadanie i&nbsp;prowadzę zespół. 2025: predykcja konformalna w&nbsp;scoringu konsumenckim. 2026: wyjaśnienia kontrfaktyczne w&nbsp;modelowaniu ryzyka kredytowego.</p>
+      <p><a href="https://github.com/wlazlod/wut-counterfactual-explanations">Repozytorium startowe (2026)</a> &middot; <a href="https://github.com/wlazlod/didactics">Materiały dydaktyczne</a></p>

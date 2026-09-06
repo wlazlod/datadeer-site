@@ -1,0 +1,95 @@
+home: /
+description: Daniel Wlazło — Data Science Manager at Allegro Pay. Trustworthy machine learning for credit risk, in Warsaw.
+og_description: Data Science Manager at Allegro Pay. Trustworthy ML for credit risk.
+og_locale: en_US
+skip: Skip to content
+header_aria: Header
+open_nav: Open navigation
+palette: Switch color scheme
+langs_aria: Language
+github_title: Go to GitHub
+source_facts: open-source XAI &amp; credit-risk tools
+nav_aria: Navigation
+overview: Overview
+notes_label: Notes
+teaching_label: Teaching
+toc_title: Table of contents
+footer_aria: Footer
+next_direction: Next
+next_href: /notes/treecf.html
+next_label: treecf: counterfactuals you can act on
+styled_after: styled after
+email_label: Email
+---
+      <h1 id="daniel-wlazlo">Daniel Wlazło<a class="headerlink" href="#daniel-wlazlo" title="Permanent link">&para;</a></h1>
+
+      <p><strong>Data Science Manager at Allegro Pay &mdash; trustworthy machine learning for credit risk, in Warsaw.</strong></p>
+      <p class="strapline-meta">Maintainer of <a href="#probcal">probcal</a> and <a href="#treecf">treecf</a> &middot; writing on <a href="#notes">fairness and calibration</a> &middot; <a href="mailto:daniel.wlazlo@datadeer.pl">daniel.wlazlo@datadeer.pl</a></p>
+
+      <h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h2>
+
+      <img class="headshot" src="/assets/img/headshot.webp" alt="Daniel Wlazło" width="400" height="468" fetchpriority="high" decoding="async">
+
+      <p>At <a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a> I lead the modelling work behind one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation.</p>
+
+      <p>I&rsquo;ve spent close to a decade in credit risk and data science, across Allegro&nbsp;Pay, Hexaware (for AXA), PKO Bank Polski, and ING Bank Śląski. Before that I was a robotics engineer at Samsung and a UAV constructor at Aviation Technik. Robotics was where I started &mdash; it&rsquo;s still how I think about machine learning: a system you can describe, debug, and put under load. Outside work I learn Czech, follow Formula&nbsp;1, and tinker with robotics.</p>
+
+
+      <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+
+      <ul>
+        <li><code>August 2026</code> <a href="/notes/treecf.html"><strong>treecf: counterfactuals you can act on</strong></a><br>The only honest answer to &ldquo;what would it take to be approved?&rdquo; is a counterfactual &mdash; constrained, verified, fast.</li>
+        <li><code>July 2026</code> <a href="/notes/shap-values-are-not-points.html"><strong>Why SHAP values are not points</strong></a><br>A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong.</li>
+        <li><code>May 2026</code> <a href="/notes/discriminatory-uncertainty.html"><strong>Discriminatory uncertainty</strong></a><br>A model can discriminate not only through its decisions, but through how confident it is in them.</li>
+      </ul>
+
+      <h2 id="open-source">Open source<a class="headerlink" href="#open-source" title="Permanent link">&para;</a></h2>
+
+      <h3 id="probcal"><a href="https://github.com/wlazlod/probcal">probcal</a><a class="headerlink" href="#probcal" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>numpy-only</code> <a href="https://pypi.org/project/probcal/"><code>v0.3.1</code></a> <code>MIT</code></p>
+      <p>Post&#8209;hoc probability calibration for binary classifiers, built for regulated PD models. Three things scikit&#8209;learn will not give you: logit&#8209;scale diagnostics that keep a 1% default rate readable, a central&#8209;tendency adjustment that ships as an auditable offset stage rather than a silent refit, and per&#8209;grade regulatory backtests (binomial, Jeffreys). Around them: the calibration literature behind one API, exact inverse maps from policy cutoffs to raw scores, anytime&#8209;valid monitoring, and JSON serialization. numpy is the only runtime dependency.</p>
+      <p><a href="https://wlazlod.github.io/probcal/">Documentation</a> &middot; <a href="https://pypi.org/project/probcal/">PyPI</a> &middot; <a href="https://github.com/wlazlod/probcal">GitHub</a></p>
+
+      <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>python</code> <code>rust core</code> <a href="https://pypi.org/project/treecf/"><code>v0.3.1</code></a> <code>MIT</code></p>
+      <p>Counterfactual explanations for tree ensembles (XGBoost, LightGBM, CatBoost, sklearn): the smallest feasible change that moves a declined application under the cutoff, respecting the constraints you declare. Unlike sampling&#8209;based tools it can prove that a plan is the cheapest available, or that none exists, and every answer is verified against the parsed model.</p>
+      <p><a href="https://wlazlod.github.io/treecf/">Documentation</a> &middot; <a href="https://pypi.org/project/treecf/">PyPI</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
+
+      <p><strong>Earlier and experimental:</strong> <a href="https://wlazlod.github.io/concept-graph-xai/">concept-graph-xai</a> (concept&#8209;level feature usage and ablation), <a href="https://wlazlod.github.io/triadxai/">triadxai</a> (three&#8209;channel decomposition of credit scores), <a href="https://wlazlod.github.io/flaggam/">flaggam</a> (interpretable GAMs built from univariate flags), <a href="https://wlazlod.github.io/swift/">swift</a> (SHAP&#8209;weighted drift monitoring).</p>
+
+      <h2 id="academic">Academic work<a class="headerlink" href="#academic" title="Permanent link">&para;</a></h2>
+
+      <h3 id="thesis">Doctoral thesis &mdash; Trustworthy credit risk under the AI Act<a class="headerlink" href="#thesis" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>SGH Warsaw School of Economics</code> <code>in progress</code> <code>submission target 2029</code></p>
+      <p>Supervised by Prof.&nbsp;Aneta Ptak&#8209;Chmielewska. The thesis develops an integrated methodology that combines algorithmic fairness, uncertainty quantification, and interpretability, organised around a concept I call <em>discriminatory uncertainty</em> : whether a model&rsquo;s confidence, and not only its decisions, is distributed fairly across groups. The core idea is set out in the note <a href="/notes/discriminatory-uncertainty.html">Discriminatory uncertainty</a>.</p>
+
+      <h2 id="talks">Conference talks<a class="headerlink" href="#talks" title="Permanent link">&para;</a></h2>
+
+      <p>Slides and materials: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a></p>
+
+      <ul>
+        <li><a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warsaw.<br>Why a SHAP value behaves like a contribution, not a coordinate &mdash; and how reading it as a point misleads scorecard interpretation. <a href="/notes/shap-values-are-not-points.html">Write-up</a>.
+        </li>
+        <li><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong> &mdash; GHOST&nbsp;Day 2026, Poznań, with Kamil&nbsp;Golis.<br>How knowledge graphs pay down the semantic debt that accumulates across ML pipelines &mdash; a practical, applied walk&#8209;through.
+        </li>
+        <li><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong> &mdash; Data Science Summit 2025, Warsaw.<br>How semantic ontologies can move ML development past the feature store, giving models a shared, reusable vocabulary.
+        </li>
+      </ul>
+
+      <p>Two of these talks are about knowledge graphs and ontologies. That is the same line of work seen from the other end: a shared vocabulary is a prerequisite for trustworthy ML, because you cannot audit the fairness or calibration of a feature nobody can define.</p>
+
+      <p>BibTeX entries for all talks: <a href="https://github.com/wlazlod/conference-talks#readme">conference-talks README</a>.</p>
+
+      <h2 id="didactics">Teaching<a class="headerlink" href="#didactics" title="Permanent link">&para;</a></h2>
+
+      <p>Teaching materials: <a href="https://github.com/wlazlod/didactics">github.com/wlazlod/didactics</a></p>
+
+      <h3 id="data-mining-sgh">Data Mining &mdash; lecture course<a class="headerlink" href="#data-mining-sgh" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>SGH Warsaw School of Economics</code> <code>autumn 2026</code> <code>taught in English</code></p>
+      <p>A finance&#8209;first, problem&#8209;driven Data Mining course for the SMMD&#8209;ADA and SMMD&#8209;AAB Master&rsquo;s programmes (elective for three more). Seven blocks, a 102&#8209;page coursebook, one lab notebook per class &mdash; and the whole course anchored on a single retail&#8209;credit (PD) dataset with the teaching traps built in: three flavours of missingness and one deliberate leakage column.</p>
+      <p><a href="/didactics/data-mining.html">Course script (HTML)</a> &middot; <a href="https://github.com/wlazlod/didactics">Repository</a></p>
+
+      <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Research Workshop<a class="headerlink" href="#conformal-workshop" title="Permanent link">&para;</a></h3>
+      <p class="doc-meta"><code>Warsaw University of Technology</code> <code>with Allegro Pay</code> <code>2025 &middot; 2026</code></p>
+      <p>Industry&#8209;mentored project for the <em>Research Workshop</em> course at the Faculty of Mathematics and Information Science. Three companies contribute a project each year and guide the student team through it; I co&#8209;prepare the brief and mentor the team. 2025: conformal prediction for consumer&#8209;credit scoring. 2026: counterfactual explanations in credit&#8209;risk modelling.</p>
+      <p><a href="https://github.com/wlazlod/wut-counterfactual-explanations">Starter repository (2026)</a> &middot; <a href="https://github.com/wlazlod/didactics">Teaching materials</a></p>
