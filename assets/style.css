@@ -213,11 +213,16 @@ body {
 
 /* Language switcher, header links */
 .md-header__langs {
+  margin: 0 0.2rem;
+  font-size: 0.65rem;
+}
+.md-header__langs ul {
   display: flex;
   align-items: center;
   gap: 0.05rem;
-  margin: 0 0.2rem;
-  font-size: 0.65rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .md-header__langs a,
 .md-header__langs span {
@@ -897,3 +902,25 @@ body {
 
 /* Pages without sidebars (404): keep the reading column width and centre it */
 .md-page--plain .md-content { max-width: 36.8rem; margin: 0 auto; }
+
+/* Homepage: the name is the page, not a document title */
+.md-page--home .md-typeset h1 {
+  color: var(--md-default-fg-color);
+  font-weight: 400;
+}
+.md-typeset .strapline-meta {
+  margin-top: -0.4em;
+  font-size: 0.7rem;
+  color: var(--md-default-fg-color--light);
+}
+.md-typeset .headshot {
+  float: right;
+  width: 8.5rem;
+  height: auto;
+  margin: 0.2em 0 0.8em 1.2em;
+  border-radius: 0.2rem;
+}
+.md-typeset h2 { clear: both; }
+@media (max-width: 599px) {
+  .md-typeset .headshot { width: 6rem; }
+}

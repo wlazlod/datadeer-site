@@ -12,16 +12,18 @@
 <link rel="alternate" hreflang="x-default" href="https://datadeer.pl/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/assets/style.css">
 
 <meta property="og:title" content="Daniel Wlazło">
 <meta property="og:description" content="Data Science Manager at Allegro Pay. Trustworthy ML for credit risk.">
 <meta property="og:url" content="https://datadeer.pl/">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://datadeer.pl/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 
 <script type="application/ld+json">
 {
@@ -64,9 +66,10 @@
 </script>
 </head>
 <body dir="ltr" class="md-page--home" data-md-color-scheme="default">
+<script>(function(){var s=null;try{s=localStorage.getItem("datadeer.palette")}catch(e){}if(s!=="slate"&&s!=="default"){s=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"slate":"default"}document.body.setAttribute("data-md-color-scheme",s)})();</script>
 
 <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-<a href="#about" class="md-skip">Skip to content</a>
+<a href="#article" class="md-skip">Skip to content</a>
 <label class="md-overlay" for="__drawer"></label>
 
 <header class="md-header" data-md-component="header">
@@ -82,11 +85,13 @@
       <svg class="md-icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
       <svg class="md-icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
     </button>
-    <p class="md-header__langs" aria-label="Language">
-      <span aria-current="true">EN</span>
-      <a href="/pl/" hreflang="pl">PL</a>
-      <a href="/cs/" hreflang="cs">CS</a>
-    </p>
+    <nav class="md-header__langs" aria-label="Language">
+      <ul>
+        <li><span aria-current="true">EN</span></li>
+        <li><a href="/pl/" hreflang="pl">PL</a></li>
+        <li><a href="/cs/" hreflang="cs">CS</a></li>
+      </ul>
+    </nav>
     <div class="md-header__source">
       <a href="https://github.com/wlazlod" title="Go to GitHub" class="md-source" data-md-component="source">
         <div class="md-source__icon md-icon">
@@ -116,9 +121,9 @@
         <li class="md-nav__item md-nav__item--section">
           <span class="md-nav__label">Notes</span>
           <ul class="md-nav__list">
-            <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty</a></li>
-            <li class="md-nav__item"><a href="/notes/shap-values-are-not-points.html" class="md-nav__link">Why SHAP values are not points</a></li>
             <li class="md-nav__item"><a href="/notes/treecf.html" class="md-nav__link">treecf: counterfactuals you can act on</a></li>
+            <li class="md-nav__item"><a href="/notes/shap-values-are-not-points.html" class="md-nav__link">Why SHAP values are not points</a></li>
+            <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty</a></li>
           </ul>
         </li>
         <li class="md-nav__item md-nav__item--section">
@@ -146,46 +151,45 @@
         <li class="md-nav__item"><a href="#academic" class="md-nav__link">Academic work</a></li>
         <li class="md-nav__item"><a href="#talks" class="md-nav__link">Conference talks</a></li>
         <li class="md-nav__item"><a href="#didactics" class="md-nav__link">Teaching</a></li>
-        <li class="md-nav__item"><a href="#elsewhere" class="md-nav__link">Elsewhere</a></li>
       </ul>
     </nav>
   </div>
 
-  <article class="md-content md-typeset" data-md-component="content">
+  <article id="article" class="md-content md-typeset" data-md-component="content">
     <div class="md-content__inner">
 
       <h1 id="daniel-wlazlo">Daniel Wlazło<a class="headerlink" href="#daniel-wlazlo" title="Permanent link">&para;</a></h1>
 
       <p><strong>Data Science Manager at Allegro Pay &mdash; trustworthy machine learning for credit risk, in Warsaw.</strong></p>
+      <p class="strapline-meta">Maintainer of <a href="#probcal">probcal</a> and <a href="#treecf">treecf</a> &middot; writing on <a href="#notes">fairness and calibration</a> &middot; <a href="mailto:daniel.wlazlo@datadeer.pl">daniel.wlazlo@datadeer.pl</a></p>
 
       <h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h2>
 
-      <p>I&rsquo;m a Data Science Manager in credit risk at <a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a>, where I lead modelling work for one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation.</p>
+      <img class="headshot" src="/assets/img/headshot.webp" alt="Daniel Wlazło" width="400" height="468" fetchpriority="high" decoding="async">
+
+      <p>At <a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a> I lead the modelling work behind one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation.</p>
 
       <p>I&rsquo;ve spent close to a decade in credit risk and data science, across Allegro&nbsp;Pay, Hexaware (for AXA), PKO Bank Polski, and ING Bank Śląski. Before that I was a robotics engineer at Samsung and a UAV constructor at Aviation Technik. Robotics was where I started &mdash; it&rsquo;s still how I think about machine learning: a system you can describe, debug, and put under load. Outside work I learn Czech, follow Formula&nbsp;1, and tinker with robotics.</p>
 
-      <figure>
-        <img src="/assets/img/about-me-1400.webp" srcset="/assets/img/about-me-720.webp 720w, /assets/img/about-me-1400.webp 1400w" sizes="(min-width: 60em) 44rem, 100vw" alt="Three photos of Daniel Wlazło: a portrait, holding a multirotor drone in a forest, and standing behind a small robot at a robotics competition." width="1400" height="711" fetchpriority="high" decoding="async">
-      </figure>
 
       <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 
       <ul>
-        <li><code>May 2026</code> <a href="/notes/discriminatory-uncertainty.html"><strong>Discriminatory uncertainty</strong></a><br>A model can discriminate not only through its decisions, but through how confident it is in them.</li>
-        <li><code>July 2026</code> <a href="/notes/shap-values-are-not-points.html"><strong>Why SHAP values are not points</strong></a><br>A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong.</li>
         <li><code>August 2026</code> <a href="/notes/treecf.html"><strong>treecf: counterfactuals you can act on</strong></a><br>The only honest answer to &ldquo;what would it take to be approved?&rdquo; is a counterfactual &mdash; constrained, verified, fast.</li>
+        <li><code>July 2026</code> <a href="/notes/shap-values-are-not-points.html"><strong>Why SHAP values are not points</strong></a><br>A SHAP waterfall looks like a scorecard. Read it like one and it hands out advice that is confidently wrong.</li>
+        <li><code>May 2026</code> <a href="/notes/discriminatory-uncertainty.html"><strong>Discriminatory uncertainty</strong></a><br>A model can discriminate not only through its decisions, but through how confident it is in them.</li>
       </ul>
 
       <h2 id="open-source">Open source<a class="headerlink" href="#open-source" title="Permanent link">&para;</a></h2>
 
       <h3 id="probcal"><a href="https://github.com/wlazlod/probcal">probcal</a><a class="headerlink" href="#probcal" title="Permanent link">&para;</a></h3>
-      <p class="doc-meta"><code>python</code> <code>numpy-only</code> <a href="https://pypi.org/project/probcal/"><code data-pypi="probcal" hidden></code></a> <code>MIT</code></p>
+      <p class="doc-meta"><code>python</code> <code>numpy-only</code> <a href="https://pypi.org/project/probcal/"><code>v0.3.1</code></a> <code>MIT</code></p>
       <p>Post&#8209;hoc probability calibration for binary classifiers, built for regulated PD models. Three things scikit&#8209;learn will not give you: logit&#8209;scale diagnostics that keep a 1% default rate readable, a central&#8209;tendency adjustment that ships as an auditable offset stage rather than a silent refit, and per&#8209;grade regulatory backtests (binomial, Jeffreys). Around them: the calibration literature behind one API, exact inverse maps from policy cutoffs to raw scores, anytime&#8209;valid monitoring, and JSON serialization. numpy is the only runtime dependency.</p>
       <p><a href="https://wlazlod.github.io/probcal/">Documentation</a> &middot; <a href="https://pypi.org/project/probcal/">PyPI</a> &middot; <a href="https://github.com/wlazlod/probcal">GitHub</a></p>
 
       <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Permanent link">&para;</a></h3>
-      <p class="doc-meta"><code>python</code> <code>rust core</code> <a href="https://pypi.org/project/treecf/"><code data-pypi="treecf" hidden></code></a> <code>MIT</code></p>
-      <p>Counterfactual explanations for tree ensembles (XGBoost, LightGBM, CatBoost, sklearn) that can prove their answer: the exact backend certifies that a plan is the cheapest available under the declared constraints, or that none exists. Targets are intervals on the raw output, so a plan moves a declined application under the cutoff the business actually uses. Plans respect declarative real&#8209;world constraints, treat missing values as first&#8209;class, and every answer is float&#8209;verified against the parsed model before it is returned. The heuristic search runs on a Rust engine bundled in the wheel &mdash; milliseconds per applicant, whole portfolios in one parallel call.</p>
+      <p class="doc-meta"><code>python</code> <code>rust core</code> <a href="https://pypi.org/project/treecf/"><code>v0.3.1</code></a> <code>MIT</code></p>
+      <p>Counterfactual explanations for tree ensembles (XGBoost, LightGBM, CatBoost, sklearn): the smallest feasible change that moves a declined application under the cutoff, respecting the constraints you declare. Unlike sampling&#8209;based tools it can prove that a plan is the cheapest available, or that none exists, and every answer is verified against the parsed model.</p>
       <p><a href="https://wlazlod.github.io/treecf/">Documentation</a> &middot; <a href="https://pypi.org/project/treecf/">PyPI</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
 
       <p><strong>Earlier and experimental:</strong> <a href="https://wlazlod.github.io/concept-graph-xai/">concept-graph-xai</a> (concept&#8209;level feature usage and ablation), <a href="https://wlazlod.github.io/triadxai/">triadxai</a> (three&#8209;channel decomposition of credit scores), <a href="https://wlazlod.github.io/flaggam/">flaggam</a> (interpretable GAMs built from univariate flags), <a href="https://wlazlod.github.io/swift/">swift</a> (SHAP&#8209;weighted drift monitoring).</p>
@@ -194,22 +198,22 @@
 
       <h3 id="thesis">Doctoral thesis &mdash; Trustworthy credit risk under the AI Act<a class="headerlink" href="#thesis" title="Permanent link">&para;</a></h3>
       <p class="doc-meta"><code>SGH Warsaw School of Economics</code> <code>in progress</code> <code>submission target 2029</code></p>
-      <p>Supervised by Prof.&nbsp;Aneta Ptak&#8209;Chmielewska. The thesis develops an integrated methodology that combines algorithmic fairness, uncertainty quantification, and interpretability, organised around a concept I call <em>discriminatory uncertainty</em> &mdash; the idea that a model can discriminate not only through its decisions, but through how confident it is in them. The core idea is set out in the note <a href="/notes/discriminatory-uncertainty.html">Discriminatory uncertainty</a>.</p>
+      <p>Supervised by Prof.&nbsp;Aneta Ptak&#8209;Chmielewska. The thesis develops an integrated methodology that combines algorithmic fairness, uncertainty quantification, and interpretability, organised around a concept I call <em>discriminatory uncertainty</em> : whether a model&rsquo;s confidence, and not only its decisions, is distributed fairly across groups. The core idea is set out in the note <a href="/notes/discriminatory-uncertainty.html">Discriminatory uncertainty</a>.</p>
 
       <h2 id="talks">Conference talks<a class="headerlink" href="#talks" title="Permanent link">&para;</a></h2>
 
       <p>Slides and materials: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a></p>
 
-      <p>Two of these talks are about knowledge graphs and ontologies. That is the same line of work seen from the other end: a shared vocabulary is a prerequisite for trustworthy ML, because you cannot audit the fairness or calibration of a feature nobody can define.</p>
-
       <ul>
         <li><a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warsaw.<br>Why a SHAP value behaves like a contribution, not a coordinate &mdash; and how reading it as a point misleads scorecard interpretation. <a href="/notes/shap-values-are-not-points.html">Write-up</a>.
         </li>
-        <li><a href="https://web.archive.org/web/20260609000742/https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznań, with Kamil&nbsp;Golis.<br>How knowledge graphs pay down the semantic debt that accumulates across ML pipelines &mdash; a practical, applied walk&#8209;through.
+        <li><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong> &mdash; GHOST&nbsp;Day 2026, Poznań, with Kamil&nbsp;Golis.<br>How knowledge graphs pay down the semantic debt that accumulates across ML pipelines &mdash; a practical, applied walk&#8209;through.
         </li>
-        <li><a href="https://github.com/wlazlod/conference-talks#readme"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Warsaw.<br>How semantic ontologies can move ML development past the feature store, giving models a shared, reusable vocabulary.
+        <li><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong> &mdash; Data Science Summit 2025, Warsaw.<br>How semantic ontologies can move ML development past the feature store, giving models a shared, reusable vocabulary.
         </li>
       </ul>
+
+      <p>Two of these talks are about knowledge graphs and ontologies. That is the same line of work seen from the other end: a shared vocabulary is a prerequisite for trustworthy ML, because you cannot audit the fairness or calibration of a feature nobody can define.</p>
 
       <p>BibTeX entries for all talks: <a href="https://github.com/wlazlod/conference-talks#readme">conference-talks README</a>.</p>
 
@@ -223,25 +227,10 @@
       <p><a href="/didactics/data-mining.html">Course script (HTML)</a> &middot; <a href="https://github.com/wlazlod/didactics">Repository</a></p>
 
       <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Research Workshop<a class="headerlink" href="#conformal-workshop" title="Permanent link">&para;</a></h3>
-      <p class="doc-meta"><code>Warsaw University of Technology</code> <code>with Allegro Pay</code></p>
-      <p>Industry&#8209;mentored project for the <em>Research Workshop</em> course at the Faculty of Mathematics and Information Science. Three companies contribute a project each year and guide the student team through it; ours is on conformal prediction applied to consumer&#8209;credit scoring. I co&#8209;prepared the brief and mentor the team.</p>
-      <p><a href="https://github.com/wlazlod/wut-counterfactual-explanations">Starter repository</a> &middot; <a href="https://github.com/wlazlod/didactics">Teaching materials</a></p>
+      <p class="doc-meta"><code>Warsaw University of Technology</code> <code>with Allegro Pay</code> <code>2025 &middot; 2026</code></p>
+      <p>Industry&#8209;mentored project for the <em>Research Workshop</em> course at the Faculty of Mathematics and Information Science. Three companies contribute a project each year and guide the student team through it; I co&#8209;prepare the brief and mentor the team. 2025: conformal prediction for consumer&#8209;credit scoring. 2026: counterfactual explanations in credit&#8209;risk modelling.</p>
+      <p><a href="https://github.com/wlazlod/wut-counterfactual-explanations">Starter repository (2026)</a> &middot; <a href="https://github.com/wlazlod/didactics">Teaching materials</a></p>
 
-      <h2 id="elsewhere">Elsewhere<a class="headerlink" href="#elsewhere" title="Permanent link">&para;</a></h2>
-
-      <div class="md-table-wrap">
-      <table>
-        <thead>
-          <tr><th>Where</th><th>Link</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>GitHub</td><td><a href="https://github.com/wlazlod">github.com/wlazlod</a></td></tr>
-          <tr><td>LinkedIn</td><td><a href="https://www.linkedin.com/in/danielwlazlorobots/">linkedin.com/in/danielwlazlorobots</a></td></tr>
-          <tr><td>ORCID</td><td><a href="https://orcid.org/0009-0003-1984-8183">0009&#8209;0003&#8209;1984&#8209;8183</a></td></tr>
-          <tr><td>Email</td><td><a href="mailto:daniel.wlazlo@datadeer.pl">daniel.wlazlo@datadeer.pl</a></td></tr>
-        </tbody>
-      </table>
-      </div>
     </div>
   </article>
 
@@ -250,10 +239,10 @@
 
 <footer class="md-footer">
   <nav class="md-footer__inner md-grid" aria-label="Footer">
-    <a href="/notes/discriminatory-uncertainty.html" class="md-footer__link md-footer__link--next" aria-label="Next: Discriminatory uncertainty">
+    <a href="/notes/treecf.html" class="md-footer__link md-footer__link--next" aria-label="Next: treecf: counterfactuals you can act on">
       <div class="md-footer__title">
         <span class="md-footer__direction">Next</span>
-        Discriminatory uncertainty
+        treecf: counterfactuals you can act on
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
     </a>

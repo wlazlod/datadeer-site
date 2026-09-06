@@ -12,9 +12,7 @@
 <link rel="alternate" hreflang="x-default" href="https://datadeer.pl/">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
 <link rel="stylesheet" href="/assets/style.css">
 
 <meta property="og:title" content="Daniel Wlazło">
@@ -22,7 +20,10 @@
 <meta property="og:url" content="https://datadeer.pl/cs/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="cs_CZ">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://datadeer.pl/assets/img/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 
 <script type="application/ld+json">
 {
@@ -65,9 +66,10 @@
 </script>
 </head>
 <body dir="ltr" class="md-page--home" data-md-color-scheme="default">
+<script>(function(){var s=null;try{s=localStorage.getItem("datadeer.palette")}catch(e){}if(s!=="slate"&&s!=="default"){s=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"slate":"default"}document.body.setAttribute("data-md-color-scheme",s)})();</script>
 
 <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-<a href="#about" class="md-skip">Přejít na obsah</a>
+<a href="#article" class="md-skip">Přejít na obsah</a>
 <label class="md-overlay" for="__drawer"></label>
 
 <header class="md-header" data-md-component="header">
@@ -83,11 +85,13 @@
       <svg class="md-icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
       <svg class="md-icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
     </button>
-    <p class="md-header__langs" aria-label="Jazyk">
-      <a href="/" hreflang="en">EN</a>
-      <a href="/pl/" hreflang="pl">PL</a>
-      <span aria-current="true">CS</span>
-    </p>
+    <nav class="md-header__langs" aria-label="Jazyk">
+      <ul>
+        <li><a href="/" hreflang="en">EN</a></li>
+        <li><a href="/pl/" hreflang="pl">PL</a></li>
+        <li><span aria-current="true">CS</span></li>
+      </ul>
+    </nav>
     <div class="md-header__source">
       <a href="https://github.com/wlazlod" title="Přejít na GitHub" class="md-source" data-md-component="source">
         <div class="md-source__icon md-icon">
@@ -117,9 +121,9 @@
         <li class="md-nav__item md-nav__item--section">
           <span class="md-nav__label">Poznámky</span>
           <ul class="md-nav__list">
-            <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty <small>(EN)</small></a></li>
-            <li class="md-nav__item"><a href="/notes/shap-values-are-not-points.html" class="md-nav__link">Why SHAP values are not points <small>(EN)</small></a></li>
             <li class="md-nav__item"><a href="/notes/treecf.html" class="md-nav__link">treecf: counterfactuals you can act on <small>(EN)</small></a></li>
+            <li class="md-nav__item"><a href="/notes/shap-values-are-not-points.html" class="md-nav__link">Why SHAP values are not points <small>(EN)</small></a></li>
+            <li class="md-nav__item"><a href="/notes/discriminatory-uncertainty.html" class="md-nav__link">Discriminatory uncertainty <small>(EN)</small></a></li>
           </ul>
         </li>
         <li class="md-nav__item md-nav__item--section">
@@ -147,46 +151,45 @@
         <li class="md-nav__item"><a href="#academic" class="md-nav__link">Akademická práce</a></li>
         <li class="md-nav__item"><a href="#talks" class="md-nav__link">Konferenční přednášky</a></li>
         <li class="md-nav__item"><a href="#didactics" class="md-nav__link">Výuka</a></li>
-        <li class="md-nav__item"><a href="#elsewhere" class="md-nav__link">Jinde</a></li>
       </ul>
     </nav>
   </div>
 
-  <article class="md-content md-typeset" data-md-component="content">
+  <article id="article" class="md-content md-typeset" data-md-component="content">
     <div class="md-content__inner">
 
       <h1 id="daniel-wlazlo">Daniel Wlazło<a class="headerlink" href="#daniel-wlazlo" title="Trvalý odkaz">&para;</a></h1>
 
       <p><strong>Manažer datové vědy v Allegro Pay &mdash; důvěryhodné strojové učení v úvěrovém riziku. Varšava.</strong></p>
+      <p class="strapline-meta">Správce balíčků <a href="#probcal">probcal</a> a&nbsp;<a href="#treecf">treecf</a> &middot; píšu o&nbsp;<a href="#notes">férovosti a&nbsp;kalibraci</a> &middot; <a href="mailto:daniel.wlazlo@datadeer.pl">daniel.wlazlo@datadeer.pl</a></p>
 
       <h2 id="about">O&nbsp;mně<a class="headerlink" href="#about" title="Trvalý odkaz">&para;</a></h2>
 
-      <p>Jsem manažerem týmu Data Science v&nbsp;oblasti úvěrového rizika v&nbsp;<a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a>, kde vedu modelovací práce pro jednu z&nbsp;největších spotřebitelských finančních platforem ve&nbsp;střední Evropě. Soustředím se hlavně na aplikační skóring &mdash; modely PD pro individuální klienty &mdash; a&nbsp;čím dál častěji na to, jak vypadá důvěryhodné strojové učení v&nbsp;regulovaném prostředí: férovost, kalibrace, vysvětlitelnost.</p>
+      <img class="headshot" src="/assets/img/headshot.webp" alt="Daniel Wlazło" width="400" height="468" fetchpriority="high" decoding="async">
+
+      <p>V&nbsp;<a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a> vedu modelovací práce pro jednu z&nbsp;největších spotřebitelských finančních platforem ve&nbsp;střední Evropě. Soustředím se hlavně na aplikační skóring &mdash; modely PD pro individuální klienty &mdash; a&nbsp;čím dál častěji na to, jak vypadá důvěryhodné strojové učení v&nbsp;regulovaném prostředí: férovost, kalibrace, vysvětlitelnost.</p>
 
       <p>V&nbsp;úvěrovém riziku a&nbsp;datové vědě pracuji téměř deset let, mimo jiné v&nbsp;Allegro&nbsp;Pay, Hexaware (pro AXA), PKO Bank Polski a&nbsp;ING&nbsp;Bank&nbsp;Śląski. Předtím jsem byl inženýrem robotiky v&nbsp;Samsungu a&nbsp;konstruktérem bezpilotních letounů v&nbsp;Aviation&nbsp;Technik. Robotika byla mým výchozím bodem &mdash; dodnes určuje, jak přemýšlím o&nbsp;strojovém učení: jako o&nbsp;systému, který lze popsat, ladit a&nbsp;zatížit. Mimo práci se učím česky, sleduji Formuli&nbsp;1 a&nbsp;věnuji se robotice.</p>
 
-      <figure>
-        <img src="/assets/img/about-me-1400.webp" srcset="/assets/img/about-me-720.webp 720w, /assets/img/about-me-1400.webp 1400w" sizes="(min-width: 60em) 44rem, 100vw" alt="Tři fotografie Daniela Wlazła: portrét, s vícerotorovým dronem v lese a za malým robotem na robotické soutěži." width="1400" height="711" fetchpriority="high" decoding="async">
-      </figure>
 
       <h2 id="notes">Poznámky<a class="headerlink" href="#notes" title="Trvalý odkaz">&para;</a></h2>
 
       <ul>
-        <li><code>květen 2026</code> <a href="/notes/discriminatory-uncertainty.html" hreflang="en"><strong>Diskriminační nejistota</strong></a> <small>(EN)</small><br>Model může diskriminovat nejen svým rozhodnutím, ale i&nbsp;tím, jak je si v&nbsp;něm jistý.</li>
-        <li><code>červenec 2026</code> <a href="/notes/shap-values-are-not-points.html" hreflang="en"><strong>Proč hodnoty SHAP nejsou body</strong></a> <small>(EN)</small><br>Vodopádový graf SHAP vypadá jako skórovací karta. Čtený tímto způsobem dává sebejisté, ale chybné rady.</li>
         <li><code>srpen 2026</code> <a href="/notes/treecf.html" hreflang="en"><strong>treecf: kontrafakty, podle kterých lze jednat</strong></a> <small>(EN)</small><br>Jedinou poctivou odpovědí na otázku &bdquo;co by se muselo změnit, aby žádost prošla?&ldquo; je kontrafakt &mdash; s&nbsp;omezeními, ověřený, rychlý.</li>
+        <li><code>červenec 2026</code> <a href="/notes/shap-values-are-not-points.html" hreflang="en"><strong>Proč hodnoty SHAP nejsou body</strong></a> <small>(EN)</small><br>Vodopádový graf SHAP vypadá jako skórovací karta. Čtený tímto způsobem dává sebejisté, ale chybné rady.</li>
+        <li><code>květen 2026</code> <a href="/notes/discriminatory-uncertainty.html" hreflang="en"><strong>Diskriminační nejistota</strong></a> <small>(EN)</small><br>Model může diskriminovat nejen svým rozhodnutím, ale i&nbsp;tím, jak je si v&nbsp;něm jistý.</li>
       </ul>
 
       <h2 id="open-source">Open source<a class="headerlink" href="#open-source" title="Trvalý odkaz">&para;</a></h2>
 
       <h3 id="probcal"><a href="https://github.com/wlazlod/probcal">probcal</a><a class="headerlink" href="#probcal" title="Trvalý odkaz">&para;</a></h3>
-      <p class="doc-meta"><code>python</code> <code>pouze numpy</code> <a href="https://pypi.org/project/probcal/"><code data-pypi="probcal" hidden></code></a> <code>MIT</code></p>
+      <p class="doc-meta"><code>python</code> <code>pouze numpy</code> <a href="https://pypi.org/project/probcal/"><code>v0.3.1</code></a> <code>MIT</code></p>
       <p>Post&#8209;hoc kalibrace pravděpodobností pro binární klasifikátory, postavená pro regulované PD modely. Tři věci, které scikit&#8209;learn nenabídne: diagnostika na logitové škále, ve které zůstává 1&nbsp;% default rate čitelné, korekce centrální tendence jako auditovatelný krok offsetu místo tichého refitu a&nbsp;regulatorní backtesty po ratingových stupních (binomický, Jeffreysův). Kolem nich: kalibrační literatura za jedním API, přesné inverzní mapy z&nbsp;cutoffů politiky na surová skóre, anytime&#8209;valid monitoring a&nbsp;serializace do JSON. Jedinou runtime závislostí je numpy.</p>
       <p><a href="https://wlazlod.github.io/probcal/">Dokumentace</a> &middot; <a href="https://pypi.org/project/probcal/">PyPI</a> &middot; <a href="https://github.com/wlazlod/probcal">GitHub</a></p>
 
       <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Trvalý odkaz">&para;</a></h3>
-      <p class="doc-meta"><code>python</code> <code>jádro v rustu</code> <a href="https://pypi.org/project/treecf/"><code data-pypi="treecf" hidden></code></a> <code>MIT</code></p>
-      <p>Kontrfaktická vysvětlení pro stromové ansámbly (XGBoost, LightGBM, CatBoost, sklearn), která umí svou odpověď dokázat: exaktní backend certifikuje, že plán je nejlevnější možný v&nbsp;rámci deklarovaných omezení &mdash; nebo že žádný neexistuje. Cíle jsou intervaly na surovém výstupu modelu, takže plán přesune zamítnutou žádost pod práh, který byznys skutečně používá. Plány respektují deklarativní omezení reálného světa, zacházejí s&nbsp;chybějícími hodnotami jako s&nbsp;plnohodnotnými a&nbsp;každá odpověď je před vrácením ověřena proti naparsovanému modelu. Heuristické hledání běží na enginu v&nbsp;Rustu přibaleném v&nbsp;balíčku &mdash; milisekundy na žadatele, celá portfolia v&nbsp;jednom paralelním volání.</p>
+      <p class="doc-meta"><code>python</code> <code>jádro v rustu</code> <a href="https://pypi.org/project/treecf/"><code>v0.3.1</code></a> <code>MIT</code></p>
+      <p>Kontrfaktická vysvětlení pro stromové ansámbly (XGBoost, LightGBM, CatBoost, sklearn): nejmenší proveditelná změna, která přesune zamítnutou žádost pod práh, při dodržení deklarovaných omezení. Na rozdíl od nástrojů založených na vzorkování umí dokázat, že plán je nejlevnější možný &mdash; nebo že žádný neexistuje &mdash; a&nbsp;každá odpověď je ověřena proti naparsovanému modelu.</p>
       <p><a href="https://wlazlod.github.io/treecf/">Dokumentace</a> &middot; <a href="https://pypi.org/project/treecf/">PyPI</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
 
       <p><strong>Starší a&nbsp;experimentální:</strong> <a href="https://wlazlod.github.io/concept-graph-xai/">concept-graph-xai</a> (využití rysů na úrovni konceptů a&nbsp;ablace), <a href="https://wlazlod.github.io/triadxai/">triadxai</a> (tříkanálová dekompozice úvěrového skóre), <a href="https://wlazlod.github.io/flaggam/">flaggam</a> (interpretovatelné GAM z&nbsp;jednorozměrných příznaků), <a href="https://wlazlod.github.io/swift/">swift</a> (monitoring driftu vážený SHAP).</p>
@@ -195,22 +198,22 @@
 
       <h3 id="thesis">Disertační práce &mdash; Důvěryhodné úvěrové riziko v&nbsp;rámci AI&nbsp;Act<a class="headerlink" href="#thesis" title="Trvalý odkaz">&para;</a></h3>
       <p class="doc-meta"><code>Varšavská ekonomická škola (SGH)</code> <code>rozpracováno</code> <code>plánované odevzdání 2029</code></p>
-      <p>Práce pod vedením prof.&nbsp;Anety&nbsp;Ptak&#8209;Chmielewské. Disertace rozvíjí integrovanou metodiku spojující algoritmickou férovost, kvantifikaci nejistoty a&nbsp;interpretovatelnost a&nbsp;je vystavěna kolem konceptu, který nazývám <em>diskriminační nejistota</em> &mdash; myšlenky, že model může diskriminovat nejen svým rozhodnutím, ale i&nbsp;tím, jak je si v&nbsp;něm jistý. Hlavní myšlenku popisuji v&nbsp;poznámce <a href="/notes/discriminatory-uncertainty.html" hreflang="en">Discriminatory uncertainty</a> (EN).</p>
+      <p>Práce pod vedením prof.&nbsp;Anety&nbsp;Ptak&#8209;Chmielewské. Disertace rozvíjí integrovanou metodiku spojující algoritmickou férovost, kvantifikaci nejistoty a&nbsp;interpretovatelnost a&nbsp;je vystavěna kolem konceptu, který nazývám <em>diskriminační nejistota</em>: otázky, zda se mezi skupinami spravedlivě rozkládají nejen rozhodnutí modelu, ale i&nbsp;jeho jistota. Hlavní myšlenku popisuji v&nbsp;poznámce <a href="/notes/discriminatory-uncertainty.html" hreflang="en">Discriminatory uncertainty</a> (EN).</p>
 
       <h2 id="talks">Konferenční přednášky<a class="headerlink" href="#talks" title="Trvalý odkaz">&para;</a></h2>
 
       <p>Slidy a&nbsp;materiály: <a href="https://github.com/wlazlod/conference-talks">github.com/wlazlod/conference-talks</a></p>
 
-      <p>Dvě z&nbsp;těchto přednášek se týkají znalostních grafů a&nbsp;ontologií. Je to stejná linie práce viděná z&nbsp;druhého konce: sdílený slovník je předpokladem důvěryhodného ML, protože nelze auditovat férovost ani kalibraci rysu, který nikdo neumí definovat.</p>
-
       <ul>
         <li><a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Varšava.<br>Proč se hodnota SHAP chová jako příspěvek, nikoli souřadnice &mdash; a&nbsp;jak její čtení jako bodu klame při interpretaci skóringu. <a href="/notes/shap-values-are-not-points.html">Poznámka</a>.
         </li>
-        <li><a href="https://web.archive.org/web/20260609000742/https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznaň, s&nbsp;Kamilem&nbsp;Golisem.<br>Jak znalostní grafy splácejí sémantický dluh, který se hromadí v&nbsp;ML pipelinách &mdash; praktický, aplikační průřez.
+        <li><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong> &mdash; GHOST&nbsp;Day 2026, Poznaň, s&nbsp;Kamilem&nbsp;Golisem.<br>Jak znalostní grafy splácejí sémantický dluh, který se hromadí v&nbsp;ML pipelinách &mdash; praktický, aplikační průřez.
         </li>
-        <li><a href="https://github.com/wlazlod/conference-talks#readme"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Varšava.<br>Jak sémantické ontologie mohou posunout vývoj ML modelů za feature store a&nbsp;dát modelům sdílený, znovupoužitelný slovník pojmů.
+        <li><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong> &mdash; Data Science Summit 2025, Varšava.<br>Jak sémantické ontologie mohou posunout vývoj ML modelů za feature store a&nbsp;dát modelům sdílený, znovupoužitelný slovník pojmů.
         </li>
       </ul>
+
+      <p>Dvě z&nbsp;těchto přednášek se týkají znalostních grafů a&nbsp;ontologií. Je to stejná linie práce viděná z&nbsp;druhého konce: sdílený slovník je předpokladem důvěryhodného ML, protože nelze auditovat férovost ani kalibraci rysu, který nikdo neumí definovat.</p>
 
       <p>Záznamy BibTeX ke všem přednáškám: <a href="https://github.com/wlazlod/conference-talks#readme">README repozitáře conference-talks</a>.</p>
 
@@ -224,25 +227,10 @@
       <p><a href="/didactics/data-mining.html" hreflang="en">Skripta kurzu (HTML)</a> <small>(EN)</small> &middot; <a href="https://github.com/wlazlod/didactics">Repozitář</a></p>
 
       <h3 id="conformal-workshop">Conformal Prediction in Credit Risk &mdash; Výzkumný workshop<a class="headerlink" href="#conformal-workshop" title="Trvalý odkaz">&para;</a></h3>
-      <p class="doc-meta"><code>Varšavská technická univerzita</code> <code>ve spolupráci s Allegro Pay</code></p>
-      <p>Firemně vedený projekt v&nbsp;rámci kurzu <em>Výzkumný workshop</em> na Fakultě matematiky a&nbsp;informačních věd VTU. Každý rok přispívají tři firmy jedním projektem a&nbsp;vedou studentský tým jeho realizací; náš se týká uplatnění konformní predikce v&nbsp;úvěrovém skóringu. Zadání jsem spolupřipravil a&nbsp;vedu tým.</p>
-      <p><a href="https://github.com/wlazlod/wut-counterfactual-explanations">Startovací repozitář</a> &middot; <a href="https://github.com/wlazlod/didactics">Výukové materiály</a></p>
+      <p class="doc-meta"><code>Varšavská technická univerzita</code> <code>ve spolupráci s Allegro Pay</code> <code>2025 &middot; 2026</code></p>
+      <p>Firemně vedený projekt v&nbsp;rámci kurzu <em>Výzkumný workshop</em> na Fakultě matematiky a&nbsp;informačních věd VTU. Každý rok přispívají tři firmy jedním projektem a&nbsp;vedou studentský tým jeho realizací; zadání spolupřipravuji a&nbsp;vedu tým. 2025: konformní predikce ve&nbsp;spotřebitelském úvěrovém skóringu. 2026: kontrfaktická vysvětlení v&nbsp;modelování úvěrového rizika.</p>
+      <p><a href="https://github.com/wlazlod/wut-counterfactual-explanations">Startovací repozitář (2026)</a> &middot; <a href="https://github.com/wlazlod/didactics">Výukové materiály</a></p>
 
-      <h2 id="elsewhere">Jinde<a class="headerlink" href="#elsewhere" title="Trvalý odkaz">&para;</a></h2>
-
-      <div class="md-table-wrap">
-      <table>
-        <thead>
-          <tr><th>Kde</th><th>Odkaz</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>GitHub</td><td><a href="https://github.com/wlazlod">github.com/wlazlod</a></td></tr>
-          <tr><td>LinkedIn</td><td><a href="https://www.linkedin.com/in/danielwlazlorobots/">linkedin.com/in/danielwlazlorobots</a></td></tr>
-          <tr><td>ORCID</td><td><a href="https://orcid.org/0009-0003-1984-8183">0009&#8209;0003&#8209;1984&#8209;8183</a></td></tr>
-          <tr><td>E&#8209;mail</td><td><a href="mailto:daniel.wlazlo@datadeer.pl">daniel.wlazlo@datadeer.pl</a></td></tr>
-        </tbody>
-      </table>
-      </div>
     </div>
   </article>
 
@@ -251,10 +239,10 @@
 
 <footer class="md-footer">
   <nav class="md-footer__inner md-grid" aria-label="Patička">
-    <a href="/notes/discriminatory-uncertainty.html" class="md-footer__link md-footer__link--next" aria-label="Další: Discriminatory uncertainty">
+    <a href="/notes/treecf.html" class="md-footer__link md-footer__link--next" aria-label="Další: treecf: counterfactuals you can act on">
       <div class="md-footer__title">
         <span class="md-footer__direction">Další</span>
-        Discriminatory uncertainty
+        treecf: counterfactuals you can act on
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
     </a>

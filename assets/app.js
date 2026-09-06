@@ -1,10 +1,5 @@
-/* Palette toggle (default <-> slate), persisted like mkdocs-material does */
+/* Palette toggle (default <-> slate); the initial palette is set by the inline script at the top of <body> */
 (function () {
-  var stored = null;
-  try { stored = localStorage.getItem("datadeer.palette"); } catch (e) {}
-  if (stored === "slate" || stored === "default") {
-    document.body.setAttribute("data-md-color-scheme", stored);
-  }
   var toggle = document.querySelector("[data-md-component=palette]");
   if (toggle) {
     toggle.addEventListener("click", function () {
@@ -36,20 +31,5 @@
   Object.keys(byId).forEach(function (id) {
     var el = document.getElementById(id);
     if (el) observer.observe(el);
-  });
-})();
-
-/* Fill PyPI version badges at load time; badges stay hidden if the lookup fails */
-(function () {
-  var badges = document.querySelectorAll("code[data-pypi]");
-  if (!badges.length || !("fetch" in window)) return;
-  badges.forEach(function (el) {
-    fetch("https://pypi.org/pypi/" + el.getAttribute("data-pypi") + "/json")
-      .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-      .then(function (data) {
-        el.textContent = "v" + data.info.version;
-        el.removeAttribute("hidden");
-      })
-      .catch(function () {});
   });
 })();
