@@ -888,3 +888,12 @@ body {
   body { display: block; }
   @page { margin: 2cm; }
 }
+
+/* Homepage: the primary sidebar duplicates the TOC on wide screens; keep it for the drawer only */
+@media (min-width: 1220px) {
+  .md-page--home .md-sidebar--primary { display: none; }
+  .md-page--home .md-content { max-width: 36.8rem; margin-left: auto; }
+}
+
+/* Pages without sidebars (404): keep the reading column width and centre it */
+.md-page--plain .md-content { max-width: 36.8rem; margin: 0 auto; }

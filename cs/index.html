@@ -64,7 +64,7 @@
 }
 </script>
 </head>
-<body dir="ltr" data-md-color-scheme="default">
+<body dir="ltr" class="md-page--home" data-md-color-scheme="default">
 
 <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
 <a href="#about" class="md-skip">Přejít na obsah</a>
@@ -163,7 +163,7 @@
 
       <p>Jsem manažerem týmu Data Science v&nbsp;oblasti úvěrového rizika v&nbsp;<a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a>, kde vedu modelovací práce pro jednu z&nbsp;největších spotřebitelských finančních platforem ve&nbsp;střední Evropě. Soustředím se hlavně na aplikační skóring &mdash; modely PD pro individuální klienty &mdash; a&nbsp;čím dál častěji na to, jak vypadá důvěryhodné strojové učení v&nbsp;regulovaném prostředí: férovost, kalibrace, vysvětlitelnost.</p>
 
-      <p>V&nbsp;úvěrovém riziku a&nbsp;datové vědě pracuji téměř deset let, mimo jiné v&nbsp;Allegro&nbsp;Pay, Hexaware (pro AXA), PKO Banku Polskim a&nbsp;ING&nbsp;Bank&nbsp;Śląski. Předtím jsem byl inženýrem robotiky v&nbsp;Samsungu a&nbsp;konstruktérem bezpilotních letounů v&nbsp;Aviation&nbsp;Technik. Robotika byla mým výchozím bodem &mdash; dodnes určuje, jak přemýšlím o&nbsp;strojovém učení: jako o&nbsp;systému, který lze popsat, ladit a&nbsp;zatížit. Mimo práci se učím česky, sleduji Formuli&nbsp;1 a&nbsp;věnuji se robotice.</p>
+      <p>V&nbsp;úvěrovém riziku a&nbsp;datové vědě pracuji téměř deset let, mimo jiné v&nbsp;Allegro&nbsp;Pay, Hexaware (pro AXA), PKO Bank Polski a&nbsp;ING&nbsp;Bank&nbsp;Śląski. Předtím jsem byl inženýrem robotiky v&nbsp;Samsungu a&nbsp;konstruktérem bezpilotních letounů v&nbsp;Aviation&nbsp;Technik. Robotika byla mým výchozím bodem &mdash; dodnes určuje, jak přemýšlím o&nbsp;strojovém učení: jako o&nbsp;systému, který lze popsat, ladit a&nbsp;zatížit. Mimo práci se učím česky, sleduji Formuli&nbsp;1 a&nbsp;věnuji se robotice.</p>
 
       <figure>
         <img src="/assets/img/about-me-1400.webp" srcset="/assets/img/about-me-720.webp 720w, /assets/img/about-me-1400.webp 1400w" sizes="(min-width: 60em) 44rem, 100vw" alt="Tři fotografie Daniela Wlazła: portrét, s vícerotorovým dronem v lese a za malým robotem na robotické soutěži." width="1400" height="711" fetchpriority="high" decoding="async">
@@ -186,7 +186,7 @@
 
       <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Trvalý odkaz">&para;</a></h3>
       <p class="doc-meta"><code>python</code> <code>jádro v rustu</code> <a href="https://pypi.org/project/treecf/"><code data-pypi="treecf" hidden></code></a> <code>MIT</code></p>
-      <p>Kontrfaktická vysvětlení pro stromové ansámbly (XGBoost, LightGBM, CatBoost, sklearn) s&nbsp;omezeními a&nbsp;znalostí rozhodovacích prahů: minimální proveditelná změna, která přesune zamítnutou žádost pod hranici schválení. Plány respektují deklarativní omezení reálného světa, pracují s&nbsp;chybějícími hodnotami jako s&nbsp;plnohodnotnými a&nbsp;každá odpověď je před vrácením ověřena proti naparsovanému modelu. Umí také dokázat, že plán je nejlevnější možný &mdash; nebo že v&nbsp;rámci omezení žádný neexistuje. Vyhledávání běží na enginu v&nbsp;Rustu přibaleném v&nbsp;balíčku &mdash; milisekundy na žádost, celá portfolia v&nbsp;jednom paralelním volání.</p>
+      <p>Kontrfaktická vysvětlení pro stromové ansámbly (XGBoost, LightGBM, CatBoost, sklearn), která umí svou odpověď dokázat: exaktní backend certifikuje, že plán je nejlevnější možný v&nbsp;rámci deklarovaných omezení &mdash; nebo že žádný neexistuje. Cíle jsou intervaly na surovém výstupu modelu, takže plán přesune zamítnutou žádost pod práh, který byznys skutečně používá. Plány respektují deklarativní omezení reálného světa, zacházejí s&nbsp;chybějícími hodnotami jako s&nbsp;plnohodnotnými a&nbsp;každá odpověď je před vrácením ověřena proti naparsovanému modelu. Heuristické hledání běží na enginu v&nbsp;Rustu přibaleném v&nbsp;balíčku &mdash; milisekundy na žadatele, celá portfolia v&nbsp;jednom paralelním volání.</p>
       <p><a href="https://wlazlod.github.io/treecf/">Dokumentace</a> &middot; <a href="https://pypi.org/project/treecf/">PyPI</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
 
       <p><strong>Starší a&nbsp;experimentální:</strong> <a href="https://wlazlod.github.io/concept-graph-xai/">concept-graph-xai</a> (využití rysů na úrovni konceptů a&nbsp;ablace), <a href="https://wlazlod.github.io/triadxai/">triadxai</a> (tříkanálová dekompozice úvěrového skóre), <a href="https://wlazlod.github.io/flaggam/">flaggam</a> (interpretovatelné GAM z&nbsp;jednorozměrných příznaků), <a href="https://wlazlod.github.io/swift/">swift</a> (monitoring driftu vážený SHAP).</p>
@@ -204,11 +204,11 @@
       <p>Dvě z&nbsp;těchto přednášek se týkají znalostních grafů a&nbsp;ontologií. Je to stejná linie práce viděná z&nbsp;druhého konce: sdílený slovník je předpokladem důvěryhodného ML, protože nelze auditovat férovost ani kalibraci rysu, který nikdo neumí definovat.</p>
 
       <ul>
-        <li><a href="https://ml.dssconf.pl/#agenda"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Varšava.<br>Proč se hodnota SHAP chová jako příspěvek, nikoli souřadnice &mdash; a&nbsp;jak její čtení jako bodu klame při interpretaci skóringu. <a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf">Slidy (PDF)</a> &middot; <a href="/notes/shap-values-are-not-points.html">poznámka</a>.
+        <li><a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Varšava.<br>Proč se hodnota SHAP chová jako příspěvek, nikoli souřadnice &mdash; a&nbsp;jak její čtení jako bodu klame při interpretaci skóringu. <a href="/notes/shap-values-are-not-points.html">Poznámka</a>.
         </li>
-        <li><a href="https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznaň, s&nbsp;Kamilem&nbsp;Golisem.<br>Jak znalostní grafy splácejí sémantický dluh, který se hromadí v&nbsp;ML pipelinách &mdash; praktický, aplikační průřez.
+        <li><a href="https://web.archive.org/web/20260609000742/https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznaň, s&nbsp;Kamilem&nbsp;Golisem.<br>Jak znalostní grafy splácejí sémantický dluh, který se hromadí v&nbsp;ML pipelinách &mdash; praktický, aplikační průřez.
         </li>
-        <li><a href="https://main.dssconf.pl/#all-speakers-modal"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Varšava.<br>Jak sémantické ontologie mohou posunout vývoj ML modelů za feature store a&nbsp;dát modelům sdílený, znovupoužitelný slovník pojmů.
+        <li><a href="https://github.com/wlazlod/conference-talks#readme"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Varšava.<br>Jak sémantické ontologie mohou posunout vývoj ML modelů za feature store a&nbsp;dát modelům sdílený, znovupoužitelný slovník pojmů.
         </li>
       </ul>
 

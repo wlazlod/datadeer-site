@@ -64,7 +64,7 @@
 }
 </script>
 </head>
-<body dir="ltr" data-md-color-scheme="default">
+<body dir="ltr" class="md-page--home" data-md-color-scheme="default">
 
 <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
 <a href="#about" class="md-skip">Przejdź do treści</a>
@@ -186,7 +186,7 @@
 
       <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Stały odnośnik">&para;</a></h3>
       <p class="doc-meta"><code>python</code> <code>rdzeń w rust</code> <a href="https://pypi.org/project/treecf/"><code data-pypi="treecf" hidden></code></a> <code>MIT</code></p>
-      <p>Wyjaśnienia kontrfaktyczne dla zespołów drzew (XGBoost, LightGBM, CatBoost, sklearn), świadome ograniczeń i&nbsp;progów decyzyjnych: minimalna, wykonalna zmiana, która przenosi odrzucony wniosek poniżej punktu odcięcia. Plany respektują deklaratywne ograniczenia świata rzeczywistego, traktują braki danych jako pełnoprawne wartości, a&nbsp;każda odpowiedź jest weryfikowana względem sparsowanego modelu przed zwróceniem. Potrafi też udowodnić, że plan jest najtańszym możliwym &mdash; albo że w&nbsp;ramach ograniczeń żaden nie istnieje. Wyszukiwanie działa na silniku w&nbsp;Rust dołączonym do pakietu &mdash; milisekundy na wniosek, całe portfele w&nbsp;jednym równoległym wywołaniu.</p>
+      <p>Wyjaśnienia kontrfaktyczne dla zespołów drzew (XGBoost, LightGBM, CatBoost, sklearn), które potrafią udowodnić swoją odpowiedź: backend dokładny certyfikuje, że plan jest najtańszym możliwym w&nbsp;ramach zadeklarowanych ograniczeń &mdash; albo że żaden nie istnieje. Cele są przedziałami na surowym wyjściu modelu, więc plan przenosi odrzucony wniosek poniżej progu, którego biznes faktycznie używa. Plany respektują deklaratywne ograniczenia świata rzeczywistego, traktują braki danych jako pełnoprawne wartości, a&nbsp;każda odpowiedź jest weryfikowana względem sparsowanego modelu przed zwróceniem. Wyszukiwanie heurystyczne działa na silniku w&nbsp;Rust dołączonym do pakietu &mdash; milisekundy na wniosek, całe portfele w&nbsp;jednym równoległym wywołaniu.</p>
       <p><a href="https://wlazlod.github.io/treecf/">Dokumentacja</a> &middot; <a href="https://pypi.org/project/treecf/">PyPI</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
 
       <p><strong>Wcześniejsze i&nbsp;eksperymentalne:</strong> <a href="https://wlazlod.github.io/concept-graph-xai/">concept-graph-xai</a> (wykorzystanie cech na poziomie konceptów i&nbsp;ablacje), <a href="https://wlazlod.github.io/triadxai/">triadxai</a> (trójkanałowa dekompozycja scoringu kredytowego), <a href="https://wlazlod.github.io/flaggam/">flaggam</a> (interpretowalne GAM&#8209;y zbudowane z&nbsp;jednowymiarowych flag), <a href="https://wlazlod.github.io/swift/">swift</a> (monitoring dryfu ważony SHAP).</p>
@@ -204,11 +204,11 @@
       <p>Dwa z&nbsp;tych wystąpień dotyczą grafów wiedzy i&nbsp;ontologii. To ten sam wątek widziany z&nbsp;drugiej strony: wspólny słownik jest warunkiem godnego zaufania ML, bo nie da się audytować bezstronności ani kalibracji cechy, której nikt nie potrafi zdefiniować.</p>
 
       <ul>
-        <li><a href="https://ml.dssconf.pl/#agenda"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warszawa.<br>Dlaczego wartość SHAP zachowuje się jak wkład, a&nbsp;nie współrzędna &mdash; i&nbsp;jak odczytywanie jej jako punktu wprowadza w&nbsp;błąd przy interpretacji scoringu. <a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf">Slajdy (PDF)</a> &middot; <a href="/notes/shap-values-are-not-points.html">notatka</a>.
+        <li><a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warszawa.<br>Dlaczego wartość SHAP zachowuje się jak wkład, a&nbsp;nie współrzędna &mdash; i&nbsp;jak odczytywanie jej jako punktu wprowadza w&nbsp;błąd przy interpretacji scoringu. <a href="/notes/shap-values-are-not-points.html">Notatka</a>.
         </li>
-        <li><a href="https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznań, z&nbsp;Kamilem&nbsp;Golisem.<br>Jak grafy wiedzy spłacają dług semantyczny narastający w&nbsp;potokach ML &mdash; praktyczny, wdrożeniowy przegląd zastosowań.
+        <li><a href="https://web.archive.org/web/20260609000742/https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznań, z&nbsp;Kamilem&nbsp;Golisem.<br>Jak grafy wiedzy spłacają dług semantyczny narastający w&nbsp;potokach ML &mdash; praktyczny, wdrożeniowy przegląd zastosowań.
         </li>
-        <li><a href="https://main.dssconf.pl/#all-speakers-modal"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Warszawa.<br>Jak ontologie semantyczne mogą wyprowadzić rozwój modeli ML poza feature store, dając modelom wspólny, wielokrotnego użytku słownik pojęć.
+        <li><a href="https://github.com/wlazlod/conference-talks#readme"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Warszawa.<br>Jak ontologie semantyczne mogą wyprowadzić rozwój modeli ML poza feature store, dając modelom wspólny, wielokrotnego użytku słownik pojęć.
         </li>
       </ul>
 

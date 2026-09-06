@@ -63,7 +63,7 @@
 }
 </script>
 </head>
-<body dir="ltr" data-md-color-scheme="default">
+<body dir="ltr" class="md-page--home" data-md-color-scheme="default">
 
 <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
 <a href="#about" class="md-skip">Skip to content</a>
@@ -160,7 +160,7 @@
 
       <h2 id="about">About<a class="headerlink" href="#about" title="Permanent link">&para;</a></h2>
 
-      <p>I&rsquo;m a Manager of Data Science in credit risk at <a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a>, where I lead modelling work for one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation.</p>
+      <p>I&rsquo;m a Data Science Manager in credit risk at <a href="https://allegro.pl/metody-platnosci/allegro-pay">Allegro&nbsp;Pay</a>, where I lead modelling work for one of Central Europe&rsquo;s largest consumer&#8209;finance platforms. My focus is application scoring &mdash; PD models for individual borrowers &mdash; and, increasingly, what trustworthy machine learning looks like in a regulated domain: fairness, calibration, explanation.</p>
 
       <p>I&rsquo;ve spent close to a decade in credit risk and data science, across Allegro&nbsp;Pay, Hexaware (for AXA), PKO Bank Polski, and ING Bank Śląski. Before that I was a robotics engineer at Samsung and a UAV constructor at Aviation Technik. Robotics was where I started &mdash; it&rsquo;s still how I think about machine learning: a system you can describe, debug, and put under load. Outside work I learn Czech, follow Formula&nbsp;1, and tinker with robotics.</p>
 
@@ -185,7 +185,7 @@
 
       <h3 id="treecf"><a href="https://github.com/wlazlod/treecf">treecf</a><a class="headerlink" href="#treecf" title="Permanent link">&para;</a></h3>
       <p class="doc-meta"><code>python</code> <code>rust core</code> <a href="https://pypi.org/project/treecf/"><code data-pypi="treecf" hidden></code></a> <code>MIT</code></p>
-      <p>Constrained, threshold&#8209;aware counterfactual explanations for tree ensembles (XGBoost, LightGBM, CatBoost, sklearn): the minimal, feasible change that moves a declined application under the cutoff. Plans respect declarative real&#8209;world constraints, treat missing values as first&#8209;class, and every answer is float&#8209;verified against the parsed model before it is returned. It can also prove a plan is the cheapest available, or that none exists under the constraints. The search runs on a Rust engine bundled in the wheel &mdash; milliseconds per applicant, whole portfolios in one parallel call.</p>
+      <p>Counterfactual explanations for tree ensembles (XGBoost, LightGBM, CatBoost, sklearn) that can prove their answer: the exact backend certifies that a plan is the cheapest available under the declared constraints, or that none exists. Targets are intervals on the raw output, so a plan moves a declined application under the cutoff the business actually uses. Plans respect declarative real&#8209;world constraints, treat missing values as first&#8209;class, and every answer is float&#8209;verified against the parsed model before it is returned. The heuristic search runs on a Rust engine bundled in the wheel &mdash; milliseconds per applicant, whole portfolios in one parallel call.</p>
       <p><a href="https://wlazlod.github.io/treecf/">Documentation</a> &middot; <a href="https://pypi.org/project/treecf/">PyPI</a> &middot; <a href="https://github.com/wlazlod/treecf">GitHub</a></p>
 
       <p><strong>Earlier and experimental:</strong> <a href="https://wlazlod.github.io/concept-graph-xai/">concept-graph-xai</a> (concept&#8209;level feature usage and ablation), <a href="https://wlazlod.github.io/triadxai/">triadxai</a> (three&#8209;channel decomposition of credit scores), <a href="https://wlazlod.github.io/flaggam/">flaggam</a> (interpretable GAMs built from univariate flags), <a href="https://wlazlod.github.io/swift/">swift</a> (SHAP&#8209;weighted drift monitoring).</p>
@@ -203,11 +203,11 @@
       <p>Two of these talks are about knowledge graphs and ontologies. That is the same line of work seen from the other end: a shared vocabulary is a prerequisite for trustworthy ML, because you cannot audit the fairness or calibration of a feature nobody can define.</p>
 
       <ul>
-        <li><a href="https://ml.dssconf.pl/#agenda"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warsaw.<br>Why a SHAP value behaves like a contribution, not a coordinate &mdash; and how reading it as a point misleads scorecard interpretation. <a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf">Slides (PDF)</a> &middot; <a href="/notes/shap-values-are-not-points.html">write-up</a>.
+        <li><a href="https://github.com/wlazlod/conference-talks/blob/main/2026-06-18-DSS-AI/the-scorecard-illusion.pdf"><strong>The Scorecard Illusion: Why SHAP values are not points (and how they can fool you)</strong></a> &mdash; Data Science Summit, AI&nbsp;Edition 2026, Warsaw.<br>Why a SHAP value behaves like a contribution, not a coordinate &mdash; and how reading it as a point misleads scorecard interpretation. <a href="/notes/shap-values-are-not-points.html">Write-up</a>.
         </li>
-        <li><a href="https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznań, with Kamil&nbsp;Golis.<br>How knowledge graphs pay down the semantic debt that accumulates across ML pipelines &mdash; a practical, applied walk&#8209;through.
+        <li><a href="https://web.archive.org/web/20260609000742/https://ghostday.pl/speakers/"><strong>Curing Semantic Debt: Practical Applications of Knowledge Graphs in ML</strong></a> &mdash; GHOST&nbsp;Day 2026, Poznań, with Kamil&nbsp;Golis.<br>How knowledge graphs pay down the semantic debt that accumulates across ML pipelines &mdash; a practical, applied walk&#8209;through.
         </li>
-        <li><a href="https://main.dssconf.pl/#all-speakers-modal"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Warsaw.<br>How semantic ontologies can move ML development past the feature store, giving models a shared, reusable vocabulary.
+        <li><a href="https://github.com/wlazlod/conference-talks#readme"><strong>Poza Feature Store: jak Ontologie Semantyczne mogą przyspieszyć rozwój modeli ML</strong></a> &mdash; Data Science Summit 2025, Warsaw.<br>How semantic ontologies can move ML development past the feature store, giving models a shared, reusable vocabulary.
         </li>
       </ul>
 
