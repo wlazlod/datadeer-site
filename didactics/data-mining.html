@@ -570,36 +570,37 @@
 </div>
 <p>EDA, finally, is a loop, not a phase: ask a question, make the one plot that answers it, let the answer raise two new questions, and repeat until the surprises stop. Keep an evidence log - one sentence plus one plot per finding. “Income is missing mostly for customers with high savings - MNAR suspected” is worth more than forty unlabelled histograms, and your future self will re-read it.</p>
 <h3 id="sec:missing"><span class="header-section-number">1.6</span> Missing data: the anatomy<a class="headerlink" href="#sec:missing" title="Permanent link">&para;</a></h3>
-<p>Missing data is where Block 1 earns its keep, because missingness is not one thing. The <em>mechanism</em> behind the gaps decides what treatments are safe:</p>
+<p>Missing data is where Block 1 earns its keep, because missingness is not one thing, and the <em>mechanism</em> behind the gaps decides which treatments are safe. Two questions sort any gap. The first: does a true value exist at all? “Months since last delinquency” has no value for a customer who was never delinquent; that gap is <em>structural</em> - the blank means “not applicable”, and nothing is hidden behind it. The second, for every other gap: what does the chance that a value is missing depend on? If it depends on nothing at all - pure chance - the data are <em>missing completely at random</em> (MCAR). If it depends on other columns you can see, and on nothing else once those are taken into account, they are <em>missing at random</em> (MAR). If it depends on the missing value itself, they are <em>missing not at random</em> (MNAR).</p>
+<p>The mechanism is a property of how the data were collected, not of the column: the same income field can be blank for four different reasons, each with a different consequence for the rows you keep.</p>
 <div class="center">
 <div class="md-table-wrap"><table>
 <thead>
 <tr class="header">
+<th style="text-align: left;">Story</th>
 <th style="text-align: left;">Type</th>
-<th style="text-align: left;">Meaning</th>
-<th style="text-align: left;">Example in our portfolio</th>
+<th style="text-align: left;">What it does to the rows you keep</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;"><strong>MCAR</strong></td>
-<td style="text-align: left;">missing completely at random - unrelated to anything</td>
-<td style="text-align: left;">a form field lost to a system glitch</td>
+<td style="text-align: left;">A scanner jam lost 5% of the paper forms, at random</td>
+<td style="text-align: left;">MCAR</td>
+<td style="text-align: left;">a smaller but fair sample: less data, no bias</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>MAR</strong></td>
-<td style="text-align: left;">depends on <em>observed</em> data</td>
-<td style="text-align: left;">employment length missing far more often for renters</td>
+<td style="text-align: left;">Renters leave it blank more often than owners - within each group, not because of what they earn</td>
+<td style="text-align: left;">MAR</td>
+<td style="text-align: left;">too few renters, but housing is on file, so the imbalance can be corrected</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;"><strong>MNAR</strong></td>
-<td style="text-align: left;">depends on the <em>unobserved</em> value itself</td>
-<td style="text-align: left;">high earners decline to state income</td>
+<td style="text-align: left;">High earners decline to state it</td>
+<td style="text-align: left;">MNAR</td>
+<td style="text-align: left;">incomes look lower than they are, and no recorded column says by how much</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;"><strong>Structural</strong></td>
-<td style="text-align: left;">the value cannot exist</td>
-<td style="text-align: left;">months since last delinquency, when there was none</td>
+<td style="text-align: left;">A “spouse’s income” field, for applicants without a spouse</td>
+<td style="text-align: left;">Structural</td>
+<td style="text-align: left;">nothing is hidden: the blank means “no spouse” and is itself information</td>
 </tr>
 </tbody>
 </table></div>
