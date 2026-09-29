@@ -1,6 +1,8 @@
 # Source material that should not ship to the public site
 Profile.pdf
 *.pdf
+# ...except the course script, which the site publishes on purpose
+!didactics/data-mining.pdf
 
 # Claude Code session files
 .claude/
